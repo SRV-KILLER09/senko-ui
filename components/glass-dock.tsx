@@ -27,26 +27,40 @@ interface GlassDockProps {
 export const GlassDock = ({ items, className }: GlassDockProps) => {
   const mouseX = useMotionValue(Infinity)
   const [mounted, setMounted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
   if (!mounted) return null
+
+  const baseSize = isMobile ? 30 : 40
+  const magnifiedSize = isMobile ? 40 : 56
 
   return (
     <div className="absolute bottom-4 left-0 right-0 flex justify-center z-30 px-4 pointer-events-none">
       <GlassContainer
         variant="default"
         className={cn(
-          "flex flex-row items-center gap-3 p-2 rounded-[50px] w-fit h-16 border-border/40 bg-card/10 backdrop-blur-xl shadow-2xl pointer-events-auto relative before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-b before:from-white/20 dark:before:from-white/7 before:to-transparent before:opacity-100 before:pointer-events-none",
+          "flex flex-row items-center gap-2 md:gap-3 p-1.5 md:p-2 rounded-[50px] w-fit h-14 md:h-16 border-border/40 bg-card/10 backdrop-blur-xl shadow-2xl pointer-events-auto relative before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-b before:from-white/20 dark:before:from-white/7 before:to-transparent before:opacity-100 before:pointer-events-none",
           className
         )}
         onMouseMove={(e) => mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(Infinity)}
       >
         {items.map((item, index) => (
-          <IconItem key={index} mouseX={mouseX} item={item} />
+          <IconItem
+            key={index}
+            mouseX={mouseX}
+            item={item}
+            baseSize={baseSize}
+            magnifiedSize={magnifiedSize}
+          />
         ))}
       </GlassContainer>
     </div>
@@ -56,9 +70,13 @@ export const GlassDock = ({ items, className }: GlassDockProps) => {
 function IconItem({
   mouseX,
   item,
+  baseSize,
+  magnifiedSize,
 }: {
   mouseX: MotionValue<number>
   item: DockItem
+  baseSize: number
+  magnifiedSize: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const Icon = item.icon
@@ -68,7 +86,11 @@ function IconItem({
     return val - (bounds.left + bounds.width / 2)
   })
 
-  const sizeTransform = useTransform(distance, [-150, 0, 150], [40, 56, 40])
+  const sizeTransform = useTransform(
+    distance,
+    [-150, 0, 150],
+    [baseSize, magnifiedSize, baseSize]
+  )
   const size = useSpring(sizeTransform, {
     mass: 0.1,
     stiffness: 150,
@@ -85,28 +107,28 @@ function IconItem({
         size="icon"
         onClick={item.onClick}
         className="
-  w-full h-full rounded-full flex items-center justify-center p-0
-  relative overflow-hidden
+w-full h-full rounded-full flex items-center justify-center p-0
+relative overflow-hidden
 
-  border border-white/30 dark:border-white/15
-  bg-gradient-to-b
-  from-white/35 via-white/20 to-white/10
-  dark:from-white/12 dark:via-white/6 dark:to-transparent
+border border-white/20 dark:border-white/10
+bg-gradient-to-b
+from-white/20 via-white/10 to-white/5
+dark:from-white/8 dark:via-white/4 dark:to-transparent
 
-  backdrop-blur-md
-  shadow-lg
+backdrop-blur-md
+shadow-lg
 
-  transition-all duration-200
-  hover:scale-[1.06]
-  active:scale-[0.92]
+transition-all duration-200
+hover:scale-[1.06]
+active:scale-[0.92]
 
-  hover:bg-white/40 dark:hover:bg-white/10
+hover:bg-white/25 dark:hover:bg-white/8
 
-  before:absolute before:inset-0
-  before:bg-gradient-to-tr
-  before:from-transparent before:via-white/20 before:to-transparent
-  before:opacity-0 hover:before:opacity-100
-  before:transition-opacity
+before:absolute before:inset-0
+before:bg-gradient-to-tr
+before:from-transparent before:via-white/12 before:to-transparent
+before:opacity-0 hover:before:opacity-100
+before:transition-opacity
   "
       >
         <Icon className="w-5 h-5 text-foreground dark:text-white/85 group-hover:text-foreground dark:group-hover:text-white transition-colors" />

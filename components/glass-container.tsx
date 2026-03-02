@@ -19,9 +19,9 @@ const glassDockVariants = cva(
   }
 )
 
-interface GlassContainerProps 
+interface GlassContainerProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof glassDockVariants> {
+  VariantProps<typeof glassDockVariants> {
   children: React.ReactNode
   blur?: number
   opacity?: number
@@ -65,19 +65,20 @@ export const GlassContainer = ({
         className="absolute inset-0 -z-10 rounded-[inherit]"
         style={{
           backdropFilter: `blur(${blur}px)`,
-          backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+          backgroundColor: `rgba(255, 255, 255, 0.04)`,
         }}
       />
+
       <div
-        className="absolute inset-0 z-0 pointer-events-none rounded-[inherit] border border-white/20"
+        className="absolute inset-0 z-0 pointer-events-none rounded-[inherit] border border-white/10"
         style={{
-          background: `linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02)) border-box`,
+          background: `linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01)) border-box`,
           WebkitMask: `linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)`,
           WebkitMaskComposite: "destination-out",
           maskComposite: "exclude",
         }}
       />
-      
+
       <div className="relative z-20 flex flex-row items-center gap-3 px-2">
         {children}
       </div>
