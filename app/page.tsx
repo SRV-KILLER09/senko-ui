@@ -214,7 +214,7 @@ export default function Home() {
         </div>
 
       </section>
-      <GlassDock items={dockItems} className="fixed bottom-8 z-50" />
+      <GlassDock items={dockItems} className="fixed bottom-5 z-50 w-fit h-fit" />
 
     </div>
   );

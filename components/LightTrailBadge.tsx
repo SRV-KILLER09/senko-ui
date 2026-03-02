@@ -52,7 +52,7 @@ export const LightTrailBadge: FC<LightTrailBadgeProps> = ({
 
             {/* border beam rainbow effect */}
             <div className="absolute inset-0 rounded-full pointer-events-none p-[1.5px] [mask-image:linear-gradient(white,white),linear-gradient(white,white)] [mask-clip:content-box,border-box] [mask-composite:exclude]">
-                <div className="absolute inset-[-50%] animate-border-beam blur-sm opacity-100
+                <div className="absolute inset-[-50%] animate-[var(--animate-border-beam)] blur-sm opacity-100
 bg-[conic-gradient(from_300deg,transparent_0deg,transparent_300deg,rgba(255,255,255,1)_320deg,rgba(168,85,247,1)_330deg,rgba(59,130,246,1)_340deg,rgba(255,255,255,1)_350deg,transparent_360deg)]"
                 />
             </div>
@@ -62,7 +62,7 @@ bg-[conic-gradient(from_300deg,transparent_0deg,transparent_300deg,rgba(255,255,
                 className={cn(
                     "relative z-10",
                     "inline-flex items-center gap-1.5",
-                    "animate-shiny-text [background-size:var(--shiny-width)_100%] bg-clip-text [background-position:0_0] bg-no-repeat",
+                    "animate-[var(--animate-shiny-text)] [background-size:var(--shiny-width)_100%] bg-clip-text [background-position:0_0] bg-no-repeat",
                     "bg-gradient-to-r from-transparent via-foreground/80 via-50% to-transparent",
                     "transition-colors duration-300"
                 )}
