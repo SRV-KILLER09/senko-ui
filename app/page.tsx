@@ -140,7 +140,7 @@ export default function Home() {
           <span className="hover:text-foreground cursor-pointer transition-colors">Components</span>
         </div>
       </header>
-      <section className="w-full max-w-5xl px-5 pt-24 pb-16 flex flex-col items-center">
+      <section className="w-full max-w-5xl px-5 pt-10 md:pt-20 pb-16 flex flex-col items-center">
         <LightTrailBadge className="mb-10">
           🌟 Find Components that Suit You
         </LightTrailBadge>
