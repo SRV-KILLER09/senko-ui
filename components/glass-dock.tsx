@@ -39,8 +39,8 @@ export const GlassDock = ({ items, className }: GlassDockProps) => {
 
   if (!mounted) return null
 
-  const baseSize = isMobile ? 30 : 40
-  const magnifiedSize = isMobile ? 40 : 56
+  const baseSize = isMobile ? 35 : 40
+  const magnifiedSize = isMobile ? 45 : 56
 
   return (
     <div className="absolute bottom-4 left-0 right-0 flex justify-center z-30 px-4 pointer-events-none">
