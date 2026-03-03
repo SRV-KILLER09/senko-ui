@@ -133,8 +133,8 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center text-foreground pb-40 overflow-x-hidden">
-      <WavyGridBackground squareSize={10} maxOpacity={0.2} gridGap={.1}/>
-       
+      <WavyGridBackground squareSize={10} maxOpacity={0.2} gridGap={.1} height={1000} />
+
 
       <header className=" fixed w-full flex justify-between items-center py-6 px-8 border-b border-border/40 z-10 backdrop-blur opacity-85">
         <h1 className="font-bold text-xl tracking-tight">TS-UI</h1>
@@ -215,6 +215,47 @@ export default function Home() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/20 blur-[80px] rounded-full -z-10 pointer-events-none" />
             <GlassLogin />
           </div>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Preview LEFT */}
+          <div className="order-2 lg:order-1 relative h-[400px] bg-muted/30 border border-border/50 rounded-2xl overflow-hidden">
+
+            <WavyGridBackground
+              squareSize={8}
+              gridGap={2}
+              maxOpacity={0.18}
+              mode="contained"
+            />
+
+            {/* Overlay Text */}
+            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+              <div className="text-center space-y-3 px-6">
+                <h3 className="text-2xl font-semibold tracking-tight text-foreground drop-shadow-sm">
+                  Subtle. Elegant. Cinematic.
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Fully theme aware. GPU accelerated.
+                </p>
+              </div>
+            </div>
+
+            {/* Optional bottom fade for better readability */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background/80 to-transparent pointer-events-none z-10" />
+
+          </div>
+
+          {/* Text RIGHT */}
+          <div className="flex flex-col gap-4 order-1 lg:order-2">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Wavy Grid Background
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              A smooth, theme-aware animated grid powered by canvas.
+              Lightweight, GPU-accelerated and perfect for hero sections.
+            </p>
+          </div>
+
         </div>
 
       </section>

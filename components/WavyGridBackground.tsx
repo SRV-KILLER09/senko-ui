@@ -1,54 +1,36 @@
 "use client"
 
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef } from "react"
 
 interface WavyGridProps {
   squareSize?: number
   gridGap?: number
   maxOpacity?: number
+  height?: number
+  mode?: "fixed" | "contained"
 }
 
 export default function WavyGridBackground({
   squareSize = 4,
   gridGap = 2,
   maxOpacity = 0.25,
+  height = 400,
+  mode = "fixed",
 }: WavyGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
 
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const fadeDistance = 180
-      const progress = Math.min(window.scrollY / fadeDistance, 1)
-
-      const visible = 18 - progress * 18
-      const fade = 55 - progress * 55
-
-      const mask = `linear-gradient(to bottom, black 0%, black ${visible}%, transparent ${fade}%)`
-
-      if (gridRef.current) {
-        gridRef.current.style.maskImage = mask
-        gridRef.current.style.webkitMaskImage = mask
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   const setupCanvas = useCallback(
-    (canvas: HTMLCanvasElement, width: number, height: number) => {
+    (canvas: HTMLCanvasElement, width: number, heightPx: number) => {
       const dpr = window.devicePixelRatio || 1
+
       canvas.width = width * dpr
-      canvas.height = height * dpr
+      canvas.height = heightPx * dpr
       canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
+      canvas.style.height = `${heightPx}px`
 
       const cols = Math.ceil(width / (squareSize + gridGap))
-      const rows = Math.ceil(height / (squareSize + gridGap))
+      const rows = Math.ceil(heightPx / (squareSize + gridGap))
 
       return { cols, rows, dpr }
     },
@@ -57,25 +39,25 @@ export default function WavyGridBackground({
 
   useEffect(() => {
     const canvas = canvasRef.current
-    const container = containerRef.current
+    const container = gridRef.current
     if (!canvas || !container) return
 
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
     let animationFrameId: number
-    let gridParams: ReturnType<typeof setupCanvas>
+    let gridParams: { cols: number; rows: number; dpr: number }
 
-    const updateCanvasSize = () => {
-      const width = container.clientWidth
-      const height = container.clientHeight
-      setCanvasSize({ width, height })
-      gridParams = setupCanvas(canvas, width, height)
+    const updateSize = () => {
+      const rect = container.getBoundingClientRect()
+      const width = rect.width
+      const heightPx = rect.height
+      gridParams = setupCanvas(canvas, width, heightPx)
     }
 
-    updateCanvasSize()
+    updateSize()
 
-    const resizeObserver = new ResizeObserver(updateCanvasSize)
+    const resizeObserver = new ResizeObserver(updateSize)
     resizeObserver.observe(container)
 
     const animate = (time: number) => {
@@ -122,12 +104,39 @@ export default function WavyGridBackground({
     }
   }, [setupCanvas, squareSize, gridGap, maxOpacity])
 
+  useEffect(() => {
+    if (mode !== "fixed") return
+
+    const handleScroll = () => {
+      const fadeDistance = 180
+      const progress = Math.min(window.scrollY / fadeDistance, 1)
+
+      const visible = 18 - progress * 18
+      const fade = 55 - progress * 55
+
+      const mask = `linear-gradient(to bottom, black 0%, black ${visible}%, transparent ${fade}%)`
+
+      if (gridRef.current) {
+        gridRef.current.style.maskImage = mask
+        gridRef.current.style.webkitMaskImage = mask
+      }
+    }
+
+    handleScroll()
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [mode])
+
   return (
     <div
       ref={gridRef}
       style={{
-        position: "fixed",
-        inset: 0,
+        position: mode === "contained" ? "absolute" : "fixed",
+        inset: mode === "contained" ? 0 : undefined,
+        top: mode === "fixed" ? 0 : undefined,
+        left: mode === "fixed" ? 0 : undefined,
+        width: "100%",
+        height: mode === "fixed" ? `${height}px` : "100%",
         zIndex: 0,
         pointerEvents: "none",
         backgroundColor: "var(--background)",
@@ -137,20 +146,17 @@ export default function WavyGridBackground({
         `,
         backgroundSize: "40px 40px",
         WebkitMaskImage:
-          "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)",
+          mode === "fixed"
+            ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
+            : "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
+
         maskImage:
-          "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)",
+          mode === "fixed"
+            ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
+            : "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
       }}
     >
-      <div ref={containerRef} className="h-full w-full">
-        <canvas
-          ref={canvasRef}
-          style={{
-            width: canvasSize.width,
-            height: canvasSize.height,
-          }}
-        />
-      </div>
+      <canvas ref={canvasRef} />
     </div>
   )
 }
