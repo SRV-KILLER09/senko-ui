@@ -133,7 +133,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-background flex flex-col items-center text-foreground pb-40 overflow-x-hidden">
-      <WavyGridBackground squareSize={10} maxOpacity={0.2}/>
+      <WavyGridBackground squareSize={10} maxOpacity={0.2} gridGap={.1}/>
        
 
       <header className=" fixed w-full flex justify-between items-center py-6 px-8 border-b border-border/40 z-10 backdrop-blur opacity-85">
