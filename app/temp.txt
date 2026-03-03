@@ -1,0 +1,65 @@
+ const gridRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const fadeDistance = 500 // 👈 how far before fully faded
+      const scrollY = window.scrollY
+      const progress = Math.min(scrollY / fadeDistance, 1)
+
+      const visiblePercent = 10 - progress * 10
+      const fadePercent = 65 - progress * 65
+
+      const mask = `linear-gradient(to bottom, black 0%, black ${visiblePercent}%, transparent ${fadePercent}%)`
+
+      if (gridRef.current) {
+        gridRef.current.style.maskImage = mask
+        gridRef.current.style.webkitMaskImage = mask
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+  const [mousePos, setMousePos] = React.useState({ x: 0, y: 0 })
+  const [isOverGrid, setIsOverGrid] = React.useState(false)
+
+React.useEffect(() => {
+  const handleMouseMove = (e: MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY })
+  }
+
+  const handleMouseEnter = () => setIsOverGrid(true)
+  const handleMouseLeave = () => setIsOverGrid(false)
+
+  window.addEventListener("mousemove", handleMouseMove)
+  document.addEventListener("mouseenter", handleMouseEnter)
+  document.addEventListener("mouseleave", handleMouseLeave)
+
+  return () => {
+    window.removeEventListener("mousemove", handleMouseMove)
+    document.removeEventListener("mouseenter", handleMouseEnter)
+    document.removeEventListener("mouseleave", handleMouseLeave)
+  }
+}, [])
+
+
+
+
+<div
+      ref={gridRef}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+        backgroundImage: `
+          linear-gradient(to right, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 1px, transparent 1px)
+        `,
+        backgroundSize: "50px 50px",
+        WebkitMaskImage:
+          "linear-gradient(to bottom, black 0%, black 10%, transparent 65%)",
+        maskImage:
+          "linear-gradient(to bottom, black 0%, black 10%, transparent 65%)",
+      }}
+    />

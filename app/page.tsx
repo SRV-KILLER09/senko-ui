@@ -26,6 +26,8 @@ import {
 } from "@/components/carousel";
 import { Button } from "@/components/ui/button";
 import { LightTrailBadge } from "@/components/LightTrailBadge";
+import WavyGridBackground from "@/components/WavyGridBackground";
+
 
 const CAROUSEL_DATA = [
   {
@@ -130,23 +132,25 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center text-foreground pb-40 overflow-x-hidden relative">
+    <div className="relative min-h-screen bg-background flex flex-col items-center text-foreground pb-40 overflow-x-hidden">
+      <WavyGridBackground squareSize={10} maxOpacity={0.2}/>
+       
 
-
-      <header className="w-full flex justify-between items-center py-6 px-8 border-b border-border/40">
+      <header className=" fixed w-full flex justify-between items-center py-6 px-8 border-b border-border/40 z-10 backdrop-blur opacity-85">
         <h1 className="font-bold text-xl tracking-tight">TS-UI</h1>
         <div className="flex gap-4 text-sm font-medium text-muted-foreground">
           <span className="hover:text-foreground cursor-pointer transition-colors">Documentation</span>
           <span className="hover:text-foreground cursor-pointer transition-colors">Components</span>
         </div>
       </header>
-      <section className="w-full max-w-5xl px-5 pt-10 md:pt-20 pb-16 flex flex-col items-center">
-        <LightTrailBadge className="mb-10">
+      <section className="w-full max-w-5xl mt-20 px-5 pt-10 md:pt-20 pb-16 flex flex-col items-center z-1">
+        <LightTrailBadge className="mb-10 shadow-[0_20px_60px_rgba(255,255,255,0.15)]">
           🌟 Find Components that Suit You
         </LightTrailBadge>
         <UnderlineHeading
           content={["Beautifully Crafted", "React Components"]}
           highlightContent={["React"]}
+          highlightClassName="bg-blue-300"
           className="text-4xl md:text-7xl mb-8"
         />
         <p className="text-md text-center text-muted-foreground max-w-2xl">
@@ -215,6 +219,7 @@ export default function Home() {
 
       </section>
       <GlassDock items={dockItems} className="fixed bottom-5 z-50 w-fit h-fit" />
+
 
     </div>
   );
