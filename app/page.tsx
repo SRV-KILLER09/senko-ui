@@ -12,7 +12,8 @@ import {
   Moon,
   Github,
   Component,
-  ArrowRight
+  ArrowUpRight,
+  Phone
 } from "lucide-react";
 
 import { GlassDock } from "@/components/glass-dock";
@@ -27,6 +28,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { LightTrailBadge } from "@/components/LightTrailBadge";
 import WavyGridBackground from "@/components/WavyGridBackground";
+import { hover, motion } from "motion/react";
+import { useRouter } from "next/navigation";
 
 
 const CAROUSEL_DATA = [
@@ -113,6 +116,9 @@ const CAROUSEL_DATA = [
 export default function Home() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const MotionArrow = motion(ArrowUpRight)
+  const MotionPhone = motion(Phone)
+  const router=useRouter()
 
   React.useEffect(() => {
     setMounted(true);
@@ -123,7 +129,7 @@ export default function Home() {
   const dockItems = [
     { label: "Home", icon: HomeIcon, onClick: () => console.log("home") },
     { label: "Components", icon: Component, onClick: () => console.log("components") },
-    { label: "Github", icon: Github, onClick: () => console.log("github") },
+    { label: "Github", icon: Github, onClick: () => router.push("https://github.com/Shourya523") },
     {
       label: "Theme",
       icon: dockThemeIcon,
@@ -157,6 +163,63 @@ export default function Home() {
           A collection of copy-and-paste components built with Tailwind CSS and Framer Motion for your next web application.
         </p>
       </section>
+      <div className="flex justify-center items-center gap-4 md:gap-10">
+        <motion.div
+        initial="rest"
+        whileHover="hover"
+        animate="rest"
+        className="
+  relative z-10
+  bg-neutral-950
+  hover:bg-neutral-900
+  text-white
+  text-sm font-medium
+  transition-colors duration-200
+  rounded-full
+  px-5 py-2
+  gap-2
+  flex items-center justify-center
+  border-transparent
+shadow-[0px_-1px_0px_0px_#FFFFFF40_inset,_0px_1px_0px_0px_#FFFFFF40_inset]
+  cursor-pointer
+  "
+      >
+        Get Started <MotionArrow
+          size={16}
+          variants={{
+            rest: { rotate: 0, scale: 1 },
+            hover: { rotate: 45, scale: 1.06 },
+          }}
+          transition={{ type: "spring", stiffness: 900, damping: 15 }} />
+      </motion.div>
+        <motion.div
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
+          className="
+  relative z-10
+  bg-white
+  hover:bg-neutral-100
+  text-black
+  text-sm font-medium
+  transition-colors duration-200
+  rounded-full
+  px-5 py-1.5
+  gap-2
+  flex items-center justify-center
+  border border-black/5
+  shadow-[inset_0_-1px_0_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]
+  cursor-pointer
+  "
+        >
+          Contact Us <MotionPhone
+            size={15}
+            variants={{
+              rest: { rotate: 0, scale: 1 },
+              hover: { rotate: 45, scale: 1.06 },
+            }}
+            transition={{ type: "spring", stiffness: 900, damping: 15 }} />
+        </motion.div></div>
       <section className="w-full max-w-6xl px-5 py-12 flex flex-col gap-24">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -217,8 +280,6 @@ export default function Home() {
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-          {/* Preview LEFT */}
           <div className="order-2 lg:order-1 relative h-[400px] bg-muted/30 border border-border/50 rounded-2xl overflow-hidden">
 
             <WavyGridBackground
@@ -227,8 +288,6 @@ export default function Home() {
               maxOpacity={0.18}
               mode="contained"
             />
-
-            {/* Overlay Text */}
             <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
               <div className="text-center space-y-3 px-6">
                 <h3 className="text-2xl font-semibold tracking-tight text-foreground drop-shadow-sm">
@@ -239,13 +298,9 @@ export default function Home() {
                 </p>
               </div>
             </div>
-
-            {/* Optional bottom fade for better readability */}
             <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background/80 to-transparent pointer-events-none z-10" />
 
           </div>
-
-          {/* Text RIGHT */}
           <div className="flex flex-col gap-4 order-1 lg:order-2">
             <h2 className="text-3xl font-bold tracking-tight">
               Wavy Grid Background
@@ -259,6 +314,8 @@ export default function Home() {
         </div>
 
       </section>
+
+
       <GlassDock items={dockItems} className="fixed bottom-5 z-50 w-fit h-fit" />
 
 
