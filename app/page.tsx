@@ -82,7 +82,7 @@ export default function Home() {
           content={["Beautifully Crafted", "React Components"]}
           highlightContent={["React"]}
           highlightClassName="bg-blue-300"
-          className="text-4xl md:text-7xl mb-8"
+          className="text-[2rem] md:text-7xl mb-8"
         />
         <p className="text-md text-center text-muted-foreground max-w-2xl">
           A collection of copy-and-paste components built with Tailwind CSS and Framer Motion for your next web application.
