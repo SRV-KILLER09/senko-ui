@@ -92,7 +92,7 @@ function IconItem({
     [-150, 0, 150],
     [baseSize, magnifiedSize, baseSize]
   )
-  
+
   const size = useSpring(sizeTransform, {
     mass: 0.1,
     stiffness: 150,
@@ -113,6 +113,7 @@ function IconItem({
         className={cn(
           "w-full h-full rounded-full flex items-center justify-center p-0 relative overflow-hidden",
           "border border-white/20 dark:border-white/10",
+          "bg-transparent hover:bg-transparent",
           "bg-gradient-to-b from-white/20 via-white/10 to-white/5 dark:from-white/8 dark:via-white/4 dark:to-transparent",
           "backdrop-blur-md shadow-lg transition-all duration-200",
           "hover:scale-[1.06] active:scale-[0.92]",
@@ -126,7 +127,7 @@ function IconItem({
       </Button>
 
       {/* Tooltip logic using local state */}
-      <div 
+      <div
         className={cn(
           "absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 rounded",
           "bg-popover/90 border border-border text-popover-foreground text-[10px]",

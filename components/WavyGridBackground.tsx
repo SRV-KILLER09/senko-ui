@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import React, { useCallback, useEffect, useRef } from "react"
+import React, { useCallback, useEffect, useRef } from "react";
 
 interface WavyGridProps {
-  squareSize?: number
-  gridGap?: number
-  maxOpacity?: number
-  height?: number
-  mode?: "fixed" | "contained"
+  squareSize?: number;
+  gridGap?: number;
+  maxOpacity?: number;
+  height?: number;
+  mode?: "fixed" | "contained";
 }
 
 export default function WavyGridBackground({
@@ -17,119 +17,149 @@ export default function WavyGridBackground({
   height = 400,
   mode = "fixed",
 }: WavyGridProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const setupCanvas = useCallback(
-    (canvas: HTMLCanvasElement, width: number, heightPx: number) => {
-      const dpr = window.devicePixelRatio || 1
+  const state = useRef({
+    ctx: null as CanvasRenderingContext2D | null,
+    cols: 0,
+    rows: 0,
+    dpr: 1,
+    color: "rgb(0,0,0)",
+    sinTable: [] as number[],
+  });
 
-      canvas.width = width * dpr
-      canvas.height = heightPx * dpr
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${heightPx}px`
+  const updateThemeColor = useCallback(() => {
+    const probe = document.createElement("div");
+    probe.style.color = "hsl(var(--foreground))";
+    document.body.appendChild(probe);
 
-      const cols = Math.ceil(width / (squareSize + gridGap))
-      const rows = Math.ceil(heightPx / (squareSize + gridGap))
+    const computed = getComputedStyle(probe).color;
+    state.current.color = computed;
 
-      return { cols, rows, dpr }
-    },
-    [squareSize, gridGap]
-  )
+    document.body.removeChild(probe);
+  }, []);
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const container = gridRef.current
-    if (!canvas || !container) return
+  const setupCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    const rect = container.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    let animationFrameId: number
-    let gridParams: { cols: number; rows: number; dpr: number }
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + "px";
+    canvas.style.height = rect.height + "px";
 
-    const updateSize = () => {
-      const rect = container.getBoundingClientRect()
-      const width = rect.width
-      const heightPx = rect.height
-      gridParams = setupCanvas(canvas, width, heightPx)
+    const cols = Math.ceil(rect.width / (squareSize + gridGap));
+    const rows = Math.ceil(rect.height / (squareSize + gridGap));
+
+    const ctx = canvas.getContext("2d", { alpha: true });
+
+    state.current.ctx = ctx;
+    state.current.cols = cols;
+    state.current.rows = rows;
+    state.current.dpr = dpr;
+
+    const tableSize = cols + rows + 100;
+    const sinTable = new Array(tableSize);
+
+    for (let i = 0; i < tableSize; i++) {
+      sinTable[i] = Math.sin(i * 0.25);
     }
 
-    updateSize()
+    state.current.sinTable = sinTable;
 
-    const resizeObserver = new ResizeObserver(updateSize)
-    resizeObserver.observe(container)
+    updateThemeColor();
+  }, [squareSize, gridGap, updateThemeColor]);
 
-    const animate = (time: number) => {
-      const t = time * 0.001
+  useEffect(() => {
+    setupCanvas();
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      ctx.globalCompositeOperation = "lighter"
+    const ro = new ResizeObserver(setupCanvas);
+    if (containerRef.current) ro.observe(containerRef.current);
 
-      const themeColor = getComputedStyle(document.documentElement)
-        .getPropertyValue("--foreground")
-        .trim()
+    const themeObserver = new MutationObserver(updateThemeColor);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "style", "data-theme"],
+    });
 
-      ctx.fillStyle = themeColor
+    let raf: number;
+    let lastTime = 0;
 
-      for (let i = 0; i < gridParams.cols; i++) {
-        for (let j = 0; j < gridParams.rows; j++) {
-          const wave =
-            (Math.sin(i * 0.4 + t) +
-              Math.sin(j * 0.3 + t * 1.2) +
-              Math.sin((i + j) * 0.2 + t * 0.8)) /
-            3
+    const render = (time: number) => {
 
-          const opacity = ((wave + 1) / 2) * maxOpacity
-          ctx.globalAlpha = opacity
+      lastTime = time;
 
-          ctx.fillRect(
-            i * (squareSize + gridGap) * gridParams.dpr,
-            j * (squareSize + gridGap) * gridParams.dpr,
-            squareSize * gridParams.dpr,
-            squareSize * gridParams.dpr
-          )
+      const s = state.current;
+      if (!s.ctx) return;
+
+      const ctx = s.ctx;
+      const total = (squareSize + gridGap) * s.dpr;
+      const size = squareSize * s.dpr;
+
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.fillStyle = s.color;
+
+      const t = time * 0.001;
+      const table = s.sinTable;
+
+      for (let i = 0; i < s.cols; i++) {
+        const x = i * total;
+        const waveX = Math.sin(i * 0.3 + t * 2);
+
+        for (let j = 0; j < s.rows; j++) {
+          const waveY = Math.sin(j * 0.25 + t * 1.6);
+
+          const wave = (waveX + waveY + Math.sin((i + j) * 0.15 + t * 1.2)) / 3;
+          const opacity = ((wave + 1) * 0.5) * maxOpacity;
+
+          if (opacity < 0.02) continue;
+
+          ctx.globalAlpha = opacity;
+          ctx.fillRect(x, j * total, size, size);
         }
       }
 
-      ctx.globalAlpha = 1
-      animationFrameId = requestAnimationFrame(animate)
-    }
+      raf = requestAnimationFrame(render);
+    };
 
-    animationFrameId = requestAnimationFrame(animate)
+    raf = requestAnimationFrame(render);
 
     return () => {
-      cancelAnimationFrame(animationFrameId)
-      resizeObserver.disconnect()
-    }
-  }, [setupCanvas, squareSize, gridGap, maxOpacity])
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      themeObserver.disconnect();
+    };
+  }, [setupCanvas, updateThemeColor, squareSize, gridGap, maxOpacity]);
 
   useEffect(() => {
-    if (mode !== "fixed") return
+    if (mode !== "fixed") return;
 
     const handleScroll = () => {
-      const fadeDistance = 180
-      const progress = Math.min(window.scrollY / fadeDistance, 1)
+      const progress = Math.min(window.scrollY / 180, 1);
+      const visible = 18 - progress * 18;
+      const fade = 55 - progress * 55;
 
-      const visible = 18 - progress * 18
-      const fade = 55 - progress * 55
+      const mask = `linear-gradient(to bottom, black 0%, black ${visible}%, transparent ${fade}%)`;
 
-      const mask = `linear-gradient(to bottom, black 0%, black ${visible}%, transparent ${fade}%)`
-
-      if (gridRef.current) {
-        gridRef.current.style.maskImage = mask
-        gridRef.current.style.webkitMaskImage = mask
+      if (containerRef.current) {
+        containerRef.current.style.maskImage = mask;
+        containerRef.current.style.webkitMaskImage = mask;
       }
-    }
+    };
 
-    handleScroll()
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [mode])
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mode]);
 
   return (
     <div
-      ref={gridRef}
+      ref={containerRef}
+      className="will-change-transform"
       style={{
         position: mode === "contained" ? "absolute" : "fixed",
         inset: mode === "contained" ? 0 : undefined,
@@ -140,23 +170,17 @@ export default function WavyGridBackground({
         zIndex: 0,
         pointerEvents: "none",
         backgroundColor: "var(--background)",
-        backgroundImage: `
-          linear-gradient(to right, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px),
-          linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 6%, transparent) 1px, transparent 1px)
-        `,
-        backgroundSize: "40px 40px",
         WebkitMaskImage:
           mode === "fixed"
             ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
             : "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
-
         maskImage:
           mode === "fixed"
             ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
             : "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
       }}
     >
-      <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} style={{ display: "block" }} />
     </div>
-  )
+  );
 }

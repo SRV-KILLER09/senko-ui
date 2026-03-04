@@ -1,199 +1,418 @@
-"use client"
+"use client";
 
-import * as React from "react";
-import { useTheme } from "next-themes";
+import React, { useState, useEffect } from "react";
 import {
-  Home as HomeIcon,
+  Zap,
+  Home,
+  Github,
   Sun,
   Moon,
-  Github,
+  Cpu,
+  ShieldCheck,
+  Workflow,
+  ChevronRight,
+  Layout,
+  Layers,
   Component,
-  Phone
+  Copy,
+  Check,
+  ExternalLink,
+  Smartphone,
+  MousePointer2,
+  Terminal,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 
 import { GlassDock } from "@/components/glass-dock";
-import IconicHeroExample from "@/components/iconic-heading-example";
 import { GlassLogin } from "@/components/glass-login";
-import UnderlineHeading from "@/components/underlined-heading";
-import {
-  Carousel,
-  CarouselRow,
-  CarouselItem
-} from "@/components/carousel";
+import { BentoCard, BentoGrid } from "@/components/bento-grid";
+import { Carousel, CarouselRow, CarouselItem } from "@/components/carousel";
 import { LightTrailBadge } from "@/components/LightTrailBadge";
 import WavyGridBackground from "@/components/WavyGridBackground";
-import { motion } from "motion/react";
-import { useRouter } from "next/navigation";
 import { BeveledBorderButton } from "@/components/BeveledBorderButton";
 import PillNavbar from "@/components/GlassyTopBar";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { IconicHeading } from "@/components/Icon-ic-Heading";
+import UnderlineHeading from "@/components/underlined-heading";
+import { IPhoneSaaSPreview } from "@/components/iphone-saas-preview";
+import { Safari } from "@/components/safari-view";
+import { SafariShowcase } from "@/components/safari-showcase";
 
-const CAROUSEL_DATA = [
-  { name: "Google", icon: ( <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path fill="#4285F4" d="M14.9 8.161c0-.476-.039-.954-.121-1.422h-6.64v2.695h3.802a3.24 3.24 0 01-1.407 2.127v1.75h2.269c1.332-1.22 2.097-3.02 2.097-5.15z" /><path fill="#34A853" d="M8.14 15c1.898 0 3.499-.62 4.665-1.69l-2.268-1.749c-.631.427-1.446.669-2.395.669-1.836 0-3.393-1.232-3.952-2.888H1.85v1.803A7.044 7.044 0 008.14 15z" /><path fill="#FBBC04" d="M4.187 9.342a4.17 4.17 0 010-2.68V4.859H1.849a6.97 6.97 0 000 6.286l2.338-1.803z" /><path fill="#EA4335" d="M8.14 3.77a3.837 3.837 0 012.7 1.05l2.01-1.999a6.786 6.786 0 00-4.71-1.82 7.042 7.042 0 00-6.29 3.858L4.186 6.66c.556-1.658 2.116-2.89 3.952-2.89z" /></svg> )},
-  { name: "Tailwind", icon: ( <svg width="16" height="16" viewBox="0 0 32 32"><path d="M9,13.7q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q11.1,10.9,9,13.7ZM2,22.1q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q4.1,19.3,2,22.1Z" fill="#44a8b3" /></svg> )},
-  { name: "React", icon: ( <svg width="16" height="16" viewBox="0 0 32 32"><circle cx="16" cy="15.974" r="2.5" fill="#007acc" /><path d="M16,21.706a28.385,28.385,0,0,1-8.88-1.2,11.3,11.3,0,0,1-3.657-1.958A3.543,3.543,0,0,1,2,15.974c0-1.653,1.816-3.273,4.858-4.333A28.755,28.755,0,0,1,16,10.293a28.674,28.674,0,0,1,9.022,1.324,11.376,11.376,0,0,1,3.538,1.866A3.391,3.391,0,0,1,30,15.974c0,1.718-2.03,3.459-5.3,4.541A28.8,28.8,0,0,1,16,21.706Zm0-10.217a27.948,27.948,0,0,0-8.749,1.282c-2.8.977-4.055,2.313-4.055,3.2,0,.928,1.349,2.387,4.311,3.4A27.21,27.21,0,0,0,16,20.51a27.6,27.6,0,0,0,8.325-1.13C27.4,18.361,28.8,16.9,28.8,15.974a2.327,2.327,0,0,0-1.01-1.573,10.194,10.194,0,0,0-3.161-1.654A27.462,27.462,0,0,0,16,11.489Z" fill="#007acc" /><path d="M10.32,28.443a2.639,2.639,0,0,1-1.336-.328c-1.432-.826-1.928-3.208-1.327-6.373a28.755,28.755,0,0,1,3.4-8.593h0A28.676,28.676,0,0,1,16.71,5.995a11.376,11.376,0,0,1,3.384-2.133,3.391,3.391,0,0,1,2.878,0c1.489.858,1.982,3.486,1.287,6.859a28.806,28.806,0,0,1-3.316,8.133,28.385,28.385,0,0,1-5.476,7.093,11.3,11.3,0,0,1-3.523,2.189A4.926,4.926,0,0,1,10.32,28.443Zm1.773-14.7a27.948,27.948,0,0,0-3.26,8.219c-.553,2.915-.022,4.668.75,5.114.8.463,2.742.024,5.1-2.036a27.209,27.209,0,0,0,5.227-6.79,27.6,27.6,0,0,0,3.181-7.776c.654-3.175.089-5.119-.713-5.581a2.327,2.327,0,0,0-1.868.089A10.194,10.194,0,0,0,17.5,6.9a27.464,27.464,0,0,0-5.4,6.849Z" fill="#007acc" /><path d="M21.677,28.456c-1.355,0-3.076-.82-4.868-2.361a28.756,28.756,0,0,1-5.747-7.237h0a28.676,28.676,0,0,1-3.374-8.471,11.376,11.376,0,0,1-.158-4A3.391,3.391,0,0,1,8.964,3.9c1.487-.861,4.01.024,6.585,2.31a28.8,28.8,0,0,1,5.39,6.934,28.384,28.384,0,0,1,3.41,8.287,11.3,11.3,0,0,1,.137,4.146,3.543,3.543,0,0,1-1.494,2.555A2.59,2.59,0,0,1,21.677,28.456Zm-9.58-10.2a27.949,27.949,0,0,0,5.492,6.929c2.249,1.935,4.033,2.351,4.8,1.9.8-.465,1.39-2.363.782-5.434A27.212,27.212,0,0,0,19.9,13.74,27.6,27.6,0,0,0,14.755,7.1c-2.424-2.152-4.39-2.633-5.191-2.169a2.327,2.327,0,0,0-.855,1.662,10.194,10.194,0,0,0,.153,3.565,27.465,27.465,0,0,0,3.236,8.1Z" fill="#007acc" /></svg> )},
+const techStack = [
+  "Framer Motion",
+  "Tailwind CSS",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Shadcn/UI",
+  "Radix UI",
 ];
 
-export default function Home() {
+export default function TSUIModernShowcase() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  const router = useRouter()
+  const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [responsiveScale, setResponsiveScale] = useState(1);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
+    const handleResize = () => {
+      if (window.innerWidth < 400) {
+        setResponsiveScale(0.85);
+      } else {
+        setResponsiveScale(1);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const dockThemeIcon = mounted ? (theme === "dark" ? Sun : Moon) : Moon;
-  const navLinks = [
-    { label: "Components", href: "/components" },
-    { label: "Blocks", href: "/blocks" },
-    { label: "Docs", href: "/docs" },
-    { label: "Pricing", href: "/pricing" }
-  ]
+  const copyCommand = () => {
+    navigator.clipboard.writeText("npx shadcn-ui@latest add https://ts-ui.com/registry/glass-login.json");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  if (!mounted) return null;
+
   const dockItems = [
-    { label: "Home", icon: HomeIcon, onClick: () => console.log("home") },
-    { label: "Components", icon: Component, onClick: () => console.log("components") },
-    { label: "Github", icon: Github, onClick: () => router.push("https://github.com/Shourya523") },
+    { label: "Home", icon: Home, onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+    { label: "Registry", icon: Cpu, onClick: () => document.getElementById('registry')?.scrollIntoView({ behavior: 'smooth' }) },
+    { label: "Github", icon: Github, onClick: () => window.open("https://github.com", "_blank") },
     {
       label: "Theme",
-      icon: dockThemeIcon,
+      icon: theme === "dark" ? Sun : Moon,
       onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
+    },
+  ];
+
+  const registryComponents = [
+    {
+      Icon: ShieldCheck,
+      name: "Authentication",
+      description: "Sophisticated login flows built with glassmorphism and secure patterns.",
+      className: "col-span-1 md:col-span-4 row-span-2",
+      background: (
+        <div className="absolute inset-0 flex items-center justify-center scale-[0.55] opacity-20 group-hover:opacity-100 group-hover:scale-[0.6] transition-all duration-1000">
+          <GlassLogin />
+        </div>
+      ),
+    },
+    {
+      Icon: Smartphone,
+      name: "Viewport Simulations",
+      description: "Professional device mockups for a pixel-perfect showcase of your work.",
+      className: "col-span-1 md:col-span-4 row-span-1",
+      background: (
+        <div className="absolute inset-0 flex items-center justify-center scale-[0.4] opacity-20 group-hover:scale-[0.45] transition-all duration-1000">
+          <div className="scale-75 origin-center">
+            <IPhoneSaaSPreview />
+          </div>
+        </div>
+      )
+    },
+    {
+      Icon: MousePointer2,
+      name: "Navigation Systems",
+      description: "Floating docks and interactive navbars that enhance user engagement.",
+      className: "col-span-1 md:col-span-4 row-span-1",
+      background: (
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center scale-75 opacity-20 group-hover:opacity-100 transition-opacity">
+          <GlassDock items={dockItems.slice(0, 3)} />
+        </div>
+      )
+    },
+    {
+      Icon: Zap,
+      name: "Signature Typography",
+      description: "Icon-integrated headings designed for a premium SaaS feel.",
+      className: "col-span-1 md:col-span-8",
+      background: (
+        <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-30 transition-opacity">
+          <IconicHeading
+            lines={[
+              {
+                text: "Modern Interfaces",
+                icon: <Zap className="w-[60%] h-[60%]" />,
+                iconPosition: "between",
+                className: "font-semibold text-6xl tracking-tight text-zinc-900 dark:text-white",
+                iconClassName: "bg-blue-600/50",
+              },
+            ]}
+          />
+        </div>
+      )
     }
   ];
 
   return (
-    <div className="relative min-h-screen bg-background flex flex-col items-center text-foreground pb-40 overflow-x-hidden ">
-      <WavyGridBackground squareSize={10} maxOpacity={0.2} gridGap={.1} height={1000} />
+    <div className="relative min-h-screen bg-zinc-50 dark:bg-[#030303] text-zinc-900 dark:text-zinc-100 font-sans overflow-x-hidden selection:bg-blue-500/20">
 
-      <PillNavbar
-        items={navLinks}
-        logo={<div className="font-bold">TS-UI</div>}
-        actions={[
-          <ThemeToggle key="theme" className="w-5 h-5" />,
-          <BeveledBorderButton key="login" title="Login" />,
-        ]}
-      />
-
-      <section className="w-full max-w-5xl mt-20 px-5 pt-10 md:pt-20 pb-16 flex flex-col items-center z-1">
-        <LightTrailBadge className="mb-10 shadow-[0_20px_60px_rgba(255,255,255,0.15)]">
-          🌟 Find Components that Suit You
-        </LightTrailBadge>
-        <UnderlineHeading
-          content={["Beautifully Crafted", "React Components"]}
-          highlightContent={["React"]}
-          highlightClassName="bg-blue-300"
-          className="text-[2rem] md:text-7xl mb-8"
-        />
-        <p className="text-md text-center text-muted-foreground max-w-2xl">
-          A collection of copy-and-paste components built with Tailwind CSS and Framer Motion for your next web application.
-        </p>
-      </section>
-
-      <div className="flex justify-center items-center gap-4 md:gap-10">
-        <BeveledBorderButton title="Get Started" />
-        <BeveledBorderButton className="relative z-1 bg-white hover:bg-neutral-100 text-black text-sm font-medium transition-colors duration-200 rounded-full px-5 py-2 gap-2 flex items-center justify-center border border-black/5 shadow-[inset_0_-1px_0_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)] cursor-pointer" title="Contact Us" icon={Phone} />
+      {/* BACKGROUND LAYER */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-40 dark:opacity-70">
+        <WavyGridBackground squareSize={30} gridGap={0.2} maxOpacity={0.15} />
       </div>
 
-      <section className="w-full max-w-6xl px-5 py-12 flex flex-col gap-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-4">
-            <LightTrailBadge className="w-fit mt-5">Dynamic Typography</LightTrailBadge>
-            <h2 className="text-3xl font-bold tracking-tight">Iconic Headers</h2>
-            <p className="text-muted-foreground text-lg">
-              Dynamic, animated headers that mix icons inline with your text to create striking heroic introductions.
-            </p>
+      {/* NAVIGATION */}
+      <PillNavbar
+        logo={
+          <div className="font-bold text-lg tracking-tight flex items-center gap-1">
+            <div className="size-4 bg-blue-600 rounded-sm" />
+            <span>TS<span className="text-blue-600">.</span>UI</span>
           </div>
-          <div className="bg-muted/30 border border-border/50 rounded-2xl flex justify-center items-center py-20 px-4 relative overflow-hidden">
-            <IconicHeroExample />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1 bg-muted/30 border border-border/50 rounded-2xl py-12 px-4 relative flex justify-center overflow-hidden">
-            <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            <Carousel>
-              <div className="flex flex-col gap-6 w-full max-w-sm">
-                <CarouselRow direction="left" duration={35}>
-                  {CAROUSEL_DATA.slice(0, 4).map((item, idx) => (
-                    <CarouselItem key={`row1-${idx}`}>
-                      {item.icon}
-                      <span className="text-xs font-medium text-foreground">{item.name}</span>
-                    </CarouselItem>
-                  ))}
-                </CarouselRow>
-                <CarouselRow direction="right" duration={45}>
-                  {CAROUSEL_DATA.slice(0, 4).map((item, idx) => (
-                    <CarouselItem key={`row2-${idx}`}>
-                      {item.icon}
-                      <span className="text-xs font-medium text-foreground">{item.name}</span>
-                    </CarouselItem>
-                  ))}
-                </CarouselRow>
-              </div>
-            </Carousel>
-          </div>
-          <div className="flex flex-col gap-4 order-1 lg:order-2">
-            <LightTrailBadge className="w-fit">Zero-JS Loops</LightTrailBadge>
-            <h2 className="text-3xl font-bold tracking-tight">Infinite Carousel</h2>
-            <p className="text-muted-foreground text-lg">
-              A perfectly looping, natively performing CSS carousel. Completely theme aware with no JavaScript intersection observers needed.
-            </p>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-4">
-            <LightTrailBadge className="w-fit">Frosted UI</LightTrailBadge>
-            <h2 className="text-3xl font-bold tracking-tight">Glassmorphism UI</h2>
-            <p className="text-muted-foreground text-lg">
-              Authentic frosted glass components that respect dark and light modes, casting gorgeous ambient reflections.
-            </p>
-          </div>
-          <div className="bg-black/5 dark:bg-white/5 border border-border/50 rounded-2xl flex justify-center items-center py-24 px-4 relative overflow-hidden">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/20 blur-[80px] rounded-full -z-10 pointer-events-none" />
-            <GlassLogin />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1 relative h-[400px] bg-muted/30 border border-border/50 rounded-2xl overflow-hidden">
-            <WavyGridBackground squareSize={8} gridGap={2} maxOpacity={0.18} mode="contained" />
-            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-              <div className="text-center space-y-3 px-6">
-                <h3 className="text-2xl font-semibold tracking-tight text-foreground drop-shadow-sm">Subtle. Elegant. Cinematic.</h3>
-                <p className="text-sm text-muted-foreground">Fully theme aware. GPU accelerated.</p>
-              </div>
-            </div>
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background/80 to-transparent pointer-events-none z-10" />
-          </div>
-          <div className="flex flex-col gap-4 order-1 lg:order-2">
-            <LightTrailBadge className="w-fit">GPU Accelerated</LightTrailBadge>
-            <h2 className="text-3xl font-bold tracking-tight">Wavy Grid Background</h2>
-            <p className="text-muted-foreground text-lg">
-              A smooth, theme-aware animated grid powered by canvas. Lightweight, GPU-accelerated and perfect for hero sections.
-            </p>
-          </div>
-        </div>
+        }
+        items={[
+          { label: "Registry", href: "#registry" },
+          { label: "Documentation", href: "#docs" },
+          { label: "Showcase", href: "#showcase" },
+        ]}
+        actions={[<BeveledBorderButton key="cta" title="Copy Registry" onClick={copyCommand} />]}
+      />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-2">
-              <LightTrailBadge>MacOS Style</LightTrailBadge>
-              <LightTrailBadge>Framer Motion</LightTrailBadge>
+      <main className="relative z-10">
+
+        {/* HERO SECTION */}
+        <section className="relative min-h-[90vh] lg:min-h-screen flex flex-col items-center justify-center px-6 pt-24 lg:pt-32 pb-10 lg:pb-20 mt-10">
+          <div className="w-full max-w-7xl mx-auto text-center space-y-12">
+
+            {/* Text Content wrapped to maintain readability */}
+            <div className="max-w-4xl mx-auto space-y-8">
+              <LightTrailBadge>
+                <div className="flex items-center gap-2 px-1 py-0.5">
+                  <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
+                    TS-UI
+                  </span>
+                  <div className="w-1 h-1 bg-zinc-300 rounded-full" />
+                  <span className="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase tracking-widest">
+                    Next.js SaaS Components
+                  </span>
+                </div>
+              </LightTrailBadge>
+
+              <div className="space-y-4">
+                <h1 className="text-6xl md:text-9xl font-semibold tracking-tighter leading-[0.9] text-zinc-900 dark:text-white">
+                  Design for the <br />
+                  <span className="text-blue-600">Future.</span>
+                </h1>
+                <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto font-medium leading-relaxed">
+                  A signature collection of copy-paste components for Next.js.
+                  Minimalist aesthetics met with high-performance motion.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-4 pt-6">
+                <BeveledBorderButton title="Explore Components" onClick={() => document.getElementById('registry')?.scrollIntoView({ behavior: 'smooth' })} />
+                <button
+                  onClick={copyCommand}
+                  className="group flex items-center gap-3 px-8 py-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-xl font-bold uppercase tracking-widest text-[10px] hover:bg-zinc-100 dark:hover:bg-white/10 transition-all"
+                >
+                  {copied ? <Check className="w-4 h-4 text-green-500" /> : <Terminal className="w-4 h-4 text-blue-500" />}
+                  {copied ? "Copied Command" : "Copy Install Command"}
+                </button>
+              </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight">Interactive Glass Dock</h2>
-            <p className="text-muted-foreground text-lg">
-              A fluid, macOS-inspired navigation dock with high-end glassmorphism effects. 
-              Features smooth hover scaling, ambient shadows, and native-feeling interactions.
+
+            {/* FLOATING PREVIEW ELEMENT - Now has more room to breathe */}
+            <div className="pt-20 lg:pt-32 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
+              {/* Desktop Preview: Safari */}
+              <div className="hidden lg:block relative group mx-auto w-full">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/0 to-purple-500/0 blur-2xl opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white/50 dark:bg-black/50 backdrop-blur-3xl shadow-2xl transition-transform duration-700 hover:translate-y-[-10px]">
+                  <Safari url="ts-ui.com/showcase" className="w-full">
+                    <div className="w-full aspect-[16/10] bg-zinc-50 dark:bg-[#050505]">
+                      <SafariShowcase />
+                    </div>
+                  </Safari>
+                </div>
+              </div>
+
+              {/* Mobile/Tablet Preview: Modular iPhone Mockup */}
+              <div className="lg:hidden flex justify-center w-full px-4 overflow-visible">
+                <div
+                  className="flex justify-center w-full transition-transform duration-500"
+                  style={{ height: responsiveScale < 1 ? '650px' : '770px' }}
+                >
+                  <IPhoneSaaSPreview scale={responsiveScale} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* REGISTRY SECTION */}
+        <section id="registry" className="max-w-7xl mx-auto px-6 py-40">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20 items-end">
+            <div className="lg:col-span-7 space-y-4">
+              <h2 className="text-4xl md:text-6xl font-semibold tracking-tighter text-zinc-900 dark:text-white leading-tight">
+                The Modern <br />
+                Component Catalog.
+              </h2>
+              <p className="text-zinc-500 font-medium max-w-lg">
+                Purpose-built components for SaaS founders who need to ship beautiful interfaces without the overhead.
+              </p>
+            </div>
+            <div className="lg:col-span-5 flex lg:justify-end gap-3">
+              <div className="px-4 py-2 border border-zinc-200 dark:border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white dark:bg-white/5">Accessible</div>
+              <div className="px-4 py-2 border border-blue-200 dark:border-blue-500/20 rounded-full text-[10px] font-bold uppercase tracking-widest bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">Type-Safe</div>
+              <div className="px-4 py-2 border border-zinc-200 dark:border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white dark:bg-white/5">Performant</div>
+            </div>
+          </div>
+
+          <BentoGrid className="grid-cols-1 md:grid-cols-8 gap-8 auto-rows-[22rem]">
+            {registryComponents.map((comp, idx) => (
+              <BentoCard key={idx} {...comp} />
+            ))}
+          </BentoGrid>
+        </section>
+
+        {/* TECH REVEAL SECTION */}
+        <section className="bg-white dark:bg-[#050505] border-y border-zinc-200 dark:border-white-10 py-32 px-6">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-20">
+            <div className="flex-1 space-y-8">
+              <IconicHeading
+                lines={[
+                  {
+                    text: "Unified Stack",
+                    icon: <Workflow className="w-[60%] h-[60%]" />,
+                    iconPosition: "start",
+                    className: "text-4xl md:text-6xl font-semibold tracking-tight",
+                    iconClassName: "bg-zinc-100 dark:bg-zinc-800",
+                  },
+                ]}
+              />
+              <p className="text-zinc-500 dark:text-zinc-400 text-lg leading-relaxed font-medium">
+                Designed to live harmoniously with the standard Shadcn UI ecosystem.
+                No redundant libraries, no bloated dependencies. Just pure Tailwind and Framer Motion.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  { title: "Native Framer Motion", desc: "60fps interactions out of the box." },
+                  { title: "Tailwind First", desc: "Easily themeable with standard CSS variables." },
+                  { title: "Radix Optimized", desc: "Full accessibility support for every interaction." }
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-4">
+                    <div className="flex-shrink-0 size-6 rounded-full bg-blue-500/10 flex items-center justify-center">
+                      <Check className="size-3 text-blue-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-sm text-zinc-900 dark:text-zinc-200 uppercase tracking-widest">{item.title}</h4>
+                      <p className="text-xs text-zinc-500">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex-1 relative">
+              <div className="absolute inset-0 bg-blue-500/10 blur-[80px] rounded-full" />
+              <div className="relative grid grid-cols-2 gap-4">
+                {techStack.map((tech, i) => (
+                  <div key={i} className="p-4 border border-zinc-200 dark:border-white/10 rounded-2xl bg-white dark:bg-zinc-900 shadow-sm flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{tech}</span>
+                    <Check className="size-3 text-green-500" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* DYNAMIC SHOWCASE CAROUSEL */}
+        <section className="py-24 overflow-hidden">
+          <Carousel>
+            <CarouselRow direction="left" duration={50}>
+              {[...techStack, "Customizable", "Responsive", "Lightweight", "Open Source"].map((item, i) => (
+                <CarouselItem
+                  key={i}
+                  className="bg-zinc-50 dark:bg-[#080808] border border-zinc-200 dark:border-white/10 px-10 py-4 text-[11px] font-black tracking-[0.2em] uppercase italic text-zinc-400"
+                >
+                  {item}
+                </CarouselItem>
+              ))}
+            </CarouselRow>
+          </Carousel>
+        </section>
+
+        {/* CTA HERO */}
+        <section className="py-40 px-6 border-t border-zinc-200 dark:border-white/10 text-center">
+          <div className="max-w-4xl mx-auto space-y-12">
+            <h2 className="text-5xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white leading-[0.9]">
+              Ship like a <br />
+              <span className="text-blue-600">Pro.</span>
+            </h2>
+            <div className="flex justify-center flex-col items-center gap-6">
+              <p className="text-xl text-zinc-500 font-medium max-w-xl">
+                Elevate your application with signature components designed for the premium web.
+              </p>
+              <div className="scale-110 pt-4">
+                <BeveledBorderButton title="Access the Registry" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      {/* FOOTER */}
+      <footer className="relative py-20 border-t border-zinc-200 dark:border-white/10 px-6 bg-white dark:bg-[#030303] z-20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+          <div className="space-y-4 text-center md:text-left">
+            <div className="font-bold text-2xl tracking-tighter flex items-center justify-center md:justify-start gap-2">
+              <div className="size-6 bg-blue-600 rounded-md" />
+              <span>TS<span className="text-blue-600">.</span>UI</span>
+            </div>
+            <p className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.3em]">
+              Premium Registry © 2026
             </p>
           </div>
-          <div className="relative group bg-gradient-to-b from-muted/20 to-muted/50 border border-border/40 rounded-3xl flex justify-center items-end py-16 px-4 min-h-[300px] overflow-hidden">
-            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-2/3 h-32 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="relative z-10 w-full flex justify-center">
-              <GlassDock items={dockItems} />
+          <div className="flex gap-16 md:gap-24">
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">Registry</h4>
+              <ul className="text-xs space-y-3 font-bold uppercase tracking-widest text-zinc-500">
+                <li className="hover:text-blue-600 cursor-pointer transition-colors">Components</li>
+                <li className="hover:text-blue-600 cursor-pointer transition-colors">Blocks</li>
+                <li className="hover:text-blue-600 cursor-pointer transition-colors">Templates</li>
+              </ul>
             </div>
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="absolute top-6 text-[10px] uppercase tracking-widest text-muted-foreground/50 font-bold">Interactive Preview</motion.div>
+            <div className="space-y-4">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400">Community</h4>
+              <ul className="text-xs space-y-3 font-bold uppercase tracking-widest text-zinc-500">
+                <li className="hover:text-blue-600 cursor-pointer flex items-center gap-2 transition-colors">GitHub <ExternalLink size={12} /></li>
+                <li className="hover:text-blue-600 cursor-pointer flex items-center gap-2 transition-colors">Twitter <ExternalLink size={12} /></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </section>
+      </footer>
+
+      {/* DOCK */}
+      <div className="fixed bottom-10 left-0 right-0 z-50 flex justify-center pointer-events-none">
+        <div className="pointer-events-auto">
+          <GlassDock items={dockItems} />
+        </div>
+      </div>
+
+      <style jsx global>{`
+        html {
+          scroll-behavior: smooth;
+        }
+        ::selection {
+          background-color: rgba(37, 99, 235, 0.15);
+          color: inherit;
+        }
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+        }
+        .dark :-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      `}</style>
     </div>
   );
 }
