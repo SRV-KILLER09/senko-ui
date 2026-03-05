@@ -1,0 +1,92 @@
+---
+title: Glass Dock
+description: A dock with frosted glass effect
+---
+
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`"use client";
+
+import React, { useState, useEffect } from "react";
+import { 
+  Home, 
+  Github, 
+  Sun, 
+  Moon, 
+  Cpu, 
+  ExternalLink 
+} from "lucide-react";
+import { useTheme } from "next-themes";
+import { GlassDock } from "@/components/glass-dock";
+
+export default function GlassDockPreview() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const dockItems = [
+    { 
+      label: "Home", 
+      icon: Home, 
+      onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) 
+    },
+    { 
+      label: "Registry", 
+      icon: Cpu, 
+      onClick: () => console.log("Navigate to Registry") 
+    },
+    { 
+      label: "Github", 
+      icon: Github, 
+      onClick: () => window.open("https://github.com", "_blank") 
+    },
+    {
+      label: "Theme",
+      icon: theme === "dark" ? Sun : Moon,
+      onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
+    },
+  ];
+
+  if (!mounted) return null;
+
+  return (
+    <div className="relative mt-10 flex justify-center  pointer-events-none">
+        <div className="pointer-events-auto z-50">
+          <GlassDock items={dockItems} />
+        </div>
+      </div>
+  );
+}`}
+>
+  <div className="flex flex-col items-center justify-center gap-6 py-16 px-8">
+    <GlassDockPreview/>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add your-registry-url/glass-dock
+```
+
+## Usage
+
+```tsx
+import {GlassDock} from "@/components/glass-dock"
+```
+
+```tsx
+<GlassDock items={dockItems} />
+```
+
+## Props
+
+| Prop         | Type        | Default | Description                                               |
+| ------------ | ----------- | ------- | --------------------------------------------------------- |
+| `swipeWidth` | `number`    | `100`   | Width of the sliding fill effect on hover as a percentage |
+| `className`  | `string`    | `—`     | Additional classes to apply                               |
+| `children`   | `ReactNode` | `—`     | Content inside the badge                                  |

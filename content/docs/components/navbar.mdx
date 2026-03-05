@@ -1,0 +1,74 @@
+---
+title: Navbar
+description: A modern smooth navbar that floats
+---
+
+## Preview
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`"use client";
+
+import React from "react";
+import PillNavbar from "@/components/GlassyTopBar";
+import { BeveledBorderButton } from "@/components/BeveledBorderButton";
+
+export function NavbarPreview() {
+  return (
+    <PillNavbar
+      fixed={false}
+      logo={
+        <div className="font-bold text-lg tracking-tight flex items-center gap-1">
+          <div className="size-4 bg-blue-600 rounded-sm" />
+          <span>TS<span className="text-blue-600">.</span>UI</span>
+        </div>
+      }
+      items={[
+        { label: "Registry", href: "#registry" },
+        { label: "Documentation", href: "#docs" },
+        { label: "Showcase", href: "#showcase" },
+      ]}
+      actions={[<BeveledBorderButton key="cta" title="Copy Registry" />]}
+    />
+  );
+}
+`}
+>
+    <NavbarPreview />
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/pill-navbar
+```
+
+## Usage
+```tsx
+import PillNavbar from "@/components/GlassyTopBar"
+
+<PillNavbar
+  logo={<span className="font-bold">TS.UI</span>}
+  items={[
+    { label: "Components", href: "/docs" },
+    { label: "GitHub", href: "https://github.com" },
+  ]}
+  actions={[<button>Get Started</button>]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `items` | `NavItem[]` | `—` | Navigation links |
+| `logo` | `ReactNode` | `—` | Logo element |
+| `actions` | `ReactNode[]` | `—` | Action buttons on the right |
+| `fixed` | `boolean` | `true` | Whether navbar is fixed to viewport |
+| `className` | `string` | `—` | Additional classes |
+
+### NavItem
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `label` | `string` | Link text |
+| `href` | `string` | Link URL |

@@ -1,0 +1,43 @@
+---
+title: IPhone
+description: A mockup of an iPhone for your hero page
+---
+
+## Preview
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import IPhoneMockup from "@/components/iphone-mockup"
+
+export default function Example() {
+  return (
+    <IPhoneMockup scale={0.6} />
+  )
+}`}
+>
+  <EmptyIphonePreview />
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/iphone-mockup
+```
+
+## Usage
+```tsx
+import IPhoneMockup from "@/components/iphone-mockup"
+```
+```tsx
+<IPhoneMockup>
+  <div className="p-4">Your content here</div>
+</IPhoneMockup>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | `—` | Content rendered inside the iPhone screen |
+| `screenClassName` | `string` | `—` | Additional classes for the screen area |
+| `scale` | `number` | `1` | Scale factor for resizing the mockup |
+| `className` | `string` | `—` | Additional classes for the outer wrapper |

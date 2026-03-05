@@ -1,0 +1,67 @@
+---
+title: Light Trail Badge
+description: A badge with an animated light trail that follows along the border
+---
+
+import { LightTrailBadge } from "@/components/LightTrailBadge";
+
+## Preview
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import { LightTrailBadge } from "@/components/LightTrailBadge"
+
+export default function Example() {
+  return (
+    <LightTrailBadge className="shadow-lg shadow-zinc-200/50 dark:shadow-black/20">
+        <div className="flex items-center gap-2 px-1 py-0.5 leading-none">
+            <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400">
+                CHANGELOG
+            </span>
+        <div className="w-1 h-1 bg-zinc-300 rounded-full" />
+            <span className="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase tracking-widest">
+                NEW COMPONENTS ADDED
+            </span>
+        </div>
+    </LightTrailBadge>
+        )
+}`}
+>
+  <div className="flex flex-col items-center justify-center gap-6 py-16 px-8">
+    <LightTrailBadge className="shadow-lg shadow-zinc-200/50 dark:shadow-black/20">
+<div className="flex items-center gap-2 px-1 py-0.5 leading-none">
+<span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400">
+CHANGELOG
+</span>
+<div className="w-1 h-1 bg-zinc-300 rounded-full" />
+<span className="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase tracking-widest">
+NEW COMPONENTS ADDED
+</span>
+</div>
+</LightTrailBadge>
+  </div>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add your-registry-url/light-trail-badge
+```
+
+## Usage
+
+```tsx
+import { LightTrailBadge } from "@/components/LightTrailBadge";
+```
+
+```tsx
+<LightTrailBadge>LightTrailBadge</LightTrailBadge>
+```
+
+## Props
+
+| Prop         | Type        | Default | Description                                               |
+| ------------ | ----------- | ------- | --------------------------------------------------------- |
+| `swipeWidth` | `number`    | `100`   | Width of the sliding fill effect on hover as a percentage |
+| `className`  | `string`    | `—`     | Additional classes to apply                               |
+| `children`   | `ReactNode` | `—`     | Content inside the badge                                  |

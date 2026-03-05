@@ -1,0 +1,59 @@
+---
+title: Wavy Grid
+description: An animated wavy grid background with theme-aware colors
+---
+
+## Preview
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import WavyGridBackground from "@/components/wavy-grid"
+
+export default function Example() {
+  return (
+    <div className="relative w-full h-[400px]">
+      <WavyGridBackground mode="contained" />
+      <div className="relative z-10 flex items-center justify-center h-full">
+        <h1 className="text-4xl font-bold">Hello World</h1>
+      </div>
+    </div>
+  )
+}`}
+>
+  <div className="relative flex flex-col items-center justify-center min-h-[400px]">
+  <div className="absolute inset-0 -z-10">
+    <WavyGridBackgroundPreview />
+  </div>
+  <span className="relative z-10 text-xl">
+    Literally See Above 🤯
+  </span>
+</div>
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/wavy-grid
+```
+
+## Usage
+```tsx
+import WavyGridBackground from "@/components/wavy-grid"
+```
+```tsx
+<div className="relative w-full h-[400px]">
+  <WavyGridBackground mode="contained" />
+  <div className="relative z-10">
+    Your content here
+  </div>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `squareSize` | `number` | `4` | Size of each grid square in pixels |
+| `gridGap` | `number` | `2` | Gap between grid squares in pixels |
+| `maxOpacity` | `number` | `0.25` | Maximum opacity of the grid squares |
+| `height` | `number` | `400` | Height in pixels, only applies in `fixed` mode |
+| `mode` | `"fixed" \| "contained"` | `"fixed"` | `fixed` pins to viewport top, `contained` fills parent |

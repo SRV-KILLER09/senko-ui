@@ -1,0 +1,44 @@
+---
+title: Browser
+description: A mockup of Browser for your hero page
+---
+
+## Preview
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import { Safari } from "@/components/safari-view";
+
+export const SafariEmptyShowcase = () => {
+  return (
+    <Safari/>
+        )
+}
+`}
+>
+  <SafariEmptyShowcase/>
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add your-registry-url/browser
+```
+
+## Usage
+
+```tsx
+import { Safari } from "@/components/safari-view";
+```
+
+```tsx
+<Safari/>
+```
+
+## Props
+
+| Prop         | Type        | Default | Description                                               |
+| ------------ | ----------- | ------- | --------------------------------------------------------- |
+| `swipeWidth` | `number`    | `100`   | Width of the sliding fill effect on hover as a percentage |
+| `className`  | `string`    | `—`     | Additional classes to apply                               |
+| `children`   | `ReactNode` | `—`     | Content inside the badge                                  |

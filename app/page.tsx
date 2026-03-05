@@ -30,7 +30,7 @@ import { Carousel, CarouselRow, CarouselItem } from "@/components/carousel";
 import { LightTrailBadge } from "@/components/LightTrailBadge";
 import WavyGridBackground from "@/components/WavyGridBackground";
 import { BeveledBorderButton } from "@/components/BeveledBorderButton";
-import PillNavbar from "@/components/GlassyTopBar";
+import PillNavbar from "@/components/PillNavbar";
 import { IconicHeading } from "@/components/Icon-ic-Heading";
 import UnderlineHeading from "@/components/underlined-heading";
 import { IPhoneSaaSPreview } from "@/components/iphone-saas-preview";
@@ -163,7 +163,7 @@ export default function TSUIModernShowcase() {
         }
         items={[
           { label: "Registry", href: "#registry" },
-          { label: "Documentation", href: "#docs" },
+          { label: "Documentation", href: "/docs" },
           { label: "Showcase", href: "#showcase" },
         ]}
         actions={[<BeveledBorderButton key="cta" title="Copy Registry" onClick={copyCommand} />]}

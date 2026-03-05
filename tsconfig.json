@@ -19,8 +19,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "fumadocs-mdx:*": ["./node_modules/fumadocs-mdx/dist/*"]
     }
+    
   },
   "include": [
     "next-env.d.ts",
