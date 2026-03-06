@@ -1,0 +1,73 @@
+---
+title: Aurora Button
+description: A pill button with an animated border beam and gradient fill. Supports custom beam colors, speed, and dark mode.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import AuroraButton from "@/components/aurora-button"
+
+export default function Example() {
+  return <AuroraButton label="Get Started" />
+}`}
+>
+  <AuroraButtonDefault />
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/aurora-button
+```
+
+## Usage
+```tsx
+import AuroraButton from "@/components/aurora-button"
+```
+```tsx
+<AuroraButton label="Get Started" />
+```
+
+## Examples
+
+### Pink
+
+<ComponentPreview
+  code={`<AuroraButton label="Learn More" beamColor="236, 72, 153" duration="2s" />`}
+>
+  <AuroraButtonPink />
+</ComponentPreview>
+
+### Blue
+
+<ComponentPreview
+  code={`<AuroraButton label="Sign Up" beamColor="59, 130, 246" duration="4s" />`}
+>
+  <AuroraButtonBlue />
+</ComponentPreview>
+
+### Slow
+
+<ComponentPreview
+  code={`<AuroraButton label="Explore" beamColor="139, 92, 246" duration="6s" />`}
+>
+  <AuroraButtonSlow />
+</ComponentPreview>
+
+### Fast
+
+<ComponentPreview
+  code={`<AuroraButton label="Buy Now" beamColor="245, 158, 11" duration="1s" />`}
+>
+  <AuroraButtonFast />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `"Click me"` | Button text |
+| `beamColor` | `string` | `"139, 92, 246"` | Beam color as `"r, g, b"` |
+| `duration` | `string` | `"3s"` | Beam rotation speed |
+| `onClick` | `() => void` | `—` | Click handler |
+| `className` | `string` | `—` | Additional classes |

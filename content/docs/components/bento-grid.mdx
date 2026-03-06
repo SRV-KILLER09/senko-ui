@@ -1,0 +1,97 @@
+---
+title: Bento Grid
+description: A responsive bento-style grid with animated cards, cursor glow effects, and customizable backgrounds
+---
+
+## Preview
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  previewClassName="!p-0"
+  code={`import { BentoGrid, BentoCard } from "@/components/bento"
+import { Search, Share2, Bell, Zap } from "lucide-react"
+
+export default function Example() {
+  return (
+    <BentoGrid className="md:grid-cols-5 md:grid-rows-2">
+      <BentoCard
+        className="md:col-span-3 md:row-span-1"
+        name="Tagging"
+        description="Neural auto-organization for your files."
+        background={<div />}
+        Icon={Search}
+        href="/"
+        cta="Explore"
+        glowColor="139, 92, 246"
+      />
+    </BentoGrid>
+  )
+}`}
+>
+  <BentoGridPreview />
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/bento-grid
+```
+
+## Usage
+```tsx
+import { BentoGrid, BentoCard } from "@/components/bento"
+import { Search } from "lucide-react"
+```
+```tsx
+<BentoGrid>
+  <BentoCard
+    className="md:col-span-3 md:row-span-1"
+    name="Tagging"
+    description="Neural auto-organization for your files."
+    background={
+      <div className="absolute inset-0 flex items-center justify-center">
+        {/* your background visual */}
+      </div>
+    }
+    Icon={Search}
+    href="/docs"
+    cta="Explore"
+    glowColor="139, 92, 246"
+  />
+</BentoGrid>
+```
+
+## Layout
+
+The grid uses `grid-cols-12` by default. Control each card's size using `col-span` and `row-span`:
+```tsx
+{/* Big card — takes 7 cols, 2 rows */}
+<BentoCard className="md:col-span-7 md:row-span-2" ... />
+
+{/* Small card — takes 5 cols, 1 row */}
+<BentoCard className="md:col-span-5 md:row-span-1" ... />
+
+{/* Full width */}
+<BentoCard className="md:col-span-12" ... />
+```
+
+## Props
+
+### BentoGrid
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | `—` | BentoCard components |
+| `className` | `string` | `—` | Override grid columns, rows, gap |
+
+### BentoCard
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | `—` | Card heading |
+| `description` | `string` | `—` | Card subtext |
+| `background` | `ReactNode` | `—` | Visual rendered behind the content |
+| `Icon` | `React.ElementType` | `—` | Icon shown in the top left |
+| `href` | `string` | `—` | Link destination for the CTA |
+| `cta` | `string` | `—` | CTA button label |
+| `glowColor` | `string` | `"255,255,255"` | Cursor glow color as `"r, g, b"` |
+| `className` | `string` | `—` | Controls col/row span and any overrides |

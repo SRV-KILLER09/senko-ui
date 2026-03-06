@@ -1,13 +1,13 @@
 ---
-title: Iconic Text
-description: Text effect in which you can add icons of your choice
+title: Iconic Heading
+description: A heading component where you can place icons inline between, before, or after words with staggered entrance animations.
 ---
 
 ## Preview
 
-<ComponentPreview 
+<ComponentPreview
   v0Link="https://v0.dev/chat/b/your-component"
-  code={`import { IconicHeading } from "@/components/Icon-ic-Heading"
+  code={`import { IconicHeading } from "@/components/iconic-heading"
 import { TrendingUp } from "lucide-react"
 
 export default function Example() {
@@ -31,7 +31,7 @@ export default function Example() {
   )
 }`}
 >
-  <IconicHeadingpreview />
+  <IconicHeadingDefault />
 </ComponentPreview>
 
 ## Installation
@@ -41,7 +41,7 @@ npx shadcn@latest add your-registry-url/iconic-heading
 
 ## Usage
 ```tsx
-import { IconicHeading } from "@/components/Icon-ic-Heading"
+import { IconicHeading } from "@/components/iconic-heading"
 import { TrendingUp } from "lucide-react"
 ```
 ```tsx
@@ -59,13 +59,115 @@ import { TrendingUp } from "lucide-react"
 />
 ```
 
+## Examples
+
+### Icon at Start
+
+<ComponentPreview
+  code={`<IconicHeading
+  lines={[
+    {
+      text: "Ship faster",
+      icon: <Rocket className="w-[60%] h-[60%]" />,
+      iconPosition: "start",
+      iconClassName: "bg-gradient-to-t from-orange-200 to-orange-400",
+    },
+    { text: "than ever before" },
+  ]}
+/>`}
+>
+  <IconicHeadingIconStart />
+</ComponentPreview>
+
+### Icon at End
+
+<ComponentPreview
+  code={`<IconicHeading
+  lines={[
+    {
+      text: "Built for AI",
+      icon: <Brain className="w-[60%] h-[60%]" />,
+      iconPosition: "end",
+      iconClassName: "bg-gradient-to-t from-violet-200 to-violet-400",
+    },
+    { text: "products" },
+  ]}
+/>`}
+>
+  <IconicHeadingIconEnd />
+</ComponentPreview>
+
+### Three Lines
+
+<ComponentPreview
+  code={`<IconicHeading
+  lines={[
+    {
+      text: "Design fast,",
+      icon: <Sparkles className="w-[60%] h-[60%]" />,
+      iconPosition: "end",
+      iconClassName: "bg-gradient-to-t from-yellow-200 to-yellow-400",
+    },
+    {
+      text: "ship faster,",
+      icon: <Zap className="w-[60%] h-[60%]" />,
+      iconPosition: "start",
+      iconClassName: "bg-gradient-to-t from-emerald-200 to-emerald-400",
+    },
+    { text: "grow forever" },
+  ]}
+/>`}
+>
+  <IconicHeadingThreeLines />
+</ComponentPreview>
+
+### Muted Line
+
+<ComponentPreview
+  code={`<IconicHeading
+  lines={[
+    {
+      text: "Components",
+      icon: <Code2 className="w-[60%] h-[60%]" />,
+      iconPosition: "between",
+      iconClassName: "bg-gradient-to-t from-zinc-200 to-zinc-400",
+    },
+    {
+      text: "that just work",
+      muted: true,
+    },
+  ]}
+/>`}
+>
+  <IconicHeadingMuted />
+</ComponentPreview>
+
+### Left Aligned
+
+<ComponentPreview
+  code={`<IconicHeading
+  align="left"
+  lines={[
+    {
+      text: "Reach users",
+      icon: <Globe className="w-[60%] h-[60%]" />,
+      iconPosition: "end",
+      iconClassName: "bg-gradient-to-t from-cyan-200 to-cyan-400",
+    },
+    { text: "everywhere" },
+  ]}
+/>`}
+>
+  <IconicHeadingGlobal />
+</ComponentPreview>
+
 ## Props
 
 ### IconicHeading
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `lines` | `Line[]` | `—` | Array of lines to render |
+| `lines` | `Line[]` | `—` | Array of line objects to render |
 | `align` | `"center" \| "left" \| "right"` | `"center"` | Text alignment |
 | `className` | `string` | `—` | Additional classes for the heading |
 | `shadow` | `boolean` | `false` | Adds a drop shadow to the heading |
@@ -76,7 +178,7 @@ import { TrendingUp } from "lucide-react"
 | --- | --- | --- | --- |
 | `text` | `string` | `—` | Text content of the line |
 | `icon` | `ReactNode` | `—` | Icon to render alongside the text |
-| `iconPosition` | `"start" \| "end" \| "between"` | `—` | Where to place the icon relative to text |
+| `iconPosition` | `"start" \| "end" \| "between"` | `—` | Where to place the icon relative to the text |
 | `iconClassName` | `string` | `—` | Additional classes for the icon wrapper |
-| `muted` | `boolean` | `—` | Renders the line in muted foreground color |
-| `className` | `string` | `—` | Additional classes for the line |
+| `muted` | `boolean` | `false` | Renders the line in muted foreground color |
+| `className` | `string` | `—` | Additional classes for this line |

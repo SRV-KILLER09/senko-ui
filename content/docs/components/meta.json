@@ -3,6 +3,8 @@
   "pages": [
     "light-trail-button",
     "glass-dock",
-    "navbar"
+    "navbar",
+    "bento-grid",
+    "aurora-button"
   ]
 }
