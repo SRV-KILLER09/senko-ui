@@ -3,6 +3,8 @@
   "pages": [
     "index",
     "---",
+    "text",
+    "---",
     "components",
     "---",
     "device-mocks",

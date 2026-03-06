@@ -1,0 +1,178 @@
+---
+title: Underline Heading
+description: A heading component with animated underline highlight effects
+---
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/underline-heading
+```
+
+---
+
+## SaaS
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import UnderlineHeading from "@/components/underlined-heading"
+
+export default function Example() {
+  return (
+    <UnderlineHeading
+      content={["Scalable infrastructure", "for modern developers"]}
+      highlightContent={["modern developers"]}
+      className="text-4xl md:text-5xl font-medium tracking-tight max-w-4xl text-center"
+      highlightClassName="bg-indigo-500 h-[6px] bottom-1 opacity-80"
+      textGradientClass="text-white"
+      behind={false}
+    />
+  )
+}`}
+>
+  <UnderlineHeadingSaaS />
+</ComponentPreview>
+
+### Usage
+```tsx
+import UnderlineHeading from "@/components/underlined-heading"
+```
+```tsx
+<UnderlineHeading
+  content={["Scalable infrastructure", "for modern developers"]}
+  highlightContent={["modern developers"]}
+  className="text-4xl md:text-5xl font-medium tracking-tight text-center"
+  highlightClassName="bg-indigo-500 h-[6px] bottom-1 opacity-80"
+  textGradientClass="text-white"
+  behind={false}
+/>
+```
+
+---
+
+## AI
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import UnderlineHeading from "@/components/underlined-heading"
+
+export default function Example() {
+  return (
+    <UnderlineHeading
+      content={["Intelligence that", "evolves with your data"]}
+      highlightContent={["evolves"]}
+      className="text-4xl md:text-5xl font-semibold tracking-tighter max-w-4xl text-center"
+      highlightClassName="bg-cyan-400/30 h-1/2 bottom-0 rounded-sm z-0"
+      textGradientClass="bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent"
+      behind
+    />
+  )
+}`}
+>
+  <UnderlineHeadingAI />
+</ComponentPreview>
+
+### Usage
+```tsx
+import UnderlineHeading from "@/components/underlined-heading"
+```
+```tsx
+<UnderlineHeading
+  content={["Intelligence that", "evolves with your data"]}
+  highlightContent={["evolves"]}
+  className="text-4xl md:text-5xl font-semibold tracking-tighter text-center"
+  highlightClassName="bg-cyan-400/30 h-1/2 bottom-0 rounded-sm z-0"
+  textGradientClass="bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent"
+  behind
+/>
+```
+
+---
+
+## Cafe
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import UnderlineHeading from "@/components/underlined-heading"
+
+export default function Example() {
+  return (
+    <UnderlineHeading
+      content={["Freshly roasted beans", "delivered to your door"]}
+      highlightContent={["Freshly roasted"]}
+      className="text-4xl md:text-5xl font-serif italic max-w-4xl text-center"
+      highlightClassName="bg-orange-200/20 h-full bottom-0 -rotate-1"
+      textGradientClass="text-orange-50"
+      behind={false}
+    />
+  )
+}`}
+>
+  <UnderlineHeadingCafe />
+</ComponentPreview>
+
+### Usage
+```tsx
+import UnderlineHeading from "@/components/underlined-heading"
+```
+```tsx
+<UnderlineHeading
+  content={["Freshly roasted beans", "delivered to your door"]}
+  highlightContent={["Freshly roasted"]}
+  className="text-4xl md:text-5xl font-serif italic text-center"
+  highlightClassName="bg-orange-200/20 h-full bottom-0 -rotate-1"
+  textGradientClass="text-orange-50"
+  behind={false}
+/>
+```
+
+---
+
+## FinTech
+
+<ComponentPreview
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import UnderlineHeading from "@/components/underlined-heading"
+
+export default function Example() {
+  return (
+    <UnderlineHeading
+      content={["Banking security", "you can actually trust"]}
+      highlightContent={["actually trust"]}
+      className="text-4xl md:text-5xl font-bold tracking-tight max-w-4xl text-center"
+      highlightClassName="bg-emerald-500 h-[3px] bottom-0"
+      textGradientClass="text-white"
+      behind={false}
+    />
+  )
+}`}
+>
+  <UnderlineHeadingFinTech />
+</ComponentPreview>
+
+### Usage
+```tsx
+import UnderlineHeading from "@/components/underlined-heading"
+```
+```tsx
+<UnderlineHeading
+  content={["Banking security", "you can actually trust"]}
+  highlightContent={["actually trust"]}
+  className="text-4xl md:text-5xl font-bold tracking-tight text-center"
+  highlightClassName="bg-emerald-500 h-[3px] bottom-0"
+  textGradientClass="text-white"
+  behind={false}
+/>
+```
+
+---
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `content` | `string[]` | `—` | Lines of text to render |
+| `highlightContent` | `string[]` | `—` | Words or phrases to apply the highlight to |
+| `className` | `string` | `—` | Additional classes for the heading |
+| `highlightClassName` | `string` | `—` | Classes for the highlight bar — controls color, height, rotation |
+| `textGradientClass` | `string` | `—` | Classes for custom text color or gradient |
+| `behind` | `boolean` | `false` | Renders the highlight behind the text instead of over it |

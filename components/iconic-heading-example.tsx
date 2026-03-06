@@ -4,7 +4,7 @@ import { TrendingUp } from "lucide-react"
 import UnderlineHeading from "./underlined-heading"
 import { IconicHeading } from "./Icon-ic-Heading"
 
-export default function IconicHeroExample() {
+export default function IconicHeadingExample() {
     return (
         <div className="flex flex-col items-center gap-2">
 

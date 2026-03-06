@@ -1,0 +1,82 @@
+---
+title: Iconic Text
+description: Text effect in which you can add icons of your choice
+---
+
+## Preview
+
+<ComponentPreview 
+  v0Link="https://v0.dev/chat/b/your-component"
+  code={`import { IconicHeading } from "@/components/Icon-ic-Heading"
+import { TrendingUp } from "lucide-react"
+
+export default function Example() {
+  return (
+    <IconicHeading
+      className="text-4xl md:text-6xl font-medium tracking-tight"
+      lines={[
+        {
+          text: "Scale your Product",
+          className: "-mb-2 md:-mb-3 whitespace-nowrap",
+          icon: <TrendingUp className="w-[60%] h-[60%]" />,
+          iconPosition: "between",
+          iconClassName: "bg-gradient-to-t from-blue-200 to-blue-400 border border-white shadow-sm",
+        },
+        {
+          text: "with TS-UI",
+          className: "text-foreground font-medium",
+        },
+      ]}
+    />
+  )
+}`}
+>
+  <IconicHeadingpreview />
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/iconic-heading
+```
+
+## Usage
+```tsx
+import { IconicHeading } from "@/components/Icon-ic-Heading"
+import { TrendingUp } from "lucide-react"
+```
+```tsx
+<IconicHeading
+  lines={[
+    {
+      text: "Scale your Product",
+      icon: <TrendingUp className="w-[60%] h-[60%]" />,
+      iconPosition: "between",
+    },
+    {
+      text: "with TS-UI",
+    },
+  ]}
+/>
+```
+
+## Props
+
+### IconicHeading
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `lines` | `Line[]` | `—` | Array of lines to render |
+| `align` | `"center" \| "left" \| "right"` | `"center"` | Text alignment |
+| `className` | `string` | `—` | Additional classes for the heading |
+| `shadow` | `boolean` | `false` | Adds a drop shadow to the heading |
+
+### Line
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `text` | `string` | `—` | Text content of the line |
+| `icon` | `ReactNode` | `—` | Icon to render alongside the text |
+| `iconPosition` | `"start" \| "end" \| "between"` | `—` | Where to place the icon relative to text |
+| `iconClassName` | `string` | `—` | Additional classes for the icon wrapper |
+| `muted` | `boolean` | `—` | Renders the line in muted foreground color |
+| `className` | `string` | `—` | Additional classes for the line |

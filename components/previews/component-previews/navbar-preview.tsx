@@ -6,7 +6,7 @@ import { BeveledBorderButton } from "@/components/BeveledBorderButton";
 
 export function NavbarPreview() {
   return (
-    <div className="w-full relative flex items-center justify-center py-6 px-4 [&_a]:no-underline [&_a]:text-inherit [&_*]:!fixed:relative">
+    <div className="w-full relative flex items-center justify-center px-4 [&_a]:no-underline [&_a]:text-inherit [&_*]:!fixed:relative">
       <PillNavbar
               logo={
                 <div className="font-bold text-lg tracking-tight flex items-center gap-1">
@@ -20,7 +20,7 @@ export function NavbarPreview() {
                 { label: "Showcase", href: "#showcase" },
               ]}
               actions={[<BeveledBorderButton key="cta" title="Copy Registry" />]}
-              className="relative"
+              className="relative -mt-18"
             />
     </div>
   );
