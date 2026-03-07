@@ -30,6 +30,7 @@ import {
   AuroraButtonPink,
   AuroraButtonSlow,
 } from "./components/previews/component-previews/aurora-button";
+import AndroidMockup from "./components/android-mockup";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -39,6 +40,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     LightTrailBadge,
     SafariEmptyShowcase,
     EmptyIphonePreview,
+    AndroidMockup,
     NavbarPreview,
     WavyGridBackgroundPreview,
     IconicHeadingDefault,

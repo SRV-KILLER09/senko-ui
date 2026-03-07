@@ -1,0 +1,45 @@
+---
+title: Android
+description: A pixel-perfect Android device frame for showcasing mobile UI in hero sections and documentation.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import AndroidMockup from "@/components/android-mockup"
+
+export default function Example() {
+  return <AndroidMockup />
+}`}
+>
+  <AndroidMockup scale={0.8} className="mt-25" />
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/android-mockup
+```
+
+## Usage
+```tsx
+import AndroidMockup from "@/components/android-mockup"
+```
+```tsx
+<AndroidMockup />
+```
+
+## With Content
+```tsx
+<AndroidMockup>
+  </div>
+</AndroidMockup>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | `—` | Content rendered inside the screen |
+| `screenClassName` | `string` | `—` | Additional classes for the screen area |
+| `scale` | `number` | `1` | Scale the mockup up or down |
+| `className` | `string` | `—` | Additional classes for the outer wrapper |
