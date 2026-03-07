@@ -68,7 +68,7 @@ export default function TSUIModernShowcase() {
   }, []);
 
   const copyCommand = () => {
-    navigator.clipboard.writeText("npx shadcn-ui@latest add https://ts-ui.com/registry/glass-login.json");
+    navigator.clipboard.writeText("npx shadcn@latest add https://ts-ui-nine.vercel.app/r/light-trail-badge.json");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -162,9 +162,9 @@ export default function TSUIModernShowcase() {
           </div>
         }
         items={[
-          { label: "Registry", href: "/docs" },
+          { label: "Components", href: "/docs/components" },
           { label: "Documentation", href: "/docs" },
-          { label: "Showcase", href: "/docs/device-mocks/iphone" },
+          { label: "Device Mockups", href: "/docs/device-mocks" },
         ]}
         actions={[<BeveledBorderButton key="cta" title="Copy Registry" onClick={copyCommand} />]}
       />
