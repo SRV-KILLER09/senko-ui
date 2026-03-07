@@ -1,10 +1,10 @@
-# TS-UI Showcase & Documentation
+# Senko UI Showcase & Documentation
 
 A modern, premium component library built with Next.js, Tailwind CSS, and Framer Motion for high-growth SaaS and AI interfaces.
 
 ## Overview
 
-**TS-UI** is a signature collection of copy-paste React components designed for the premium web. This project serves as both a live showcase and comprehensive documentation site for the TS-UI component library, demonstrating professional-grade UI elements for SaaS and AI applications.
+**Senko UI** is a signature collection of copy-paste React components designed for the premium web. This project serves as both a live showcase and comprehensive documentation site for the Senko UI component library, demonstrating professional-grade UI elements for SaaS and AI applications.
 
 Built with **Next.js 16**, **Tailwind CSS 4**, and **Framer Motion**, these components prioritize minimalist aesthetics, high-performance motion, and developer experience.
 
@@ -17,6 +17,36 @@ Built with **Next.js 16**, **Tailwind CSS 4**, and **Framer Motion**, these comp
 - **Type-Safe Development**: Complete TypeScript coverage for robust developer experience
 - **Documentation-Driven**: Comprehensive docs built with Fumadocs for easy component discovery and usage
 - **Shadcn/UI Compatible**: Integrates seamlessly with the shadcn/ui ecosystem
+
+## Components
+
+Senko UI includes a curated set of premium components for modern web applications:
+
+- **Android Mockup**: Display Android device previews
+- **Aurora Button**: Animated button with aurora effects
+- **Bento Grid**: Flexible grid layout component
+- **Beveled Border Button**: Button with beveled border styling
+- **Carousel**: Interactive image or content carousel
+- **Component Preview**: Preview wrapper for components
+- **Glass Card**: Glassmorphism card component
+- **Glass Container**: Glassmorphism container
+- **Glass Dock**: Glassmorphism dock navigation
+- **Glass Login**: Glassmorphism login form
+- **Hero Highlighter**: Highlighting component for hero sections
+- **Highlight Text**: Text highlighting utility
+- **Iconic Heading**: Styled heading with icons
+- **iPhone Mockup**: iPhone device preview
+- **iPhone SaaS Preview**: SaaS-focused iPhone mockup
+- **Laptop Mockup**: Laptop device preview
+- **Light Trail Badge**: Badge with light trail animation
+- **Mesh Gradient**: Gradient background component
+- **Open in V0 Button**: Button to open in V0 editor
+- **Pill Navbar**: Pill-shaped navigation bar
+- **Safari Showcase**: Safari browser showcase
+- **Safari View**: Safari browser view component
+- **Theme Toggle**: Dark/light theme switcher
+- **Underlined Heading**: Heading with underline styling
+- **Wavy Grid Background**: Animated wavy grid background
 
 ## Tech Stack
 
@@ -46,7 +76,7 @@ Built with **Next.js 16**, **Tailwind CSS 4**, and **Framer Motion**, these comp
 1. **Clone the repository:**
    ```bash
    git clone <repository-url>
-   cd test-nxt
+   cd senko-ui
    ```
 
 2. **Install dependencies:**

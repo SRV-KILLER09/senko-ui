@@ -68,7 +68,7 @@ export default function TSUIModernShowcase() {
   }, []);
 
   const copyCommand = () => {
-    navigator.clipboard.writeText("npx shadcn@latest add https://ts-ui-nine.vercel.app/r/light-trail-badge.json");
+    navigator.clipboard.writeText("npx shadcn@latest add https://senko-ui.vercel.app/r/light-trail-badge.json");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -158,7 +158,7 @@ export default function TSUIModernShowcase() {
         logo={
           <div className="font-bold text-lg tracking-tight flex items-center gap-1">
             <div className="size-4 bg-blue-600 rounded-sm" />
-            <span>TS<span className="text-blue-600">.</span>UI</span>
+            <span>SENKO<span className="text-blue-600">.</span>UI</span>
           </div>
         }
         items={[
@@ -180,7 +180,7 @@ export default function TSUIModernShowcase() {
               <LightTrailBadge>
                 <div className="flex items-center gap-2 px-1 py-0.5">
                   <span className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-                    TS-UI
+                    SENKO-UI
                   </span>
                   <div className="w-1 h-1 bg-zinc-300 rounded-full" />
                   <span className="text-zinc-500 text-[9px] lg:text-[10px] font-bold uppercase tracking-widest">
@@ -358,7 +358,7 @@ export default function TSUIModernShowcase() {
           <div className="space-y-4 text-center md:text-left">
             <div className="font-bold text-2xl tracking-tighter flex items-center justify-center md:justify-start gap-2">
               <div className="size-6 bg-blue-600 rounded-md" />
-              <span>TS<span className="text-blue-600">.</span>UI</span>
+              <span>SENKO<span className="text-blue-600">.</span>UI</span>
             </div>
             <p className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.3em]">
               Premium Registry © 2026

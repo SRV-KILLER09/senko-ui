@@ -1,8 +1,8 @@
 // @ts-nocheck
 import { default as __fd_glob_17 } from "../content/docs/text/meta.json?collection=meta"
-import { default as __fd_glob_16 } from "../content/docs/components/meta.json?collection=meta"
-import { default as __fd_glob_15 } from "../content/docs/device-mocks/meta.json?collection=meta"
-import { default as __fd_glob_14 } from "../content/docs/backgrounds/meta.json?collection=meta"
+import { default as __fd_glob_16 } from "../content/docs/device-mocks/meta.json?collection=meta"
+import { default as __fd_glob_15 } from "../content/docs/backgrounds/meta.json?collection=meta"
+import { default as __fd_glob_14 } from "../content/docs/components/meta.json?collection=meta"
 import { default as __fd_glob_13 } from "../content/docs/meta.json?collection=meta"
 import * as __fd_glob_12 from "../content/docs/text/underline-heading.mdx?collection=docs"
 import * as __fd_glob_11 from "../content/docs/text/iconic-text.mdx?collection=docs"
@@ -27,4 +27,4 @@ const create = server<typeof Config, import("fumadocs-mdx/runtime/types").Intern
 
 export const docs = await create.doc("docs", "content/docs", {"index.mdx": __fd_glob_0, "backgrounds/wavy-grid-background.mdx": __fd_glob_1, "device-mocks/android.mdx": __fd_glob_2, "device-mocks/browser.mdx": __fd_glob_3, "device-mocks/iphone.mdx": __fd_glob_4, "device-mocks/laptop.mdx": __fd_glob_5, "components/aurora-button.mdx": __fd_glob_6, "components/bento-grid.mdx": __fd_glob_7, "components/glass-dock.mdx": __fd_glob_8, "components/light-trail-button.mdx": __fd_glob_9, "components/navbar.mdx": __fd_glob_10, "text/iconic-text.mdx": __fd_glob_11, "text/underline-heading.mdx": __fd_glob_12, });
 
-export const meta = await create.meta("meta", "content/docs", {"meta.json": __fd_glob_13, "backgrounds/meta.json": __fd_glob_14, "device-mocks/meta.json": __fd_glob_15, "components/meta.json": __fd_glob_16, "text/meta.json": __fd_glob_17, });
+export const meta = await create.meta("meta", "content/docs", {"meta.json": __fd_glob_13, "components/meta.json": __fd_glob_14, "backgrounds/meta.json": __fd_glob_15, "device-mocks/meta.json": __fd_glob_16, "text/meta.json": __fd_glob_17, });

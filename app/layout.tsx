@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TS-UI",
+  title: "SENKO-UI",
   description: "Modern UI components",
 };
 
