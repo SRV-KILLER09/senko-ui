@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "iphone-mockup",
+  "title": "iPhone Mockup",
+  "description": "iPhone device mockup",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/iphone-mockup.tsx",
+      "content": "\"use client\"\r\n\r\nimport * as React from \"react\"\r\nimport { cn } from \"@/lib/utils\"\r\n\r\ninterface IPhoneMockupProps extends React.HTMLAttributes<HTMLDivElement> {\r\n  children?: React.ReactNode\r\n  screenClassName?: string\r\n  scale?: number\r\n}\r\n\r\nconst IPhoneMockup = React.forwardRef<HTMLDivElement, IPhoneMockupProps>(\r\n  ({ className, children, screenClassName, scale = 1, ...props }, ref) => {\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        style={{ transform: `scale(${scale})`, transformOrigin: \"top center\" }}\r\n        className={cn(\"relative w-[377px] h-[767px] shrink-0\", className)}\r\n        {...props}\r\n      >\r\n        {/* Outer Chassis */}\r\n        <div className=\"absolute inset-x-[2px] inset-y-0 rounded-[65px] bg-zinc-300 dark:bg-zinc-700\" />\r\n\r\n        {/* Inner Bezel */}\r\n        <div className=\"absolute inset-x-[6px] inset-y-[3px] rounded-[60px] bg-zinc-900 dark:bg-zinc-800 z-10\" />\r\n\r\n        {/* Screen */}\r\n        <div\r\n          className={cn(\r\n            \"absolute left-[17px] top-[15px] w-[343px] h-[736px] rounded-[48px] overflow-hidden\",\r\n            \"bg-white dark:bg-zinc-950\",\r\n            \"z-20\",\r\n            screenClassName\r\n          )}\r\n        >\r\n          <div className=\"w-full h-full overflow-y-auto\">\r\n            {children}\r\n          </div>\r\n        </div>\r\n\r\n        {/* Dynamic Island */}\r\n        <div className=\"absolute top-[25px] left-1/2 -translate-x-1/2 w-[108px] h-[32px] rounded-[16px] bg-black z-50 backdrop-blur-md\" />\r\n\r\n        {/* Side Buttons */}\r\n        <svg\r\n          className=\"absolute inset-0 z-40 pointer-events-none\"\r\n          width=\"377\"\r\n          height=\"767\"\r\n          viewBox=\"0 0 377 767\"\r\n          fill=\"none\"\r\n          xmlns=\"http://www.w3.org/2000/svg\"\r\n        >\r\n          <path d=\"M0 148C0 146.895 0.895431 146 2 146H4V176H2C0.895431 176 0 175.105 0 174V148Z\" className=\"fill-zinc-300 dark:fill-zinc-600\"/>\r\n          <path d=\"M0 203C0 201.895 0.895431 201 2 201H4V260H2C0.895431 260 0 259.105 0 258V203Z\" className=\"fill-zinc-300 dark:fill-zinc-600\"/>\r\n          <path d=\"M0 277C0 275.895 0.895431 275 2 275H4V334H2C0.895431 334 0 333.105 0 332V277Z\" className=\"fill-zinc-300 dark:fill-zinc-600\"/>\r\n          <path d=\"M377 242C377 240.895 376.105 240 375 240H373V333H375C376.105 333 377 332.105 377 331V242Z\" className=\"fill-zinc-300 dark:fill-zinc-600\"/>\r\n        </svg>\r\n      </div>\r\n    )\r\n  }\r\n)\r\n\r\nIPhoneMockup.displayName = \"IPhoneMockup\"\r\n\r\nexport default IPhoneMockup",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aurora-button",
+  "title": "Aurora Button",
+  "description": "Animated aurora effect button",
+  "dependencies": [
+    "motion",
+    "lucide-react",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/aurora-button.tsx",
+      "content": "\"use client\"\r\n\r\ninterface AuroraButtonProps {\r\n  label?: string\r\n  onClick?: () => void\r\n  duration?: string\r\n  className?: string\r\n  beamColor?: string\r\n}\r\n\r\nexport default function AuroraButton({\r\n  label = \"Click me\",\r\n  onClick,\r\n  duration = \"3s\",\r\n  className = \"\",\r\n  beamColor = \"139, 92, 246\",\r\n}: AuroraButtonProps) {\r\n  return (\r\n    <div\r\n      onClick={onClick}\r\n      className={`cursor-pointer shadow-[0_0_20px_6px_rgba(0,0,0,0.15)] dark:shadow-[0_0_30px_10px_rgba(255,255,255,0.3)] relative rounded-full p-[2px] bg-linear-to-b from-foreground/70 to-foreground dark:bg-linear-to-tr dark:from-foreground dark:to-pink-200 overflow-hidden ${className}`}\r\n    >\r\n\r\n      <div\r\n        className=\"absolute inset-[-100%] animate-spin pointer-events-none\"\r\n        style={{\r\n          animationDuration: duration,\r\n          background: `conic-gradient(\r\n            from 0deg,\r\n            transparent 0%,\r\n            transparent 50%,\r\n            rgba(${beamColor}, 0) 60%,\r\n            rgba(${beamColor}, 0.3) 70%,\r\n            rgba(${beamColor}, 0.6) 85%,\r\n            rgba(255, 255, 255, 1) 96%,\r\n            transparent 100%\r\n          )`,\r\n        }}\r\n      />\r\n\r\n      <div className=\"relative rounded-full flex justify-center items-center w-fit py-2 px-6 bg-linear-to-b from-zinc-800 to-zinc-700 dark:bg-linear-to-tr dark:from-foreground/60 dark:to-pink-200 text-white dark:text-background font-medium\">\r\n        {label}\r\n      </div>\r\n    </div>\r\n  )\r\n}",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

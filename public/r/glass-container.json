@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-container",
+  "title": "Glass Container",
+  "description": "Glass morphism container",
+  "dependencies": [
+    "motion",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/glass-container.tsx",
+      "content": "\"use client\"\r\n\r\nimport * as React from \"react\"\r\nimport { cva, type VariantProps } from \"class-variance-authority\"\r\nimport { cn } from \"@/lib/utils\"\r\n\r\nconst glassDockVariants = cva(\r\n  \"relative flex flex-row items-center justify-center gap-3 p-2 w-fit h-16 rounded-[50px] shadow-2xl transition-all duration-300\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"\",\r\n        animated: \"\",\r\n      },\r\n    },\r\n    defaultVariants: {\r\n      variant: \"default\",\r\n    },\r\n  }\r\n)\r\n\r\ninterface GlassContainerProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n  VariantProps<typeof glassDockVariants> {\r\n  children: React.ReactNode\r\n  blur?: number\r\n  opacity?: number\r\n  speed?: number\r\n  colorFrom?: string\r\n  colorTo?: string\r\n}\r\n\r\nexport const GlassContainer = ({\r\n  children,\r\n  className,\r\n  variant,\r\n  blur = 15,\r\n  opacity = 0.08,\r\n  speed = 1,\r\n  colorFrom = \"#ffaa40\",\r\n  colorTo = \"#9c40ff\",\r\n  ...props\r\n}: GlassContainerProps) => {\r\n  return (\r\n    <div\r\n      className={cn(glassDockVariants({ variant, className }))}\r\n      {...props}\r\n    >\r\n      {variant === \"animated\" && (\r\n        <span\r\n          className=\"animate-gradient absolute inset-0 block h-full w-full rounded-[inherit] bg-gradient-to-r from-[var(--color-from)] via-[var(--color-to)] to-[var(--color-from)] bg-[length:var(--bg-size)_100%] p-[1px]\"\r\n          style={{\r\n            \"--bg-size\": `${speed * 300}%`,\r\n            \"--color-from\": colorFrom,\r\n            \"--color-to\": colorTo,\r\n            WebkitMask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n            WebkitMaskComposite: \"destination-out\",\r\n            mask: \"linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)\",\r\n            maskComposite: \"subtract\",\r\n            WebkitClipPath: \"padding-box\",\r\n          } as React.CSSProperties}\r\n        />\r\n      )}\r\n      <div\r\n        className=\"absolute inset-0 -z-10 rounded-[inherit]\"\r\n        style={{\r\n          backdropFilter: `blur(${blur}px)`,\r\n          backgroundColor: `rgba(255, 255, 255, 0.04)`,\r\n        }}\r\n      />\r\n\r\n      <div\r\n        className=\"absolute inset-0 z-0 pointer-events-none rounded-[inherit] border border-white/10\"\r\n        style={{\r\n          background: `linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01)) border-box`,\r\n          WebkitMask: `linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)`,\r\n          WebkitMaskComposite: \"destination-out\",\r\n          maskComposite: \"exclude\",\r\n        }}\r\n      />\r\n\r\n      <div className=\"relative z-20 flex flex-row items-center gap-3 px-2\">\r\n        {children}\r\n      </div>\r\n    </div>\r\n  )\r\n}",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

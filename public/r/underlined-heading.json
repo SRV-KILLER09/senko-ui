@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "underlined-heading",
+  "title": "Underlined Heading",
+  "description": "Heading with animated underline effects",
+  "dependencies": [
+    "motion",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/underlined-heading.tsx",
+      "content": "\"use client\";\r\n\r\nimport { motion, easeOut } from \"motion/react\";\r\nimport { ReactNode } from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\ntype UnderlineHeadingProps = {\r\n  content: string[];\r\n  highlightContent?: string[];\r\n\r\n  className?: string;\r\n  lineClassName?: string;\r\n  highlightClassName?: string;\r\n  textGradientClass?: string;\r\n  behind?: boolean;\r\n};\r\n\r\nexport default function UnderlineHeading({\r\n  content,\r\n  highlightContent,\r\n  className,\r\n  lineClassName,\r\n  highlightClassName,\r\n  textGradientClass,\r\n  behind = false,\r\n}: UnderlineHeadingProps) {\r\n\r\n\r\n  const HighlightText = ({\r\n    children,\r\n    delay = 0,\r\n  }: {\r\n    children: ReactNode;\r\n    delay?: number;\r\n  }) => (\r\n    <span className=\"relative inline-block\">\r\n      <motion.span\r\n        initial={{ scaleX: 0 }}\r\n        animate={{ scaleX: 1 }}\r\n        transition={{\r\n          duration: 0.35,\r\n          ease: easeOut,\r\n          delay,\r\n        }}\r\n        className={cn(\r\n          \"absolute left-0 -bottom-1 h-[5px] w-full origin-left bg-neutral-200\",\r\n          behind && \"-z-10\",\r\n          highlightClassName\r\n        )}\r\n      />\r\n      <span\r\n        className={cn(\r\n          behind && \"relative z-10\",\r\n          gradient\r\n        )}\r\n      >\r\n        {children}\r\n      </span>\r\n    </span>\r\n  );\r\n\r\n  const container = {\r\n    hidden: {},\r\n    show: {\r\n      transition: { staggerChildren: 0.2 },\r\n    },\r\n  };\r\n\r\n  const child = {\r\n    hidden: { opacity: 0, y: 12 },\r\n    show: {\r\n      opacity: 1,\r\n      y: 0,\r\n      transition: { duration: 0.5, ease: easeOut },\r\n    },\r\n  };\r\n\r\n  const gradient =\r\n    textGradientClass ??\r\n    \"bg-linear-to-b from-neutral-900 to-neutral-600 dark:from-neutral-50 dark:to-neutral-400 bg-clip-text text-transparent\";\r\n\r\n  const text = content.map((line, lineIndex) => {\r\n    if (!highlightContent || highlightContent.length === 0) return line;\r\n\r\n    const parts = line.split(\r\n      new RegExp(`(${highlightContent.join(\"|\")})`, \"gi\")\r\n    );\r\n\r\n    return (\r\n      <span key={lineIndex}>\r\n        {parts.map((part, i) => {\r\n          const match = highlightContent.find(\r\n            word => word.toLowerCase() === part.toLowerCase()\r\n          );\r\n\r\n          if (match) {\r\n            return (\r\n              <HighlightText\r\n                key={i}\r\n                delay={0.55 + lineIndex * 0.2}\r\n              >\r\n                {part}\r\n              </HighlightText>\r\n            );\r\n          }\r\n\r\n          return part;\r\n        })}\r\n      </span>\r\n    );\r\n  });\r\n\r\n  return (\r\n    <div className=\"flex justify-center items-center w-full\">\r\n      <motion.h1\r\n        variants={container}\r\n        initial=\"hidden\"\r\n        animate=\"show\"\r\n        className={cn(\r\n          \"font-bold text-5xl max-w-2xl text-center tracking-tight\",\r\n          className\r\n        )}\r\n      >\r\n        {text.map((line, i) => (\r\n          <motion.span\r\n            key={i}\r\n            variants={child}\r\n            className={cn(\"block not-first:mt-3\", lineClassName)}\r\n          >\r\n            <span className={gradient}>{line}</span>\r\n          </motion.span>\r\n        ))}\r\n      </motion.h1>\r\n    </div>\r\n  );\r\n}",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:component"
+}

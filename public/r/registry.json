@@ -1,0 +1,164 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ts-ui",
+  "homepage": "https://ts-ui.com",
+  "items": [
+    {
+      "name": "android-mockup",
+      "type": "registry:component",
+      "title": "Android Mockup",
+      "description": "Android device mockup component",
+      "dependencies": ["motion", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/android-mockup.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "aurora-button",
+      "type": "registry:component",
+      "title": "Aurora Button",
+      "description": "Animated aurora effect button",
+      "dependencies": ["motion", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/aurora-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "glass-container",
+      "type": "registry:component",
+      "title": "Glass Container",
+      "description": "Glass morphism container",
+      "dependencies": ["motion", "class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/glass-container.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "glass-dock",
+      "type": "registry:component",
+      "title": "Glass Dock",
+      "description": "Glass morphism dock navigation",
+      "dependencies": ["motion", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
+      "registryDependencies": ["button", "glass-container"],
+      "files": [
+        {
+          "path": "registry/glass-dock.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "icon-ic-heading",
+      "type": "registry:component",
+      "title": "Iconic Heading",
+      "description": "Heading component with integrated icons",
+      "dependencies": ["motion", "lucide-react"],
+      "files": [
+        {
+          "path": "registry/Icon-ic-Heading.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "iphone-mockup",
+      "type": "registry:component",
+      "title": "iPhone Mockup",
+      "description": "iPhone device mockup",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "registry/iphone-mockup.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "laptop-mockup",
+      "type": "registry:component",
+      "title": "Laptop Mockup",
+      "description": "Laptop device mockup",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "registry/laptop-mockup.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "light-trail-badge",
+      "type": "registry:component",
+      "title": "Light Trail Badge",
+      "description": "Animated badge with light trail effects",
+      "dependencies": ["motion", "class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/LightTrailBadge.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pill-navbar",
+      "type": "registry:component",
+      "title": "Pill Navbar",
+      "description": "Pill-shaped navigation bar",
+      "dependencies": ["motion", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/PillNavbar.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "safari-view",
+      "type": "registry:component",
+      "title": "Safari View",
+      "description": "Safari browser view",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "registry/safari-view.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "underlined-heading",
+      "type": "registry:component",
+      "title": "Underlined Heading",
+      "description": "Heading with animated underline effects",
+      "dependencies": ["motion", "class-variance-authority", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/underlined-heading.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "wavy-grid-background",
+      "type": "registry:component",
+      "title": "Wavy Grid Background",
+      "description": "Animated wavy grid background",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "registry/WavyGridBackground.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
