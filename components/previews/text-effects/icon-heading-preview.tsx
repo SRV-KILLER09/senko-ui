@@ -6,13 +6,13 @@ import {
 
 // ─── 1. Default ──────────────────────────────────────────────
 export const IconicHeadingDefault = () => (
-  <div className="flex w-full items-center justify-center py-12 px-4">
+  <div className="flex w-full items-center justify-center py-8 px-4">
     <IconicHeading
-      className="text-4xl md:text-6xl font-medium tracking-tight"
+      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight"
       lines={[
         {
           text: "Scale your Product",
-          className: "-mb-2 md:-mb-3 whitespace-nowrap text-foreground",
+          className: "-mb-1 sm:-mb-2 md:-mb-3 text-foreground",
           icon: <TrendingUp className="w-[60%] h-[60%]" />,
           iconPosition: "between",
           iconClassName: "bg-gradient-to-t from-blue-200 to-blue-400 border border-white shadow-sm",
@@ -68,14 +68,14 @@ export const IconicHeadingThreeLines = () => (
       className="text-4xl md:text-6xl font-medium tracking-tight"
       lines={[
         {
-          text: "Design fast,",
+          text: "Design fast",
           className: "-mb-2 md:-mb-3 text-foreground whitespace-nowrap",
           icon: <Sparkles className="w-[60%] h-[60%]" />,
           iconPosition: "end",
           iconClassName: "bg-gradient-to-t from-yellow-200 to-yellow-400 border border-yellow-300 shadow-sm",
         },
         {
-          text: "ship faster,",
+          text: "ship faster",
           className: "-mb-2 md:-mb-3 text-foreground whitespace-nowrap",
           icon: <Zap className="w-[60%] h-[60%]" />,
           iconPosition: "start",
@@ -89,7 +89,7 @@ export const IconicHeadingThreeLines = () => (
 
 // ─── 5. Muted second line ────────────────────────────────────
 export const IconicHeadingMuted = () => (
-  <div className="flex w-full items-center justify-center py-12 px-4">
+  <div className="flex w-full items-center justify-center py-12 px-2">
     <IconicHeading
       className="text-4xl md:text-6xl font-medium tracking-tight"
       lines={[
@@ -97,8 +97,8 @@ export const IconicHeadingMuted = () => (
           text: "Components",
           className: "-mb-2 md:-mb-3 text-foreground whitespace-nowrap",
           icon: <Code2 className="w-[60%] h-[60%]" />,
-          iconPosition: "between",
-          iconClassName: "bg-gradient-to-t from-zinc-200 to-zinc-400 border border-zinc-300 shadow-sm",
+          iconPosition: "end",
+          iconClassName: "bg-gradient-to-t from-green-200 to-zinc-400 border border-zinc-300 shadow-sm rotate-0",
         },
         {
           text: "that just work",
@@ -120,7 +120,7 @@ export const IconicHeadingGlobal = () => (
           className: "-mb-2 md:-mb-3 text-foreground whitespace-nowrap",
           icon: <Globe className="w-[60%] h-[60%]" />,
           iconPosition: "end",
-          iconClassName: "bg-gradient-to-t from-cyan-200 to-cyan-400 border border-cyan-300 shadow-sm",
+          iconClassName: "bg-gradient-to-t from-cyan-200 to-cyan-400 border border-cyan-300 shadow-sm rotate-6",
         },
         {
           text: "everywhere",

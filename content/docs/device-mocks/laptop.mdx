@@ -1,0 +1,59 @@
+---
+title: Laptop Mockup
+description: A pixel-perfect laptop device frame for showcasing web UI in hero sections and documentation.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import LaptopMockup from "@/components/laptop-mockup"
+
+export default function Example() {
+  return <LaptopMockup />
+}`}
+>
+  <div>
+  <LaptopMockup scale={0.18} className="mt-35 md:hidden" />
+  <LaptopMockup scale={0.5} className="mt-35 hidden md:block" />
+</div>
+</ComponentPreview>
+
+## Installation
+```bash
+npx shadcn@latest add your-registry-url/laptop-mockup
+```
+
+## Usage
+```tsx
+import LaptopMockup from "@/components/laptop-mockup"
+```
+```tsx
+<LaptopMockup />
+```
+
+## With Content
+```tsx
+<LaptopMockup>
+  <div className="p-8">
+    <h1>My App</h1>
+  </div>
+</LaptopMockup>
+```
+
+## Scaled Down
+```tsx
+<LaptopMockup scale={0.5}>
+  <div className="p-8">
+    <h1>My App</h1>
+  </div>
+</LaptopMockup>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | `—` | Content rendered inside the screen |
+| `screenClassName` | `string` | `—` | Additional classes for the screen area |
+| `scale` | `number` | `1` | Scale the mockup up or down |
+| `className` | `string` | `—` | Additional classes for the outer wrapper |

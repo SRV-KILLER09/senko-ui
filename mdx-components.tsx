@@ -31,6 +31,7 @@ import {
   AuroraButtonSlow,
 } from "./components/previews/component-previews/aurora-button";
 import AndroidMockup from "./components/android-mockup";
+import LaptopMockup from "./components/laptop-mockup";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -41,6 +42,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     SafariEmptyShowcase,
     EmptyIphonePreview,
     AndroidMockup,
+    LaptopMockup,
     NavbarPreview,
     WavyGridBackgroundPreview,
     IconicHeadingDefault,
