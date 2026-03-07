@@ -162,9 +162,9 @@ export default function TSUIModernShowcase() {
           </div>
         }
         items={[
-          { label: "Registry", href: "#registry" },
+          { label: "Registry", href: "/docs" },
           { label: "Documentation", href: "/docs" },
-          { label: "Showcase", href: "#showcase" },
+          { label: "Showcase", href: "/docs/device-mocks/iphone" },
         ]}
         actions={[<BeveledBorderButton key="cta" title="Copy Registry" onClick={copyCommand} />]}
       />

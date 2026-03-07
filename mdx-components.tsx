@@ -32,13 +32,24 @@ import {
 } from "./components/previews/component-previews/aurora-button";
 import AndroidMockup from "./components/android-mockup";
 import LaptopMockup from "./components/laptop-mockup";
+import {
+  SaaSBadges,
+  PortfolioBadges,
+  Web3Badges,
+  GamingBadges,
+  EcommerceBadges,
+} from "./components/previews/component-previews/light-trail-badge-preview";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
     ComponentPreview,
     GlassDockPreview,
-    LightTrailBadge,
+    SaaSBadges,
+    PortfolioBadges,
+    Web3Badges,
+    GamingBadges,
+    EcommerceBadges,
     SafariEmptyShowcase,
     EmptyIphonePreview,
     AndroidMockup,
