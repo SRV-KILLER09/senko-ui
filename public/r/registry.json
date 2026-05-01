@@ -64,7 +64,7 @@
       "dependencies": ["motion", "lucide-react"],
       "files": [
         {
-          "path": "registry/Icon-ic-Heading.tsx",
+          "path": "registry/iconic-heading.tsx",
           "type": "registry:component"
         }
       ]
@@ -103,7 +103,7 @@
       "dependencies": ["motion", "class-variance-authority", "clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/LightTrailBadge.tsx",
+          "path": "registry/light-trail-badge.tsx",
           "type": "registry:component"
         }
       ]
@@ -116,7 +116,7 @@
       "dependencies": ["motion", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/PillNavbar.tsx",
+          "path": "registry/pill-navbar.tsx",
           "type": "registry:component"
         }
       ]
@@ -155,7 +155,98 @@
       "dependencies": ["motion"],
       "files": [
         {
-          "path": "registry/WavyGridBackground.tsx",
+          "path": "registry/wavy-grid-background.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "activity-dropdown",
+      "type": "registry:component",
+      "title": "Activity Dropdown",
+      "description": "Animated notification/activity dropdown with tabs and mark-as-read functionality",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/activity-dropdown.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "like-button",
+      "type": "registry:component",
+      "title": "Like Button",
+      "description": "Glassmorphic like button with animated sparkle particles and number counter",
+      "dependencies": ["motion", "@number-flow/react", "lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/like-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "social-proof",
+      "type": "registry:component",
+      "title": "Social Proof",
+      "description": "Stacked avatar group with star rating and customizable heading for social trust signals",
+      "dependencies": ["lucide-react", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/social-proof.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "magnetic-pit-slider",
+      "type": "registry:component",
+      "title": "Magnetic Pit Slider",
+      "description": "Physics-based glass slider with magnetic bar pit effect and floating value badge",
+      "dependencies": ["motion", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/magnetic-pit-slider.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-prompt-box-glassmorphism",
+      "type": "registry:component",
+      "title": "AI Prompt Box (Glass)",
+      "description": "Full-featured AI chat input with glassmorphism design, file uploads, voice recording, and mode toggles",
+      "dependencies": ["motion", "lucide-react", "@radix-ui/react-tooltip", "@radix-ui/react-dialog", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/ai-prompt-box-glassmorphism.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "ai-prompt-box-neomorphism",
+      "type": "registry:component",
+      "title": "AI Prompt Box (Neo)",
+      "description": "Full-featured AI chat input with neomorphism design, file uploads, voice recording, and mode toggles",
+      "dependencies": ["motion", "lucide-react", "@radix-ui/react-tooltip", "@radix-ui/react-dialog"],
+      "files": [
+        {
+          "path": "registry/ai-prompt-box-neomorphism.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "animated-grid-background",
+      "type": "registry:component",
+      "title": "Animated Grid Background",
+      "description": "Animated grid background with traveling light beams, pulsing nodes, and floating glow patches",
+      "dependencies": ["motion"],
+      "files": [
+        {
+          "path": "registry/animated-grid-background.tsx",
           "type": "registry:component"
         }
       ]

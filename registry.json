@@ -64,7 +64,7 @@
       "dependencies": ["motion", "lucide-react"],
       "files": [
         {
-          "path": "registry/Icon-ic-Heading.tsx",
+          "path": "registry/iconic-heading.tsx",
           "type": "registry:component"
         }
       ]
@@ -103,7 +103,7 @@
       "dependencies": ["motion", "class-variance-authority", "clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/LightTrailBadge.tsx",
+          "path": "registry/light-trail-badge.tsx",
           "type": "registry:component"
         }
       ]
@@ -116,7 +116,7 @@
       "dependencies": ["motion", "lucide-react", "class-variance-authority", "clsx", "tailwind-merge"],
       "files": [
         {
-          "path": "registry/PillNavbar.tsx",
+          "path": "registry/pill-navbar.tsx",
           "type": "registry:component"
         }
       ]
@@ -155,7 +155,7 @@
       "dependencies": ["motion"],
       "files": [
         {
-          "path": "registry/WavyGridBackground.tsx",
+          "path": "registry/wavy-grid-background.tsx",
           "type": "registry:component"
         }
       ]
