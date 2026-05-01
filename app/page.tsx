@@ -62,9 +62,9 @@ export default function HomePage() {
                   className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-48"
                 >
                   <div className="bg-zinc-900 border border-white/10 rounded-xl p-2 shadow-2xl">
-                    <Link href="/docs/getting-started" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Getting Started</Link>
-                    <Link href="/docs/installation" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Installation</Link>
-                    <Link href="/docs/theming" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Theming</Link>
+                    <Link href="/docs" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Getting Started</Link>
+                    <Link href="/docs" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Installation</Link>
+                    <Link href="/docs" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Theming</Link>
                   </div>
                 </motion.div>
               )}
@@ -89,9 +89,9 @@ export default function HomePage() {
                   className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-48"
                 >
                   <div className="bg-zinc-900 border border-white/10 rounded-xl p-2 shadow-2xl">
-                    <Link href="/components/buttons" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Buttons</Link>
-                    <Link href="/components/cards" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Glass Cards</Link>
-                    <Link href="/components/inputs" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Inputs</Link>
+                    <Link href="/docs/components/light-trail-badge" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Components</Link>
+                    <Link href="/docs/device-mocks/browser" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Mocks</Link>
+                    <Link href="/docs/backgrounds/wavy-grid-background" className="block px-3 py-2 hover:bg-white/5 rounded-md text-zinc-300 hover:text-white transition-colors">Backgrounds</Link>
                   </div>
                 </motion.div>
               )}
