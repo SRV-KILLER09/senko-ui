@@ -6,11 +6,15 @@ A modern, premium component library built with Next.js, Tailwind CSS, and Framer
 
 **Senko UI** is a signature collection of copy-paste React components designed for the premium web. This project serves as both a live showcase and comprehensive documentation site for the Senko UI component library, demonstrating professional-grade UI elements for SaaS and AI applications.
 
+Recently completely redesigned, the landing experience now features a pristine, Vercel/Linear-inspired aesthetic with perfectly aligned Bento grids, subtle geometrical backgrounds, and the "Senko Studio" interactive component playground.
+
 Built with **Next.js 16**, **Tailwind CSS 4**, and **Framer Motion**, these components prioritize minimalist aesthetics, high-performance motion, and developer experience.
 
 ## Features
 
-- **Premium Design Language**: Signature components that make applications feel expensive and forward-thinking
+- **Premium Design Language**: Signature components that make applications feel expensive and forward-thinking, inspired by Vercel and Linear aesthetics
+- **Senko Studio Showcase**: A highly detailed, live visual workspace demonstration combining multiple components into a cohesive UI
+- **Responsive Navigation**: State-of-the-art glassmorphism top navigation with Framer Motion dropdowns and mobile drawers
 - **60fps Animations**: Native Framer Motion integrations for fluid, responsive interactions
 - **Fully Themeable**: Tailwind-first approach with CSS variables and utility classes
 - **Accessibility First**: Built on Radix UI primitives with full keyboard and screen-reader support
