@@ -1,0 +1,81 @@
+---
+title: Animated Grid Background
+description: An animated grid background with traveling light beams along grid lines, pulsing intersection nodes, and drifting radial glow patches.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import { AnimatedGridBackground } from "@/components/animated-grid-background"
+
+export default function Example() {
+  return (
+    <div className="relative w-full h-[400px]">
+      <AnimatedGridBackground />
+      <div className="relative z-10 flex items-center justify-center h-full">
+        <h1 className="text-4xl font-bold">Your Content Here</h1>
+      </div>
+    </div>
+  )
+}`}
+>
+  <AnimatedGridPreview />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/animated-grid-background.json
+```
+
+## Usage
+
+```tsx
+import { AnimatedGridBackground } from "@/components/animated-grid-background"
+```
+
+```tsx
+<div className="relative w-full h-[400px]">
+  <AnimatedGridBackground />
+  <div className="relative z-10">
+    Your content here
+  </div>
+</div>
+```
+
+## Features
+
+- **Light Beams** — 12 animated beams travel horizontally and vertically along grid lines
+- **Pulsing Nodes** — 15 nodes pulse at grid intersections with staggered delays
+- **Glow Patches** — 5 large blurred radial patches drift across the grid for ambient depth
+- **Edge Fade** — Grid fades to transparent at edges with a radial mask
+- **Vignette** — Subtle vignette overlay adds cinematic depth
+- **SSR Safe** — Randomized elements are generated client-side to avoid hydration mismatches
+
+## CSS Variables
+
+Add these to your `globals.css` to match your theme:
+
+```css
+:root {
+  --grid-line: rgba(0, 0, 0, 0.08);
+  --grid-dot: rgba(0, 0, 0, 0.15);
+  --grid-beam: rgba(99, 102, 241, 0.6);
+  --grid-patch: rgba(99, 102, 241, 0.05);
+  --vignette: rgba(0, 0, 0, 0.15);
+}
+
+.dark {
+  --grid-line: rgba(255, 255, 255, 0.06);
+  --grid-dot: rgba(255, 255, 255, 0.12);
+  --grid-beam: rgba(129, 140, 248, 0.5);
+  --grid-patch: rgba(129, 140, 248, 0.04);
+  --vignette: rgba(0, 0, 0, 0.4);
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | `—` | Additional classes for the container |

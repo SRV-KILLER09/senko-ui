@@ -1,4 +1,4 @@
-import WavyGridBackground from "@/components/WavyGridBackground";
+import WavyGridBackground from "@/registry/wavy-grid-background";
 
 import React from 'react'
 

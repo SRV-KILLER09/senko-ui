@@ -1,4 +1,4 @@
-import IPhoneMockup from "@/components/iphone-mockup";
+import IPhoneMockup from "@/registry/iphone-mockup";
 
 export const EmptyIphonePreview = () => {
   return (

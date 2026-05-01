@@ -1,4 +1,4 @@
-import AuroraButton from "@/components/aurora-button"
+import AuroraButton from "@/registry/aurora-button"
 
 
 export function AuroraButtonDefault() {

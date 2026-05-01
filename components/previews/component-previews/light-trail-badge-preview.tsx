@@ -13,7 +13,7 @@ import {
   ShoppingBag,
   Zap
 } from "lucide-react"
-import { LightTrailBadge } from "@/components/LightTrailBadge"
+import { LightTrailBadge } from "@/registry/light-trail-badge"
 
 // ─── 1. AI & SaaS Landing Pages ─────────────────────────────
 export const SaaSBadges = () => (

@@ -1,4 +1,4 @@
-import { IconicHeading } from "@/components/Icon-ic-Heading"
+import { IconicHeading } from "@/registry/iconic-heading"
 import {
   TrendingUp, Zap, Sparkles, ArrowRight, Star,
   Rocket, Brain, Globe, Heart, Code2

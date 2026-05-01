@@ -13,7 +13,7 @@ import {
   GlassCardDescription,
   GlassCardContent,
   GlassCardFooter,
-} from "@/components/glass-card"
+} from "@/registry/glass-card"
 
 const LoginSchema = z.object({
   username: z.string().min(1, "Username is required"),

@@ -1,0 +1,60 @@
+---
+title: AI Prompt Box (Glassmorphism)
+description: A full-featured AI chat input with a frosted glass design — includes file uploads via drag-and-drop or paste, voice recording, and animated Search / Think / Canvas mode toggles.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import { PromptInputBox } from "@/components/ai-prompt-box-glassmorphism"
+
+export default function Example() {
+  return (
+    <div className="w-full max-w-2xl mx-auto">
+      <PromptInputBox
+        placeholder="Ask me anything..."
+        onSend={(message, files) => console.log(message, files)}
+      />
+    </div>
+  )
+}`}
+>
+  <AiPromptGlassDefault />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/ai-prompt-box-glassmorphism.json
+```
+
+## Usage
+
+```tsx
+import { PromptInputBox } from "@/components/ai-prompt-box-glassmorphism"
+```
+
+```tsx
+<PromptInputBox
+  placeholder="Ask me anything..."
+  onSend={(message, files) => console.log(message, files)}
+/>
+```
+
+## Features
+
+- **Glassmorphism Design** — Frosted backdrop-blur panel with ambient gradient glow
+- **Image Uploads** — Click, drag-and-drop, or paste images from clipboard
+- **Voice Recording** — Full recording UI with animated waveform visualizer
+- **Mode Toggles** — Search (blue), Think (purple), Canvas (orange) with expanding labels
+- **Auto-expanding Textarea** — Grows to `maxHeight` before scrolling
+- **Loading State** — Shows stop button while streaming
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `onSend` | `(message: string, files?: File[]) => void` | `—` | Called on submit |
+| `isLoading` | `boolean` | `false` | Shows stop button when true |
+| `placeholder` | `string` | `"Type your message here..."` | Textarea placeholder |
+| `className` | `string` | `—` | Additional classes |

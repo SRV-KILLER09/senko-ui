@@ -1,7 +1,7 @@
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
-import { ComponentPreview } from "./components/ComponetPreview";
-import { LightTrailBadge } from "./components/LightTrailBadge";
+import { ComponentPreview } from "./components/component-preview";
+import { LightTrailBadge } from "@/registry/light-trail-badge";
 import GlassDockPreview from "./components/previews/component-previews/glass-dock-preview";
 import { SafariEmptyShowcase } from "./components/previews/device-previews/safari-preview/safari-empty-preview";
 import { EmptyIphonePreview } from "./components/previews/device-previews/iphone-preview/empty-iphone-preview";
@@ -30,8 +30,8 @@ import {
   AuroraButtonPink,
   AuroraButtonSlow,
 } from "./components/previews/component-previews/aurora-button";
-import AndroidMockup from "./components/android-mockup";
-import LaptopMockup from "./components/laptop-mockup";
+import AndroidMockup from "@/registry/android-mockup";
+import LaptopMockup from "@/registry/laptop-mockup";
 import {
   SaaSBadges,
   PortfolioBadges,
@@ -39,6 +39,22 @@ import {
   GamingBadges,
   EcommerceBadges,
 } from "./components/previews/component-previews/light-trail-badge-preview";
+import { ActivityDropdownPreview } from "./components/previews/component-previews/activity-dropdown-preview";
+import {
+  LikeButtonDefault,
+  LikeButtonLiked,
+} from "./components/previews/component-previews/like-button-preview";
+import {
+  SocialProofDefault,
+  SocialProofCustom,
+} from "./components/previews/component-previews/social-proof-preview";
+import {
+  MagneticSliderDefault,
+  MagneticSliderCustom,
+} from "./components/previews/component-previews/magnetic-slider-preview";
+import { AiPromptGlassDefault } from "./components/previews/component-previews/ai-prompt-glass-preview";
+import { AiPromptNeoDefault } from "./components/previews/component-previews/ai-prompt-neo-preview";
+import { AnimatedGridPreview } from "./components/previews/background/animated-grid-preview";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -73,6 +89,16 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     AuroraButtonFast,
     AuroraButtonPink,
     AuroraButtonSlow,
+    ActivityDropdownPreview,
+    LikeButtonDefault,
+    LikeButtonLiked,
+    SocialProofDefault,
+    SocialProofCustom,
+    MagneticSliderDefault,
+    MagneticSliderCustom,
+    AiPromptGlassDefault,
+    AiPromptNeoDefault,
+    AnimatedGridPreview,
     ...components,
   };
 }

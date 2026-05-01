@@ -10,7 +10,7 @@ import {
   ExternalLink 
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { GlassDock } from "@/components/glass-dock";
+import { GlassDock } from "@/registry/glass-dock";
 
 export default function GlassDockPreview() {
   const { theme, setTheme } = useTheme();

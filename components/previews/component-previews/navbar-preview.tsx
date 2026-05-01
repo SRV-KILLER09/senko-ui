@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import PillNavbar from "@/components/PillNavbar";
-import { BeveledBorderButton } from "@/components/BeveledBorderButton";
+import PillNavbar from "@/registry/pill-navbar";
+import { BeveledBorderButton } from "@/registry/beveled-border-button";
 
 export function NavbarPreview() {
   return (

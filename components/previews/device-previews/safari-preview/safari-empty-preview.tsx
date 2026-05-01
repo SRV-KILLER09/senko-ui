@@ -1,4 +1,4 @@
-import { Safari } from "@/components/safari-view";
+import { Safari } from "@/registry/safari-view";
 
 export const SafariEmptyShowcase = () => {
   return (

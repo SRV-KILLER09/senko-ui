@@ -15,13 +15,13 @@ import {
     Plus,
     ArrowRight
 } from "lucide-react"
-import IPhoneMockup from "./iphone-mockup"
-import { GlassCard } from "./glass-card"
-import { LightTrailBadge } from "./LightTrailBadge"
-import { BeveledBorderButton } from "./BeveledBorderButton"
-import { MeshGradient } from "./MeshGradient"
-import { IconicHeading } from "./Icon-ic-Heading"
-import { GlassDock } from "./glass-dock"
+import IPhoneMockup from "@/registry/iphone-mockup"
+import { GlassCard } from "@/registry/glass-card"
+import { LightTrailBadge } from "@/registry/light-trail-badge"
+import { BeveledBorderButton } from "@/registry/beveled-border-button"
+import { MeshGradient } from "@/registry/mesh-gradient"
+import { IconicHeading } from "@/registry/iconic-heading"
+import { GlassDock } from "@/registry/glass-dock"
 
 export function IPhoneSaaSPreview({ scale = 1 }: { scale?: number }) {
     return (

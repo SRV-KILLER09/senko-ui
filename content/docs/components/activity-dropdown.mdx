@@ -1,0 +1,52 @@
+---
+title: Activity Dropdown
+description: An animated notification/activity dropdown with collapsible content, read/unread tabs, and mark-as-read functionality.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import { ActivityDropdown } from "@/components/activity-dropdown"
+
+export default function Example() {
+  return (
+    <div className="flex items-center justify-center p-8">
+      <ActivityDropdown />
+    </div>
+  )
+}`}
+>
+  <ActivityDropdownPreview />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/activity-dropdown.json
+```
+
+## Usage
+
+```tsx
+import { ActivityDropdown } from "@/components/activity-dropdown"
+```
+
+```tsx
+<ActivityDropdown />
+```
+
+## Features
+
+- **Collapsible Panel** — Click to expand/collapse with smooth spring animations
+- **Tabs** — Switch between All and Unread notifications
+- **Mark as Read** — Click individual items or "Mark all read"
+- **Animated Entries** — Items animate in with staggered delays
+- **Unread Badge** — Live pulsing indicator on the bell icon
+
+## Props
+
+The `ActivityDropdown` component is self-contained with no required props. It ships with sample data out of the box.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| — | — | — | Self-contained, no props required |

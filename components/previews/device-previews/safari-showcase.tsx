@@ -1,16 +1,16 @@
 "use client"
 
 import React from "react"
-import { BentoGrid, BentoCard } from "./bento-grid"
-import { GlassCard } from "./glass-card"
-import { GlassDock } from "./glass-dock"
-import PillNavBar from "./PillNavbar"
-import { GlassLogin } from "./glass-login"
-import WavyGridBackground from "./WavyGridBackground"
-import { IconicHeading } from "./Icon-ic-Heading"
-import UnderlineHeading from "./underlined-heading"
-import { BeveledBorderButton } from "./BeveledBorderButton"
-import { LightTrailBadge } from "./LightTrailBadge"
+import { BentoGrid, BentoCard } from "@/registry/bento-grid"
+import { GlassCard } from "@/registry/glass-card"
+import { GlassDock } from "@/registry/glass-dock"
+import PillNavBar from "@/registry/pill-navbar"
+import { GlassLogin } from "@/registry/glass-login"
+import WavyGridBackground from "@/registry/wavy-grid-background"
+import { IconicHeading } from "@/registry/iconic-heading"
+import UnderlineHeading from "@/registry/underlined-heading"
+import { BeveledBorderButton } from "@/registry/beveled-border-button"
+import { LightTrailBadge } from "@/registry/light-trail-badge"
 import {
     Layout,
     Layers,

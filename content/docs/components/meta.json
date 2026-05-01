@@ -1,10 +1,16 @@
 {
   "title": "Components",
   "pages": [
-    "light-trail-button",
+    "light-trail-badge",
     "glass-dock",
     "navbar",
     "bento-grid",
-    "aurora-button"
+    "aurora-button",
+    "activity-dropdown",
+    "like-button",
+    "social-proof",
+    "magnetic-pit-slider",
+    "ai-prompt-box-glassmorphism",
+    "ai-prompt-box-neomorphism"
   ]
 }

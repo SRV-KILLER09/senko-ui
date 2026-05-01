@@ -10,7 +10,7 @@ import {
 } from "motion/react"
 import { cn } from "@/lib/utils"
 import { type LucideIcon } from "lucide-react"
-import { GlassContainer } from "@/components/glass-container"
+import { GlassContainer } from "@/registry/glass-container"
 import { Button } from "@/components/ui/button"
 
 interface DockItem {

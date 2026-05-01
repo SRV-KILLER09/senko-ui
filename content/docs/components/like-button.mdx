@@ -1,0 +1,50 @@
+---
+title: Like Button
+description: A glassmorphic like button with animated sparkle particles, a spring-physics heart icon, and an animated number counter.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import { LikeButton } from "@/components/like-button"
+
+export default function Example() {
+  return <LikeButton initialCount={128} />
+}`}
+>
+  <LikeButtonDefault />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/like-button.json
+```
+
+## Usage
+
+```tsx
+import { LikeButton } from "@/components/like-button"
+```
+
+```tsx
+<LikeButton initialCount={128} />
+```
+
+## Examples
+
+### Pre-liked State
+
+<ComponentPreview
+  code={`<LikeButton initialCount={2048} defaultLiked={true} />`}
+>
+  <LikeButtonLiked />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `initialCount` | `number` | `0` | Starting like count |
+| `defaultLiked` | `boolean` | `false` | Whether the button starts in liked state |
+| `className` | `string` | `—` | Additional CSS classes |

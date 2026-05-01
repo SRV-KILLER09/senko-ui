@@ -48,6 +48,10 @@
   --radius-xl: calc(var(--radius) + 4px);
   --animate-shiny-text: shiny-text 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   --animate-border-beam: border-beam 8s linear infinite;
+
+  /* Animated grid background tokens */
+  --color-grid-beam: var(--grid-beam);
+  --color-grid-patch: var(--grid-patch);
 }
 
 @keyframes shiny-text {
@@ -149,4 +153,52 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
+}
+
+/* ─── Neomorphism shadow system ──────────────────────────────── */
+:root {
+  --neo-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.10),
+    -6px -6px 14px rgba(255, 255, 255, 0.85);
+  --neo-shadow-inset:
+    inset 4px 4px 10px rgba(0, 0, 0, 0.10),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.85);
+  --neo-shadow-sm:
+    3px 3px 8px rgba(0, 0, 0, 0.08),
+    -3px -3px 8px rgba(255, 255, 255, 0.80);
+  --neo-shadow-inset-sm:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.08),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.80);
+}
+
+.dark {
+  --neo-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.55),
+    -6px -6px 14px rgba(255, 255, 255, 0.04);
+  --neo-shadow-inset:
+    inset 4px 4px 10px rgba(0, 0, 0, 0.55),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.04);
+  --neo-shadow-sm:
+    3px 3px 8px rgba(0, 0, 0, 0.50),
+    -3px -3px 8px rgba(255, 255, 255, 0.03);
+  --neo-shadow-inset-sm:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.50),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+}
+
+/* ─── Animated Grid Background CSS variables ─────────────────── */
+:root {
+  --grid-line: rgba(0, 0, 0, 0.07);
+  --grid-dot: rgba(0, 0, 0, 0.18);
+  --grid-beam: rgba(99, 102, 241, 0.55);
+  --grid-patch: rgba(99, 102, 241, 0.04);
+  --vignette: rgba(0, 0, 0, 0.12);
+}
+
+.dark {
+  --grid-line: rgba(255, 255, 255, 0.06);
+  --grid-dot: rgba(255, 255, 255, 0.14);
+  --grid-beam: rgba(129, 140, 248, 0.55);
+  --grid-patch: rgba(129, 140, 248, 0.04);
+  --vignette: rgba(0, 0, 0, 0.45);
 }

@@ -1,0 +1,59 @@
+---
+title: Social Proof
+description: A stacked avatar group with interactive hover tooltips, a star rating, and a customizable heading — perfect for landing pages.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import SocialProof from "@/components/social-proof"
+
+export default function Example() {
+  return <SocialProof />
+}`}
+>
+  <SocialProofDefault />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/social-proof.json
+```
+
+## Usage
+
+```tsx
+import SocialProof from "@/components/social-proof"
+```
+
+```tsx
+<SocialProof />
+```
+
+## Examples
+
+### Custom Heading & Avatars
+
+<ComponentPreview
+  code={`<SocialProof
+  heading={<>Join 50,000+ happy customers</>}
+  rating={4}
+  avatars={[
+    { src: "https://i.pravatar.cc/100?img=1", alt: "User 1", name: "James Lee" },
+    { src: "https://i.pravatar.cc/100?img=2", alt: "User 2", name: "Priya Singh" },
+    { src: "https://i.pravatar.cc/100?img=3", alt: "User 3", name: "Tom Baker" },
+  ]}
+/>`}
+>
+  <SocialProofCustom />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `heading` | `ReactNode` | `"Trusted by 120,000+ founders..."` | Custom heading text or JSX |
+| `avatars` | `{ src, alt, name }[]` | 5 default avatars | Array of avatar objects |
+| `rating` | `number` | `5` | Star rating out of 5 |
+| `className` | `string` | `—` | Additional classes |

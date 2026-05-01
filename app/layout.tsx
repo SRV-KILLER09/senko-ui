@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SENKO-UI",
+  title: "Senko UI",
   description: "Modern UI components",
 };
 
@@ -21,14 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className="light">
+    <html lang="en" suppressHydrationWarning className="dark">
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
         >
-         <RootProvider>{children}</RootProvider>
+          <RootProvider>{children}</RootProvider>
         </ThemeProvider>
       </body>
     </html>

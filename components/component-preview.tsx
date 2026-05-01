@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { RotateCcw, Copy, Check } from "lucide-react"
 import { codeToHtml } from "shiki"
-import { OpenInV0Button } from "./open-in-v0-button"
+import { OpenInV0Button } from "@/components/site/open-in-v0-button"
 
 interface ComponentPreviewProps {
   children: React.ReactNode

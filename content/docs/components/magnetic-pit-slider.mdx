@@ -1,0 +1,55 @@
+---
+title: Magnetic Pit Slider
+description: A physics-based glass slider with a magnetic bar-pit effect, a spring-animated thumb orb, and a floating value badge.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import { MagneticPitSlider } from "@/components/magnetic-pit-slider"
+
+export default function Example() {
+  return <MagneticPitSlider defaultValue={50} />
+}`}
+>
+  <MagneticSliderDefault />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/magnetic-pit-slider.json
+```
+
+## Usage
+
+```tsx
+import { MagneticPitSlider } from "@/components/magnetic-pit-slider"
+```
+
+```tsx
+<MagneticPitSlider defaultValue={50} onChange={(val) => console.log(val)} />
+```
+
+## Examples
+
+### Custom Range & Steps
+
+<ComponentPreview
+  code={`<MagneticPitSlider defaultValue={30} min={0} max={200} step={5} barCount={32} />`}
+>
+  <MagneticSliderCustom />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `number` | `—` | Controlled value |
+| `defaultValue` | `number` | `50` | Initial uncontrolled value |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `barCount` | `number` | `48` | Number of equalizer bars |
+| `onChange` | `(value: number) => void` | `—` | Change handler |
+| `className` | `string` | `—` | Additional classes |

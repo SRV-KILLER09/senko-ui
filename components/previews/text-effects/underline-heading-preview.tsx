@@ -1,6 +1,6 @@
 "use client"
 
-import UnderlineHeading from "@/components/underlined-heading"
+import UnderlineHeading from "@/registry/underlined-heading"
 import React from "react"
 
 export const UnderlineHeadingSaaS = () => (

@@ -1,7 +1,7 @@
 
 "use client"
 
-import { BentoGrid, BentoCard } from "@/components/bento-grid"
+import { BentoGrid, BentoCard } from "@/registry/bento-grid"
 import {
   Search,
   Share2,

@@ -1,0 +1,60 @@
+---
+title: AI Prompt Box (Neomorphism)
+description: A full-featured AI chat input with a soft neomorphism design — includes file uploads, voice recording, and animated Search / Think / Canvas mode toggles.
+---
+
+## Preview
+
+<ComponentPreview
+  code={`import { PromptInputBox } from "@/components/ai-prompt-box-neomorphism"
+
+export default function Example() {
+  return (
+    <div className="w-full max-w-2xl mx-auto">
+      <PromptInputBox
+        placeholder="Ask me anything..."
+        onSend={(message, files) => console.log(message, files)}
+      />
+    </div>
+  )
+}`}
+>
+  <AiPromptNeoDefault />
+</ComponentPreview>
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui-nine.vercel.app/r/ai-prompt-box-neomorphism.json
+```
+
+## Usage
+
+```tsx
+import { PromptInputBox } from "@/components/ai-prompt-box-neomorphism"
+```
+
+```tsx
+<PromptInputBox
+  placeholder="Ask me anything..."
+  onSend={(message, files) => console.log(message, files)}
+/>
+```
+
+## Features
+
+- **Neomorphism Design** — Soft extruded shadow style with inset active states
+- **Image Uploads** — Click, drag-and-drop, or paste images from clipboard
+- **Voice Recording** — Full recording UI with animated waveform visualizer
+- **Mode Toggles** — Search (blue), Think (purple), Canvas (orange) with expanding labels
+- **Inset Active States** — Buttons press in with `neo-shadow-inset` on activation
+- **Loading State** — Shows stop button while streaming
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `onSend` | `(message: string, files?: File[]) => void` | `—` | Called on submit |
+| `isLoading` | `boolean` | `false` | Shows stop button when true |
+| `placeholder` | `string` | `"Ask me anything..."` | Textarea placeholder |
+| `className` | `string` | `—` | Additional classes |
