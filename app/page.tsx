@@ -404,7 +404,7 @@ export default function HomePage() {
               <div className="p-6 font-mono text-sm overflow-x-auto text-zinc-300">
                 <div className="flex items-center gap-3">
                   <span className="text-blue-400">npx</span>
-                  <span>shadcn@latest add https://senko.dev/r/button.json</span>
+                  <span>shadcn@latest add https://senko-ui.vercel.app/r/button.json</span>
                 </div>
                 <div className="mt-4 text-zinc-500 flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />

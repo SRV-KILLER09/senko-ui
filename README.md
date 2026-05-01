@@ -260,7 +260,7 @@ Components are organized in preview categories:
 
 1. **Using Shadcn CLI:**
    ```bash
-   npx shadcn@latest add <component-registry-url>
+   npx shadcn@latest add https://senko-ui.vercel.app/r/<component>.json
    ```
 
 2. **Manual Addition:**

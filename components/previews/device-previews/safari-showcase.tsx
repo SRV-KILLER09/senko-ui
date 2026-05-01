@@ -147,7 +147,7 @@ export function SafariShowcase() {
                             <div className="space-y-2">
                                 <h4 className="text-lg font-bold dark:text-white">CLI Integration</h4>
                                 <pre className="text-[10px] font-mono p-3 rounded-lg bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
-                                    npx shadcn@latest add ts-ui
+                                    npx shadcn@latest add https://senko-ui.vercel.app/r/component.json
                                 </pre>
                             </div>
                         </GlassCard>
