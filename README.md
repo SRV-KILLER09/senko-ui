@@ -26,7 +26,11 @@ Built with **Next.js 16**, **Tailwind CSS 4**, and **Framer Motion**, these comp
 
 Senko UI includes a curated set of premium components for modern web applications:
 
+- **Activity Dropdown**: Animated notification dropdown with tabs
+- **AI Prompt Box (Glass)**: Premium AI chat input with glassmorphism
+- **AI Prompt Box (Neo)**: AI chat input with neomorphism design
 - **Android Mockup**: Display Android device previews
+- **Animated Grid Background**: Grid background with traveling light beams
 - **Aurora Button**: Animated button with aurora effects
 - **Bento Grid**: Flexible grid layout component
 - **Beveled Border Button**: Button with beveled border styling
@@ -43,11 +47,14 @@ Senko UI includes a curated set of premium components for modern web application
 - **iPhone SaaS Preview**: SaaS-focused iPhone mockup
 - **Laptop Mockup**: Laptop device preview
 - **Light Trail Badge**: Badge with light trail animation
+- **Like Button**: Glassmorphic like button with sparkle effects
+- **Magnetic Pit Slider**: Physics-based slider with magnetic effects
 - **Mesh Gradient**: Gradient background component
 - **Open in V0 Button**: Button to open in V0 editor
 - **Pill Navbar**: Pill-shaped navigation bar
 - **Safari Showcase**: Safari browser showcase
 - **Safari View**: Safari browser view component
+- **Social Proof**: Stacked avatar group with star rating
 - **Theme Toggle**: Dark/light theme switcher
 - **Underlined Heading**: Heading with underline styling
 - **Wavy Grid Background**: Animated wavy grid background
@@ -67,6 +74,8 @@ Senko UI includes a curated set of premium components for modern web application
 | **Shadcn/UI** | 3.8.5 | Component registry system |
 | **Zod** | 4.3.6 | Schema validation |
 | **Class Variance Authority** | 0.7.1 | Component variant management |
+| **Number Flow** | 0.6.0 | Animated numbers for React |
+| **Shadcn** | 4.0.0 | Registry and CLI system |
 
 ## Installation & Setup
 
@@ -114,49 +123,39 @@ test-nxt/
 │   ├── docs/                     # Documentation pages
 │   │   ├── layout.tsx            # Docs layout
 │   │   └── [[...slug]]/          # Dynamic docs routing
-│   ├── iphone-preview/           # iPhone mockup preview page
-│   ├── mac-preview/              # Mac mockup preview page
-│   ├── test/                     # Test/demo page
-│   ├── bento-grid-example.tsx    # Bento grid example page
 │   ├── globals.css               # Global Tailwind styles
 │   ├── layout.tsx                # Root layout with theme provider
 │   └── page.tsx                  # Home showcase page
-├── components/                   # React components
+├── components/                   # Website components
 │   ├── ui/                       # Shadcn/UI base components
-│   │   ├── button.tsx            # Button component
-│   │   ├── input.tsx             # Input component
-│   │   └── label.tsx             # Label component
 │   ├── previews/                 # Preview wrapper components
-│   │   ├── background/           # Background effect previews
-│   │   ├── component-previews/   # Component showcase wrappers
-│   │   ├── device-previews/      # Device mockup previews
-│   │   └── text-effects/         # Text effect previews
-│   ├── test-components/          # Development test components
+│   └── site/                     # Documentation site components
+├── registry/                     # Core Senko UI component registry
+│   ├── activity-dropdown.tsx     # Animated activity dropdown
+│   ├── ai-prompt-box-glassmorphism.tsx # Glassmorphism AI prompt box
+│   ├── ai-prompt-box-neomorphism.tsx # Neomorphism AI prompt box
 │   ├── android-mockup.tsx        # Android device mockup
+│   ├── animated-grid-background.tsx # Animated grid background
 │   ├── aurora-button.tsx         # Animated aurora effect button
 │   ├── bento-grid.tsx            # Flexible grid layout system
-│   ├── BeveledBorderButton.tsx   # 3D beveled border button
+│   ├── beveled-border-button.tsx # 3D beveled border button
 │   ├── carousel.tsx              # Interactive carousel component
-│   ├── ComponetPreview.tsx       # Component preview wrapper
 │   ├── glass-card.tsx            # Glass morphism card
 │   ├── glass-container.tsx       # Glass morphism container
 │   ├── glass-dock.tsx            # Glass morphism dock navigation
 │   ├── glass-login.tsx           # Glass morphism login form
-│   ├── heroHighlighter.tsx       # Hero section highlighter
-│   ├── highlightText.tsx         # Text highlighting component
-│   ├── Icon-ic-Heading.tsx       # Iconic heading component
-│   ├── iconic-heading-example.tsx # Iconic heading example
+│   ├── iconic-heading.tsx        # Iconic heading component
 │   ├── iphone-mockup.tsx         # iPhone device mockup
-│   ├── iphone-saas-preview.tsx   # iPhone SaaS app preview
-│   ├── LightTrailBadge.tsx       # Light trail animated badge
-│   ├── MeshGradient.tsx          # Mesh gradient background
-│   ├── open-in-v0-button.tsx     # Open in v0 editor button
-│   ├── PillNavbar.tsx            # Pill-shaped navigation bar
-│   ├── safari-showcase.tsx       # Safari browser showcase
+│   ├── laptop-mockup.tsx         # Laptop device mockup
+│   ├── light-trail-badge.tsx     # Light trail animated badge
+│   ├── like-button.tsx           # Glassmorphic like button
+│   ├── magnetic-pit-slider.tsx   # Magnetic pit effect slider
+│   ├── mesh-gradient.tsx         # Mesh gradient background
+│   ├── pill-navbar.tsx           # Pill-shaped navigation bar
 │   ├── safari-view.tsx           # Safari browser view
-│   ├── theme-toggle.tsx          # Dark/light theme toggle
+│   ├── social-proof.tsx          # Social trust signals component
 │   ├── underlined-heading.tsx    # Underlined heading component
-│   └── WavyGridBackground.tsx    # Wavy grid background effect
+│   └── wavy-grid-background.tsx  # Wavy grid background effect
 ├── content/                      # Documentation content
 │   └── docs/                     # Fumadocs MDX content
 │       ├── index.mdx             # Introduction page
@@ -202,6 +201,14 @@ test-nxt/
 - **GlassContainer**: Container component with glass morphism styling
 - **GlassDock**: MacOS-style dock navigation with glass effects
 - **GlassLogin**: Login form with glass morphism design
+- **LikeButton**: High-fidelity glass button with sparkle animations and number flow
+- **MagneticPitSlider**: Physics-based glass slider with magnetic bar pit effect
+
+#### AI & Functional Components
+- **AIPromptBox (Glass)**: Full-featured AI chat input with glassmorphism, voice, and file support
+- **AIPromptBox (Neo)**: Minimalist neomorphic AI chat input with premium interactions
+- **ActivityDropdown**: Notification/activity center with tabbed content and empty states
+- **SocialProof**: Star-rated social trust group with stacked avatars
 
 #### Navigation Components
 - **PillNavbar**: Modern pill-shaped navigation bar with smooth transitions
@@ -222,6 +229,7 @@ test-nxt/
 #### Background Effects
 - **WavyGridBackground**: Animated wavy grid background
 - **MeshGradient**: Dynamic mesh gradient background
+- **AnimatedGridBackground**: Modern grid background with traveling light beams and glow pulses
 
 #### Device Mockups
 - **IPhoneMockup**: iPhone device mockup component
@@ -336,7 +344,7 @@ The project is compatible with any platform supporting Next.js:
 
 ## Contributing
 
-We welcome contributions to TS-UI! Here's how to get started:
+We welcome contributions to Senko UI! Here's how to get started:
 
 1. **Fork the repository**
 2. **Create a feature branch:**
