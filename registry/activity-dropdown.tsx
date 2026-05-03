@@ -103,7 +103,7 @@ export function ActivityDropdown() {
             </span>
           )}
         </div>
-        
+
         <div className="flex-1 overflow-hidden">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold tracking-tight text-card-foreground">
@@ -168,8 +168,8 @@ export function ActivityDropdown() {
             </button>
           </div>
         </div>
-        
-        <div 
+
+        <div
           className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-muted/50 transition-colors hover:bg-muted"
           onClick={(e) => {
             e.stopPropagation();
@@ -224,11 +224,11 @@ export function ActivityDropdown() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
-                      <h4 
+                      <h4
                         className={cn(
                           "text-sm font-semibold truncate transition-colors",
-                          activity.unread 
-                            ? "text-card-foreground" 
+                          activity.unread
+                            ? "text-card-foreground"
                             : "text-muted-foreground"
                         )}
                       >
@@ -258,9 +258,10 @@ export function ActivityDropdown() {
           </div>
         </div>
       </div>
-      
+
       {/* CSS for custom scrollbar mask */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }

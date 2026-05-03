@@ -1,7 +1,10 @@
 "use client"
 
+import type { ReactNode } from "react"
+
 interface AuroraButtonProps {
-  label?: string
+  label?: ReactNode
+  children?: ReactNode
   onClick?: () => void
   duration?: string
   className?: string
@@ -10,6 +13,7 @@ interface AuroraButtonProps {
 
 export default function AuroraButton({
   label = "Click me",
+  children,
   onClick,
   duration = "3s",
   className = "",
@@ -38,8 +42,8 @@ export default function AuroraButton({
         }}
       />
 
-      <div className="relative rounded-full flex justify-center items-center w-fit py-2 px-6 bg-linear-to-b from-zinc-800 to-zinc-700 dark:bg-linear-to-tr dark:from-foreground/60 dark:to-pink-200 text-white dark:text-background font-medium">
-        {label}
+      <div className="relative rounded-full flex justify-center items-center w-full py-2 px-6 bg-linear-to-b from-zinc-800 to-zinc-700 dark:bg-linear-to-tr dark:from-foreground/60 dark:to-pink-200 text-white dark:text-background font-medium gap-2">
+        {children || label}
       </div>
     </div>
   )
