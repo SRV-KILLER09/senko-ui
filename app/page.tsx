@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle } from "lucide-react";
+import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search } from "lucide-react";
+import { SearchModal } from "@/components/site/search-modal";
 
 // Components
 import { Safari } from "@/registry/safari-view";
@@ -22,6 +23,20 @@ export default function HomePage() {
   const [copied, setCopied] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [isMac, setIsMac] = useState(false);
+
+  useEffect(() => {
+    setIsMac(/Mac|iPhone|iPad|iPod/i.test(navigator.platform));
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const handleCopy = () => {
     setCopied(true);
@@ -35,6 +50,9 @@ export default function HomePage() {
       <div className="fixed inset-0 z-0 pointer-events-none flex justify-center">
         <div className="w-full max-w-[1200px] h-full border-x border-black/[0.02] dark:border-white/[0.02] bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
+
+      {/* Search Modal */}
+      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-white/50 dark:bg-black/50 backdrop-blur-md border-b border-black/5 dark:border-white/5 transition-colors duration-300">
@@ -100,13 +118,33 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-4 border-l border-black/10 dark:border-white/10 pl-6 ml-2">
+            <button
+              id="search-trigger-desktop"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search documentation"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-black/10 dark:border-white/10 text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all text-xs font-medium"
+            >
+              <Search className="w-3.5 h-3.5 shrink-0" />
+              <span>Search</span>
+              <kbd className="hidden lg:inline-flex px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-[10px] text-zinc-400 font-mono leading-none">
+                {isMac ? "⌘K" : "Ctrl K"}
+              </kbd>
+            </button>
             <ThemeToggle className="w-5 h-5 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors" />
             <Link href="/docs" className="px-4 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded-full hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors shadow-sm">Get Started</Link>
           </div>
         </div>
 
         {/* Mobile Toggle */}
-        <div className="flex md:hidden items-center gap-4">
+        <div className="flex md:hidden items-center gap-3">
+          <button
+            id="search-trigger-mobile"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Search documentation"
+            className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
+          >
+            <Search className="w-5 h-5" />
+          </button>
           <ThemeToggle className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
           <button
             className="text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white p-2"
@@ -196,6 +234,27 @@ export default function HomePage() {
             <Link href="/docs" className="w-full sm:w-auto h-12 px-8 inline-flex items-center justify-center rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-sm font-medium text-black dark:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors group">
               Read Docs <ChevronRight className="w-4 h-4 ml-1 text-zinc-400 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </motion.div>
+
+          {/* Search Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="mt-8 w-full max-w-md"
+          >
+            <button
+              id="search-trigger-hero"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search components and documentation"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/80 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-black/20 dark:hover:border-white/20 transition-all text-left"
+            >
+              <Search className="w-4 h-4 text-zinc-400 shrink-0" />
+              <span className="text-sm text-zinc-400 dark:text-zinc-500 flex-1">Search components, docs...</span>
+              <kbd className="px-2 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800 text-[11px] font-mono text-zinc-400 dark:text-zinc-500 shrink-0 leading-none">
+                {isMac ? "⌘K" : "Ctrl K"}
+              </kbd>
+            </button>
           </motion.div>
         </section>
 
