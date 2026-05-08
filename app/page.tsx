@@ -74,8 +74,8 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-white dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-black dark:selection:text-white transition-colors duration-300">
-      
+    <div className="relative min-h-screen w-full bg-white dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-black dark:selection:text-white transition-colors duration-300 overflow-x-hidden">
+
       {/* Full-width shader background fading out at the bottom */}
       <div className="absolute top-0 left-0 right-0 h-[80vh] z-0 pointer-events-none [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]">
         <ShaderBackground intensity={1} fps={30} quality={1} className="!absolute inset-0 !z-0" />
