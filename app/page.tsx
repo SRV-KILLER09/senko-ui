@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search } from "lucide-react";
 import { SearchModal } from "@/components/site/search-modal";
 
@@ -29,7 +29,7 @@ export default function HomePage() {
   const [isMac, setIsMac] = useState(false);
   const [demoMessages, setDemoMessages] = useState<Array<{ role: "user" | "assistant"; text: string }>>([]);
 
-  const sectionReveal = {
+  const sectionReveal: Variants = {
     hidden: { opacity: 0, y: 22 },
     show: {
       opacity: 1,
@@ -38,7 +38,7 @@ export default function HomePage() {
     },
   };
 
-  const staggerChildren = {
+  const staggerChildren: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
   };
