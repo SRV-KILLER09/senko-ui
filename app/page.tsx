@@ -489,8 +489,8 @@ export default function HomePage() {
           <BentoGrid className="h-full md:grid-cols-5 md:grid-rows-2 gap-4">
             <BentoCard
               className="md:col-span-3 md:row-span-1"
-              name="Motion-first components"
-              description="Micro-interactions tuned for that “premium product” feel."
+              name="60FPS Animations"
+              description="Powered by physics-based animations. Interactions feel physical, snappy, and perfectly tuned to human expectations."
               Icon={Zap}
               href="/docs"
               cta="Browse"
@@ -514,8 +514,8 @@ export default function HomePage() {
 
             <BentoCard
               className="md:col-span-2 md:row-span-1"
-              name="Glass + glow cards"
-              description="Borders that react to your cursor, like a living UI."
+              name="Tailwind Native"
+              description="Theme your entire application in seconds. No complex CSS-in-JS. Just clean, manageable utility classes."
               Icon={Layers}
               href="/docs/components/glass-card"
               cta="See card"
@@ -545,8 +545,8 @@ export default function HomePage() {
 
             <BentoCard
               className="md:col-span-2 md:row-span-1"
-              name="Structured layouts"
-              description="Bento grids that look designed, not assembled."
+              name="Accessible First"
+              description="Keyboard navigation, screen reader support, and focus management built right into the foundation."
               Icon={Grid}
               href="/docs/components/bento-grid"
               cta="Use bento"
@@ -564,8 +564,8 @@ export default function HomePage() {
 
             <BentoCard
               className="md:col-span-3 md:row-span-1"
-              name="Device-level polish"
-              description="Showcase components inside realistic mockups."
+              name="Mobile Optimized"
+              description="Perfect hitboxes, smooth scaling, and native-feeling gesture support for touch devices out of the box."
               Icon={Smartphone}
               href="/docs/device-mocks/browser"
               cta="View mocks"
