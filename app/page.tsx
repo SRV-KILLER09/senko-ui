@@ -75,14 +75,17 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen w-full bg-white dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-black dark:selection:text-white transition-colors duration-300">
-
-      {/* Animated "shader" layer (3D-ish) */}
-      <ShaderBackground intensity={1} fps={30} quality={0.55} />
+      
+      {/* Full-width shader background fading out at the bottom */}
+      <div className="absolute top-0 left-0 right-0 h-[80vh] z-0 pointer-events-none [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]">
+        <ShaderBackground intensity={1} fps={30} quality={1} className="!absolute inset-0 !z-0" />
+        <div className="absolute inset-0 senko-noise opacity-[0.10] dark:opacity-[0.14] z-0" />
+      </div>
 
       {/* Cinematic overlays */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 senko-noise opacity-[0.09] dark:opacity-[0.13]" />
-        <div className="absolute inset-0 senko-vignette opacity-[0.42] dark:opacity-[0.62]" />
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 senko-noise opacity-[0.09] dark:opacity-[0.13] z-0" />
+        <div className="absolute inset-0 senko-vignette hidden dark:block opacity-[0.62]" />
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[520px] w-[820px] rounded-full bg-gradient-to-b from-blue-500/18 via-violet-500/10 to-transparent blur-[120px] dark:from-blue-500/22 dark:via-violet-500/14 opacity-80" />
         <div className="absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-gradient-to-tr from-cyan-400/16 via-emerald-400/8 to-transparent blur-[130px] dark:from-cyan-400/20 dark:via-emerald-400/10 opacity-70" />
       </div>
@@ -231,24 +234,7 @@ export default function HomePage() {
 
         {/* HERO SECTION */}
         <section className="relative w-full max-w-5xl mx-auto flex flex-col items-center text-center py-4 md:py-6">
-          {/* Hero-only animated backdrop (cheap + masked) */}
-          <div className="absolute -inset-x-4 -inset-y-6 md:-inset-x-6 md:-inset-y-8 -z-10 pointer-events-none overflow-hidden rounded-[40px] md:rounded-[48px]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.20),transparent_55%),radial-gradient(circle_at_15%_40%,rgba(34,211,238,0.14),transparent_55%),radial-gradient(circle_at_85%_55%,rgba(244,63,94,0.10),transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.28),transparent_55%),radial-gradient(circle_at_15%_40%,rgba(34,211,238,0.18),transparent_55%),radial-gradient(circle_at_85%_55%,rgba(244,63,94,0.14),transparent_60%)]" />
-            <div className="absolute inset-0 opacity-[0.35] dark:opacity-[0.45] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_20%,black_0%,transparent_70%)]">
-              <AnimatedGridBackground />
-            </div>
-            <div className="absolute inset-0 opacity-[0.55] dark:opacity-[0.65] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_10%,black_0%,transparent_70%)]">
-              <WavyGridBackground mode="contained" maxOpacity={0.12} />
-            </div>
-            <motion.div
-              aria-hidden="true"
-              className="absolute -top-24 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/20 via-white/5 to-transparent blur-[90px] dark:from-white/12 dark:via-white/4"
-              animate={{ x: ["-6%", "6%", "-6%"], opacity: [0.7, 0.9, 0.7] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <div className="absolute inset-0 senko-noise opacity-[0.10] dark:opacity-[0.14]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/70 dark:to-black/70" />
-          </div>
+          {/* Hero background removed to allow full-page shader to shine through */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -478,116 +464,116 @@ export default function HomePage() {
             <p className="text-zinc-600 dark:text-zinc-400 text-lg max-w-xl">Every component is meticulously crafted with Framer Motion and Tailwind CSS. Built to be customized, not overwritten.</p>
           </div>
 
-        <motion.div
-          variants={staggerChildren}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          className="relative"
-        >
-          <div className="pointer-events-none absolute inset-0 -z-10 rounded-[32px] bg-gradient-to-b from-black/[0.03] to-transparent dark:from-white/[0.03]" />
-          <BentoGrid className="h-full md:grid-cols-5 md:grid-rows-2 gap-4">
-            <BentoCard
-              className="md:col-span-3 md:row-span-1"
-              name="60FPS Animations"
-              description="Powered by physics-based animations. Interactions feel physical, snappy, and perfectly tuned to human expectations."
-              Icon={Zap}
-              href="/docs"
-              cta="Browse"
-              glowColor="99, 102, 241"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/18 via-violet-500/8 to-transparent dark:from-blue-500/26 dark:via-violet-500/14" />
-                  <div className="absolute inset-0 opacity-70">
-                    <WavyGridBackground mode="contained" maxOpacity={0.12} />
+          <motion.div
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            className="relative"
+          >
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[32px] bg-gradient-to-b from-black/[0.03] to-transparent dark:from-white/[0.03]" />
+            <BentoGrid className="h-full md:grid-cols-5 md:grid-rows-2 gap-4">
+              <BentoCard
+                className="md:col-span-3 md:row-span-1"
+                name="60FPS Animations"
+                description="Powered by physics-based animations. Interactions feel physical, snappy, and perfectly tuned to human expectations."
+                Icon={Zap}
+                href="/docs"
+                cta="Browse"
+                glowColor="99, 102, 241"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/18 via-violet-500/8 to-transparent dark:from-blue-500/26 dark:via-violet-500/14" />
+                    <div className="absolute inset-0 opacity-70">
+                      <WavyGridBackground mode="contained" maxOpacity={0.12} />
+                    </div>
+                    <div className="absolute inset-0 [mask-image:radial-gradient(circle_at_40%_30%,black_0%,transparent_60%)]">
+                      <motion.div
+                        animate={{ x: ["-20%", "20%", "-20%"], y: ["10%", "-10%", "10%"] }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute left-0 top-0 h-[260px] w-[360px] rounded-full bg-cyan-400/12 blur-[80px]"
+                      />
+                    </div>
                   </div>
-                  <div className="absolute inset-0 [mask-image:radial-gradient(circle_at_40%_30%,black_0%,transparent_60%)]">
+                }
+              />
+
+              <BentoCard
+                className="md:col-span-2 md:row-span-1"
+                name="Tailwind Native"
+                description="Theme your entire application in seconds. No complex CSS-in-JS. Just clean, manageable utility classes."
+                Icon={Layers}
+                href="/docs/components/glass-card"
+                cta="See card"
+                glowColor="34, 211, 238"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.18),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.16),transparent_55%)]" />
+                    <div className="absolute inset-0 senko-noise opacity-[0.10]" />
                     <motion.div
-                      animate={{ x: ["-20%", "20%", "-20%"], y: ["10%", "-10%", "10%"] }}
-                      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute left-0 top-0 h-[260px] w-[360px] rounded-full bg-cyan-400/12 blur-[80px]"
-                    />
+                      initial={{ opacity: 0.4, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <div className="w-[72%] -rotate-3">
+                        <GlassCard className="p-4 bg-white/25 dark:bg-black/25 border-white/10">
+                          <div className="h-2 w-24 rounded bg-white/30 dark:bg-white/10" />
+                          <div className="mt-3 h-2 w-32 rounded bg-white/25 dark:bg-white/10" />
+                          <div className="mt-6 h-8 w-full rounded-xl bg-white/15 dark:bg-white/5" />
+                        </GlassCard>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              }
-            />
+                }
+              />
 
-            <BentoCard
-              className="md:col-span-2 md:row-span-1"
-              name="Tailwind Native"
-              description="Theme your entire application in seconds. No complex CSS-in-JS. Just clean, manageable utility classes."
-              Icon={Layers}
-              href="/docs/components/glass-card"
-              cta="See card"
-              glowColor="34, 211, 238"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.18),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.16),transparent_55%)]" />
-                  <div className="absolute inset-0 senko-noise opacity-[0.10]" />
-                  <motion.div
-                    initial={{ opacity: 0.4, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <div className="w-[72%] -rotate-3">
-                      <GlassCard className="p-4 bg-white/25 dark:bg-black/25 border-white/10">
-                        <div className="h-2 w-24 rounded bg-white/30 dark:bg-white/10" />
-                        <div className="mt-3 h-2 w-32 rounded bg-white/25 dark:bg-white/10" />
-                        <div className="mt-6 h-8 w-full rounded-xl bg-white/15 dark:bg-white/5" />
-                      </GlassCard>
+              <BentoCard
+                className="md:col-span-2 md:row-span-1"
+                name="Accessible First"
+                description="Keyboard navigation, screen reader support, and focus management built right into the foundation."
+                Icon={Grid}
+                href="/docs/components/bento-grid"
+                cta="Use bento"
+                glowColor="244, 63, 94"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/14 via-orange-500/8 to-transparent dark:from-rose-500/18 dark:via-orange-500/10" />
+                    <div className="absolute inset-0 opacity-[0.55] dark:opacity-[0.65]">
+                      <AnimatedGridBackground />
                     </div>
-                  </motion.div>
-                </div>
-              }
-            />
-
-            <BentoCard
-              className="md:col-span-2 md:row-span-1"
-              name="Accessible First"
-              description="Keyboard navigation, screen reader support, and focus management built right into the foundation."
-              Icon={Grid}
-              href="/docs/components/bento-grid"
-              cta="Use bento"
-              glowColor="244, 63, 94"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/14 via-orange-500/8 to-transparent dark:from-rose-500/18 dark:via-orange-500/10" />
-                  <div className="absolute inset-0 opacity-[0.55] dark:opacity-[0.65]">
-                    <AnimatedGridBackground />
+                    <div className="absolute inset-0 senko-noise opacity-[0.08]" />
                   </div>
-                  <div className="absolute inset-0 senko-noise opacity-[0.08]" />
-                </div>
-              }
-            />
+                }
+              />
 
-            <BentoCard
-              className="md:col-span-3 md:row-span-1"
-              name="Mobile Optimized"
-              description="Perfect hitboxes, smooth scaling, and native-feeling gesture support for touch devices out of the box."
-              Icon={Smartphone}
-              href="/docs/device-mocks/browser"
-              cta="View mocks"
-              glowColor="234, 179, 8"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-transparent dark:from-yellow-500/14" />
-                  <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-yellow-400/10 blur-[70px]" />
-                  <div className="absolute inset-0 flex items-end justify-end p-5">
-                    <div className="w-[220px] origin-bottom-right rotate-[6deg] transition-transform duration-500 group-hover:rotate-[3deg] group-hover:scale-[1.02]">
-                      <IPhoneMockup className="shadow-2xl">
-                        <div className="w-full h-full bg-white dark:bg-black relative flex flex-col justify-end p-4 pb-8 border border-black/10 dark:border-white/10">
-                          <PromptInputBox />
-                        </div>
-                      </IPhoneMockup>
+              <BentoCard
+                className="md:col-span-3 md:row-span-1"
+                name="Mobile Optimized"
+                description="Perfect hitboxes, smooth scaling, and native-feeling gesture support for touch devices out of the box."
+                Icon={Smartphone}
+                href="/docs/device-mocks/browser"
+                cta="View mocks"
+                glowColor="234, 179, 8"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-transparent dark:from-yellow-500/14" />
+                    <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-yellow-400/10 blur-[70px]" />
+                    <div className="absolute inset-0 flex items-end justify-end p-5">
+                      <div className="w-[220px] origin-bottom-right rotate-[6deg] transition-transform duration-500 group-hover:rotate-[3deg] group-hover:scale-[1.02]">
+                        <IPhoneMockup className="shadow-2xl">
+                          <div className="w-full h-full bg-white dark:bg-black relative flex flex-col justify-end p-4 pb-8 border border-black/10 dark:border-white/10">
+                            <PromptInputBox />
+                          </div>
+                        </IPhoneMockup>
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
-            />
-          </BentoGrid>
-        </motion.div>
+                }
+              />
+            </BentoGrid>
+          </motion.div>
         </motion.section>
 
         {/* DEVELOPER EXPERIENCE */}

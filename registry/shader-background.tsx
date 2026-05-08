@@ -176,24 +176,7 @@ export function ShaderBackground({
       blob(bx, by, Math.max(w, h) * 0.30, b, 0.12 * I);
       blob(cx, cy, Math.max(w, h) * 0.28, c, 0.09 * I);
 
-      // Diagonal rim-light streaks (striped gradient fill)
-      ctx.globalCompositeOperation = "screen";
-      ctx.globalAlpha = 0.08 * I;
-      ctx.save();
-      ctx.translate(w / 2, h / 2);
-      ctx.rotate(0.22 + Math.sin(t * 3) * 0.02);
-      ctx.translate(-w / 2, -h / 2);
-      const stripeW = 160;
-      for (let i = -w; i < w * 2; i += stripeW) {
-        const g = ctx.createLinearGradient(i, 0, i + stripeW, 0);
-        g.addColorStop(0, "rgba(255,255,255,0)");
-        g.addColorStop(0.5, "rgba(255,255,255,0.25)");
-        g.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = g;
-        ctx.fillRect(i + (t * 120) % stripeW, 0, stripeW, h);
-      }
-      ctx.restore();
-      ctx.globalAlpha = 1;
+      // Removed diagonal streaks to fix weird geometric shapes
 
       // Final subtle tint unify (very cheap)
       ctx.globalCompositeOperation = "soft-light";
