@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search } from "lucide-react";
+import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search, ArrowUpRight, Github, Twitter } from "lucide-react";
 import { SearchModal } from "@/components/site/search-modal";
 
 // Components
@@ -19,6 +19,8 @@ import AuroraButton from "@/registry/aurora-button";
 import { ThemeToggle } from "@/components/site/theme-toggle";
 import { ShaderBackground } from "@/registry/shader-background";
 import { BentoCard, BentoGrid } from "@/registry/bento-grid";
+
+// ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("auth");
@@ -378,9 +380,6 @@ export default function HomePage() {
                       <span className="text-xs font-medium text-black dark:text-white">Senko-v1.0 (Reasoning)</span>
                       <ChevronDown className="w-3 h-3 text-zinc-500" />
                     </div>
-                    {/* <div className="absolute right-3 top-15 z-50 scale-[0.8] origin-top-right">
-                      <ActivityDropdown />
-                    </div> */}
                   </div>
 
                   {/* Chat Content */}
@@ -657,97 +656,91 @@ export default function HomePage() {
 
       </main>
 
-      {/* FOOTER */}
-      <footer className="relative z-10 w-full border-t border-black/5 dark:border-white/5 bg-zinc-50 dark:bg-[#050505] py-16 px-6 transition-colors duration-300">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-6 gap-12">
+      {/* ── FOOTER ─────────────────────────────────────────────────────────────── */}
+      <footer className="relative w-full bg-[#07080a] text-zinc-50 overflow-hidden border-t border-white/[0.06]">
 
-          {/* Interactive Components */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Interactive</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/activity-dropdown" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Activity Dropdown</Link>
-              <Link href="/docs/components/aurora-button" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Aurora Button</Link>
-              <Link href="/docs/components/beveled-border-button" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Beveled Button</Link>
-              <Link href="/docs/components/like-button" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Like Button</Link>
-              <Link href="/docs/components/magnetic-pit-slider" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Magnetic Slider</Link>
+        {/* Subtle glow behind the whole bar */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_120%_at_50%_120%,rgba(99,102,241,0.13),transparent_70%)]" aria-hidden />
+
+        {/* Top strip — brand + nav links all on one line */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+
+          {/* Wordmark */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <div className="w-6 h-6 rounded-md bg-white flex items-center justify-center">
+              <Box className="w-3.5 h-3.5 text-black" />
             </div>
+            <span className="text-sm font-bold tracking-tight text-white">Senko UI</span>
+            <span className="hidden sm:inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[10px] font-mono text-zinc-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 inline-block" />
+              v1.0
+            </span>
           </div>
 
-          {/* Layout Components */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Layout</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/bento-grid" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Bento Grid</Link>
-              <Link href="/docs/components/carousel" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Carousel</Link>
-              <Link href="/docs/components/glass-card" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Card</Link>
-              <Link href="/docs/components/glass-container" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Container</Link>
-              <Link href="/docs/components/social-proof" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Social Proof</Link>
-            </div>
-          </div>
+          {/* Nav links — collapsed into a single scrollable row */}
+          <nav className="flex items-center gap-1 flex-wrap" aria-label="Footer navigation">
+            {[
+              { label: "Docs", href: "/docs" },
+              { label: "Components", href: "/docs/components/light-trail-badge" },
+              { label: "Backgrounds", href: "/docs/backgrounds/wavy-grid-background" },
+              { label: "Mocks", href: "/docs/device-mocks/browser" },
+              { label: "Bento Grid", href: "/docs/components/bento-grid" },
+              { label: "Glass Card", href: "/docs/components/glass-card" },
+              { label: "Aurora Button", href: "/docs/components/aurora-button" },
+              { label: "Wavy Grid", href: "/docs/components/wavy-grid-background" },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="px-3 py-1.5 rounded-lg text-[12px] text-zinc-500 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-          {/* Navigation */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Navigation</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/glass-dock" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Dock</Link>
-              <Link href="/docs/components/pill-navbar" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Pill Navbar</Link>
-            </div>
+          {/* Right — social + CTA */}
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href="https://github.com"
+              aria-label="GitHub"
+              className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.04] flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all duration-150"
+            >
+              <Github className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://twitter.com"
+              aria-label="Twitter"
+              className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.04] flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all duration-150"
+            >
+              <Twitter className="w-3.5 h-3.5" />
+            </a>
+            <Link
+              href="/docs"
+              className="ml-1 inline-flex items-center gap-1.5 h-8 px-4 rounded-full bg-white text-black text-[12px] font-semibold hover:bg-zinc-200 transition-colors"
+            >
+              Get Started
+              <ArrowUpRight className="w-3 h-3" />
+            </Link>
           </div>
+        </div>
 
-          {/* Device Mockups */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Mockups</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/android-mockup" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Android Mockup</Link>
-              <Link href="/docs/components/iphone-mockup" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">iPhone Mockup</Link>
-              <Link href="/docs/components/laptop-mockup" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Laptop Mockup</Link>
-              <Link href="/docs/components/safari-view" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Safari View</Link>
-            </div>
-          </div>
-
-          {/* Backgrounds & Text */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Effects</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/ai-prompt-box-glassmorphism" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">AI Prompt (Glass)</Link>
-              <Link href="/docs/components/ai-prompt-box-neomorphism" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">AI Prompt (Neo)</Link>
-              <Link href="/docs/components/animated-grid-background" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Animated Grid</Link>
-              <Link href="/docs/components/glass-login" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Login</Link>
-              <Link href="/docs/components/iconic-heading" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Iconic Heading</Link>
-              <Link href="/docs/components/light-trail-badge" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Light Trail Badge</Link>
-              <Link href="/docs/components/mesh-gradient" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Mesh Gradient</Link>
-              <Link href="/docs/components/underlined-heading" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Underlined Heading</Link>
-              <Link href="/docs/components/wavy-grid-background" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Wavy Grid</Link>
-            </div>
-          </div>
-
-          {/* Resources Column - Hidden on mobile, shown on larger screens */}
-          <div className="hidden md:flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Resources</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Documentation</Link>
-              <Link href="/docs/getting-started" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Getting Started</Link>
-              <Link href="/docs/installation" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Installation</Link>
-              <Link href="https://twitter.com" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Twitter</Link>
-            </div>
-          </div>
-
-          {/* Brand Column */}
-          <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-6 border-t border-black/5 dark:border-white/5 pt-8 mt-8 md:mt-0 md:border-0 md:pt-0">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 bg-black dark:bg-white rounded-md flex items-center justify-center shadow-sm">
-                <Box className="w-3.5 h-3.5 text-white dark:text-black" />
-              </div>
-              <span className="font-semibold text-sm tracking-tight text-black dark:text-zinc-300">Senko UI</span>
-            </div>
-            <p className="text-sm text-zinc-500 leading-relaxed max-w-sm">
-              Modern UI components built with React and Tailwind CSS. Beautiful, accessible, and highly customizable.
-            </p>
+        {/* Bottom micro-bar */}
+        <div className="relative z-10 border-t border-white/[0.04] max-w-[1200px] mx-auto px-6 py-3 flex items-center justify-between gap-4">
+          <p className="text-[11px] text-zinc-700 tracking-wide">
+            © {new Date().getFullYear()} Senko UI — MIT License
+          </p>
+          <div className="flex items-center gap-4">
+            {["Privacy", "Terms"].map((item) => (
+              <Link key={item} href="/docs" className="text-[11px] text-zinc-700 hover:text-zinc-400 transition-colors">
+                {item}
+              </Link>
+            ))}
           </div>
         </div>
 
       </footer>
-    </div>
 
+    </div>
   );
 }
