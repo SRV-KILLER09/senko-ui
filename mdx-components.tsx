@@ -63,22 +63,22 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
     p: (props) => (
-      <p {...props} className="text-[1.05rem] md:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 font-light mb-6 tracking-wide pl-1 md:pl-4 border-l border-transparent hover:border-indigo-500/10 transition-colors duration-500" />
+      <p {...props} className="text-sm md:text-base leading-[1.8] text-zinc-500 dark:text-zinc-400 font-normal mb-6 tracking-wide pl-2 md:pl-4 border-l-2 border-transparent hover:border-pink-500/30 transition-all duration-500" />
     ),
     ul: (props) => (
-      <ul {...props} className="space-y-4 mb-8 pl-1 md:pl-4" />
+      <ul {...props} className="space-y-3 mb-8 pl-2 md:pl-4" />
     ),
     li: (props) => {
       const children = props.children;
       return (
-        <li {...props} className="text-[1.05rem] md:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 font-light tracking-wide flex items-start gap-3 group">
-          <span className="mt-2.5 shrink-0 w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-700 group-hover:bg-indigo-500/50 group-hover:shadow-[0_0_10px_rgba(99,102,241,0.5)] transition-all duration-300" />
-          <span className="flex-1">{children}</span>
+        <li {...props} className="text-sm md:text-base leading-[1.8] text-zinc-500 dark:text-zinc-400 font-normal tracking-wide flex items-start gap-3 group">
+          <span className="mt-2.5 shrink-0 w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-700 group-hover:bg-cyan-500/70 group-hover:shadow-[0_0_12px_rgba(6,182,212,0.8)] group-hover:scale-150 transition-all duration-300" />
+          <span className="flex-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors duration-300">{children}</span>
         </li>
       );
     },
     strong: (props) => (
-      <strong {...props} className="font-medium text-zinc-900 dark:text-zinc-100" />
+      <strong {...props} className="font-semibold text-zinc-800 dark:text-zinc-200" />
     ),
     h2: (props) => {
       const text = props.children?.toString() || "";
