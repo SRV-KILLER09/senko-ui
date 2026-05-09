@@ -1,9 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useChat } from '@ai-sdk/react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search, ArrowUpRight, Github, Twitter } from "lucide-react";
@@ -32,10 +29,7 @@ export default function HomePage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [isMac, setIsMac] = useState(false);
-  const { messages, sendMessage, status, setMessages } = useChat({
-    api: '/api/chat',
-  });
-  const isLoading = status === 'submitted' || status === 'streaming';
+  const [demoMessages, setDemoMessages] = useState<Array<{ role: "user" | "assistant"; text: string }>>([]);
 
   const sectionReveal: Variants = {
     hidden: { opacity: 0, y: 22 },
@@ -71,7 +65,14 @@ export default function HomePage() {
   const handleDemoSend = (message: string) => {
     const text = message.trim();
     if (!text) return;
-    sendMessage({ role: "user", content: text });
+    setDemoMessages((prev) => [
+      ...prev,
+      { role: "user", text },
+      {
+        role: "assistant",
+        text: "Demo mode: wired UI only (no API key). Your message is captured + rendered.",
+      },
+    ]);
   };
 
   return (
@@ -341,12 +342,10 @@ export default function HomePage() {
 
                   {/* New Chat Button */}
                   <div>
-                    <div onClick={() => setMessages([])}>
-                      <AuroraButton>
-                        <MessageCircle className="w-4 h-4" />
-                        New Chat
-                      </AuroraButton>
-                    </div>
+                    <AuroraButton>
+                      <MessageCircle className="w-4 h-4" />
+                      New Chat
+                    </AuroraButton>
                   </div>
 
                   {/* Chat History */}
@@ -391,7 +390,7 @@ export default function HomePage() {
                     </div>
 
                     <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-10 flex flex-col min-h-[360px]">
-                      {messages.length === 0 ? (
+                      {demoMessages.length === 0 ? (
                         <div className="flex-1 flex flex-col items-center justify-center">
                           <div className="max-w-2xl w-full flex flex-col items-center text-center space-y-6 mb-10">
                             <div className="w-16 h-16 rounded-2xl bg-black dark:bg-white flex items-center justify-center shadow-xl">
@@ -401,11 +400,11 @@ export default function HomePage() {
 
                             {/* Suggestion Chips */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-xl mt-8">
-                              <GlassCard onClick={() => sendMessage({ role: 'user', content: 'Explain quantum computing in simple terms for a beginner' })} className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
+                              <GlassCard className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
                                 <h4 className="text-sm font-medium text-black dark:text-white mb-1">Explain quantum computing</h4>
                                 <p className="text-xs text-zinc-500">in simple terms for a beginner</p>
                               </GlassCard>
-                              <GlassCard onClick={() => sendMessage({ role: 'user', content: 'Refactor this React code to use Server Components' })} className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
+                              <GlassCard className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
                                 <h4 className="text-sm font-medium text-black dark:text-white mb-1">Refactor this React code</h4>
                                 <p className="text-xs text-zinc-500">to use Server Components</p>
                               </GlassCard>
@@ -414,7 +413,7 @@ export default function HomePage() {
                         </div>
                       ) : (
                         <div className="flex flex-col gap-3">
-                          {messages.map((m, idx) => (
+                          {demoMessages.map((m, idx) => (
                             <div
                               key={idx}
                               className={m.role === "user" ? "flex justify-end" : "flex justify-start"}
@@ -424,28 +423,13 @@ export default function HomePage() {
                                   "max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm border",
                                   m.role === "user"
                                     ? "bg-black text-white border-black/10 dark:bg-white dark:text-black dark:border-white/10"
-                                    : "bg-white/70 text-black border-black/10 dark:bg-black/40 dark:text-white dark:border-white/10 backdrop-blur-md prose prose-sm dark:prose-invert max-w-none prose-p:leading-relaxed prose-pre:bg-black/5 dark:prose-pre:bg-white/5 prose-pre:border prose-pre:border-black/10 dark:prose-pre:border-white/10",
+                                    : "bg-white/70 text-black border-black/10 dark:bg-black/40 dark:text-white dark:border-white/10 backdrop-blur-md",
                                 ].join(" ")}
                               >
-                                {m.role === 'user' ? (
-                                  m.content
-                                ) : (
-                                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
-                                )}
+                                {m.text}
                               </div>
                             </div>
                           ))}
-                          {isLoading && messages[messages.length - 1]?.role === "user" && (
-                            <div className="flex justify-start">
-                              <div className="bg-white/70 text-black border-black/10 dark:bg-black/40 dark:text-white dark:border-white/10 backdrop-blur-md max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm border flex items-center gap-2">
-                                <div className="flex gap-1.5">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-                                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-                                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "300ms" }} />
-                                </div>
-                              </div>
-                            </div>
-                          )}
                           <div className="h-2" />
                         </div>
                       )}
@@ -454,7 +438,7 @@ export default function HomePage() {
                     {/* Prompt Box Area */}
                     <div className="relative z-20 w-full px-4 pb-6 pt-4 bg-gradient-to-t from-white via-white to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a] dark:to-transparent flex justify-center">
                       <div className="w-full max-w-3xl flex flex-col items-center">
-                        <PromptInputBox isLoading={isLoading} onSend={(msg) => handleDemoSend(msg)} placeholder="Type and press Enter…" />
+                        <PromptInputBox onSend={(msg) => handleDemoSend(msg)} placeholder="Type and press Enter…" />
                         <p className="text-[10px] text-zinc-400 text-center mt-3 font-medium">Senko AI can make mistakes. Consider verifying important information.</p>
                       </div>
                     </div>

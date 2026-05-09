@@ -12,5 +12,5 @@ export async function POST(req: Request) {
     system: "You are Senko AI, an advanced, highly capable reasoning AI assistant. You help the user with any task they require, providing concise, accurate, and insightful answers. Use markdown formatting to make your responses readable.",
   });
 
-  return result.toDataStreamResponse();
+  return result.toTextStreamResponse();
 }

@@ -10,12 +10,9 @@
     "registry:build": "shadcn build"
   },
   "dependencies": {
-    "@ai-sdk/react": "^3.0.179",
-    "@google/generative-ai": "^0.24.1",
     "@number-flow/react": "^0.6.0",
     "@radix-ui/react-icons": "^1.3.2",
     "@types/mdx": "^2.0.13",
-    "ai": "^6.0.177",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "fumadocs-core": "^16.6.9",
@@ -29,8 +26,6 @@
     "radix-ui": "^1.4.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.5.0",
     "zod": "^4.3.6"
   },
