@@ -27,11 +27,11 @@ export const LightTrailBadge: FC<LightTrailBadgeProps> = ({
             }
             className={cn(
                 "group relative overflow-hidden",
-                "px-3 py-1 rounded-full",
+                "px-4 py-1.5 rounded-full",
                 "border border-foreground/10 bg-background/60 backdrop-blur-md",
 
                 "text-foreground/70 inline-flex items-center gap-2",
-                "text-[10px] font-medium tracking-wider uppercase",
+                "text-sm font-semibold tracking-widest uppercase",
                 "transition-all duration-300 ease-out",
                 "hover:border-foreground/20 hover:bg-background/80",
 

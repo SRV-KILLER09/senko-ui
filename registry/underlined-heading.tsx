@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 type UnderlineHeadingProps = {
   content: string[];
   highlightContent?: string[];
+  align?: "left" | "center" | "right";
 
   className?: string;
   lineClassName?: string;
@@ -18,6 +19,7 @@ type UnderlineHeadingProps = {
 export default function UnderlineHeading({
   content,
   highlightContent,
+  align = "center",
   className,
   lineClassName,
   highlightClassName,
@@ -25,7 +27,7 @@ export default function UnderlineHeading({
   behind = false,
 }: UnderlineHeadingProps) {
 
-
+//... keeping the HighlightText definition unchanged
   const HighlightText = ({
     children,
     delay = 0,
@@ -110,14 +112,16 @@ export default function UnderlineHeading({
     );
   });
 
+  const alignClass = align === "left" ? "justify-start text-left" : align === "right" ? "justify-end text-right" : "justify-center text-center";
+
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className={cn("flex items-center w-full", alignClass)}>
       <motion.h1
         variants={container}
         initial="hidden"
         animate="show"
         className={cn(
-          "font-bold text-5xl max-w-2xl text-center tracking-tight",
+          "font-bold text-5xl max-w-2xl tracking-tight",
           className
         )}
       >

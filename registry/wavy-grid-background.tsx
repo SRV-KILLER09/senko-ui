@@ -169,7 +169,7 @@ export default function WavyGridBackground({
         height: mode === "fixed" ? `${height}px` : "100%",
         zIndex: 0,
         pointerEvents: "none",
-        backgroundColor: "var(--background)",
+        backgroundColor: mode === "contained" ? "transparent" : "var(--background)",
         WebkitMaskImage:
           mode === "fixed"
             ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
