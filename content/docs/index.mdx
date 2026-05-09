@@ -5,22 +5,20 @@ description: Professional-grade React components for high-growth SaaS and AI int
 
 ## Introduction
 
-<div className="mb-16 mt-4 relative">
-  {/* Ambient Background Glow */}
-  <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-500/10 dark:bg-indigo-500/20 blur-[120px] rounded-full pointer-events-none" />
+<div className="mb-20 relative">
+  {/* Dual Ambient Background Glows for Aesthetic Vibe */}
+  <div className="absolute top-1/2 -left-[10%] -translate-y-1/2 w-[500px] h-[300px] bg-purple-500/15 dark:bg-purple-500/30 blur-[100px] rounded-full pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
+  <div className="absolute top-1/2 left-[20%] -translate-y-1/2 w-[400px] h-[300px] bg-cyan-500/15 dark:bg-cyan-500/30 blur-[100px] rounded-full pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
   
   <UnderlineHeading
     content={["Build interfaces that demand attention"]}
-    highlightContent={["demand attention"]}
     align="left"
     className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl leading-[1.1] relative z-10"
-    highlightClassName="bg-indigo-500 h-[8px] md:h-[12px] bottom-1 md:bottom-2 opacity-80"
-    textGradientClass="text-foreground"
-    behind={false}
+    textGradientClass="text-zinc-900 dark:text-white text-3d-aesthetic"
   />
   
-  <div className="text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 mt-8 max-w-2xl font-light leading-relaxed relative z-10 [&>p]:text-inherit [&>p]:m-0">
-    **Senko-ui** is a signature collection of copy-paste components designed for the premium web. Built with Next.js, Tailwind CSS, and Framer Motion, these components prioritize minimalist aesthetics and high-performance motion.
+  <div className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 -mt-4 max-w-2xl font-light leading-relaxed relative z-10 [&>p]:text-inherit [&>p]:m-0">
+    <strong className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">Senko-ui</strong> is a signature collection of copy-paste components designed for the premium web. Built with Next.js, Tailwind CSS, and Framer Motion, these components prioritize minimalist aesthetics and high-performance motion.
   </div>
 </div>
 
@@ -55,7 +53,7 @@ npm install framer-motion lucide-react clsx tailwind-merge
 
 ## Tech Stack
 
-<div className="mac-window-wrapper relative z-10 bg-zinc-50 dark:bg-zinc-950/50">
+<div className="mac-window-wrapper relative bg-zinc-50 dark:bg-zinc-950/50">
   <div className="flex items-center px-4 py-3 border-b border-indigo-500/10 dark:border-indigo-500/20 bg-indigo-500/5 dark:bg-indigo-500/10 backdrop-blur-md">
     <div className="flex space-x-2">
       <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
@@ -65,14 +63,38 @@ npm install framer-motion lucide-react clsx tailwind-merge
     <div className="mx-auto text-xs font-mono text-indigo-500/70 dark:text-indigo-300/70 font-medium">tech-stack.md</div>
   </div>
 
-| Technology | Purpose |
-| --- | --- |
-| Next.js | Framework & Server Components |
-| Tailwind CSS | Styling & Design System |
-| Framer Motion | Physics-based Animations |
-| Lucide React | Consistent Iconography |
-| Shadcn/UI | Baseline Registry Compatibility |
-
+  <div className="w-full m-0 p-0 overflow-x-auto">
+    <table className="w-full !m-0 !border-t-0 !rounded-t-none !shadow-none !bg-transparent border-collapse">
+      <thead className="bg-indigo-500/5 dark:bg-indigo-500/10">
+        <tr className="divide-x divide-zinc-200 dark:divide-white/40">
+          <th className="px-6 py-4 text-left text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider border-b border-zinc-200 dark:border-white/40">Technology</th>
+          <th className="px-6 py-4 text-left text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider border-b border-zinc-200 dark:border-white/40">Purpose</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-zinc-200 dark:divide-white/40 bg-white/40 dark:bg-zinc-950/40 backdrop-blur-md">
+        <tr className="hover:bg-indigo-500/5 transition-colors divide-x divide-zinc-200 dark:divide-white/40">
+          <td className="px-6 py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">Next.js</td>
+          <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-400">Framework & Server Components</td>
+        </tr>
+        <tr className="hover:bg-indigo-500/5 transition-colors divide-x divide-zinc-200 dark:divide-white/40">
+          <td className="px-6 py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">Tailwind CSS</td>
+          <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-400">Styling & Design System</td>
+        </tr>
+        <tr className="hover:bg-indigo-500/5 transition-colors divide-x divide-zinc-200 dark:divide-white/40">
+          <td className="px-6 py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">Framer Motion</td>
+          <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-400">Physics-based Animations</td>
+        </tr>
+        <tr className="hover:bg-indigo-500/5 transition-colors divide-x divide-zinc-200 dark:divide-white/40">
+          <td className="px-6 py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">Lucide React</td>
+          <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-400">Consistent Iconography</td>
+        </tr>
+        <tr className="hover:bg-indigo-500/5 transition-colors divide-x divide-zinc-200 dark:divide-white/40">
+          <td className="px-6 py-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">Shadcn/UI</td>
+          <td className="px-6 py-4 text-sm text-zinc-600 dark:text-zinc-400">Baseline Registry Compatibility</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 ---

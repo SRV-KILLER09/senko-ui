@@ -27,13 +27,13 @@ export const LightTrailBadge: FC<LightTrailBadgeProps> = ({
             }
             className={cn(
                 "group relative overflow-hidden",
-                "px-4 py-1.5 rounded-full",
-                "border border-foreground/10 bg-background/60 backdrop-blur-md",
+                "px-5 py-2 rounded-full",
+                "border border-foreground/10 bg-background/50 backdrop-blur-md shadow-sm",
 
-                "text-foreground/70 inline-flex items-center gap-2",
-                "text-sm font-semibold tracking-widest uppercase",
-                "transition-all duration-300 ease-out",
-                "hover:border-foreground/20 hover:bg-background/80",
+                "text-foreground/90 inline-flex items-center gap-2",
+                "text-lg md:text-xl font-bold tracking-[0.2em] uppercase",
+                "transition-all duration-500 ease-out",
+                "hover:border-cyan-500/30 hover:bg-background/80 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]",
 
                 className
             )}
@@ -52,8 +52,8 @@ export const LightTrailBadge: FC<LightTrailBadgeProps> = ({
 
             {/* border beam rainbow effect */}
             <div className="absolute inset-0 rounded-full pointer-events-none p-[1.5px] [mask-image:linear-gradient(white,white),linear-gradient(white,white)] [mask-clip:content-box,border-box] [mask-composite:exclude]">
-                <div className="absolute inset-[-50%] animate-[var(--animate-border-beam)] blur-sm opacity-100
-bg-[conic-gradient(from_300deg,transparent_0deg,transparent_300deg,rgba(255,255,255,1)_320deg,rgba(168,85,247,1)_330deg,rgba(59,130,246,1)_340deg,rgba(255,255,255,1)_350deg,transparent_360deg)]"
+                <div className="absolute inset-[-50%] animate-[var(--animate-border-beam)] blur-[4px] opacity-100
+bg-[conic-gradient(from_300deg,transparent_0deg,transparent_300deg,rgba(255,255,255,1)_320deg,rgba(236,72,153,1)_330deg,rgba(6,182,212,1)_340deg,rgba(255,255,255,1)_350deg,transparent_360deg)]"
                 />
             </div>
 

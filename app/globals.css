@@ -357,15 +357,17 @@
   margin: 2.5rem 0;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 1);
 }
 
 .dark .docs-theme-overrides main .mac-window-wrapper {
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 1), 0 0 60px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
-.docs-theme-overrides main .mac-window-wrapper > div,
-.docs-theme-overrides main .mac-window-wrapper > *:last-child {
+.docs-theme-overrides main .mac-window-wrapper > *:not(:first-child) {
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
@@ -376,4 +378,28 @@
   border-radius: 0 0 16px 16px !important;
   box-shadow: none !important;
   width: 100% !important;
+}
+
+/* ─── Aesthetic 3D Text ─── */
+.text-3d-aesthetic {
+  text-shadow: 
+    1px 1px 0px #d8b4fe,
+    2px 2px 0px #a855f7,
+    3px 3px 0px #67e8f9,
+    4px 4px 0px #06b6d4,
+    5px 5px 15px rgba(168, 85, 247, 0.3),
+    0px 10px 30px rgba(6, 182, 212, 0.2);
+  transform: translateZ(0); /* Hardware acceleration */
+}
+
+.dark .text-3d-aesthetic {
+  text-shadow: 
+    1px 1px 0px #a855f7,
+    2px 2px 0px #a855f7,
+    3px 3px 0px #6366f1,
+    4px 4px 0px #6366f1,
+    5px 5px 0px #06b6d4,
+    6px 6px 0px #06b6d4,
+    7px 7px 15px rgba(0, 0, 0, 0.8),
+    0px 10px 30px rgba(168, 85, 247, 0.2);
 }
