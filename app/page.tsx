@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useChat } from '@ai-sdk/react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search } from "lucide-react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search, ArrowUpRight, Github, Twitter } from "lucide-react";
 import { SearchModal } from "@/components/site/search-modal";
 
 // Components
@@ -20,6 +23,8 @@ import { ThemeToggle } from "@/components/site/theme-toggle";
 import { ShaderBackground } from "@/registry/shader-background";
 import { BentoCard, BentoGrid } from "@/registry/bento-grid";
 
+// ─── Page ──────────────────────────────────────────────────────────────────────
+
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("auth");
   const [copied, setCopied] = useState(false);
@@ -27,9 +32,12 @@ export default function HomePage() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [isMac, setIsMac] = useState(false);
-  const [demoMessages, setDemoMessages] = useState<Array<{ role: "user" | "assistant"; text: string }>>([]);
+  const { messages, sendMessage, status, setMessages } = useChat({
+    api: '/api/chat',
+  });
+  const isLoading = status === 'submitted' || status === 'streaming';
 
-  const sectionReveal = {
+  const sectionReveal: Variants = {
     hidden: { opacity: 0, y: 22 },
     show: {
       opacity: 1,
@@ -38,7 +46,7 @@ export default function HomePage() {
     },
   };
 
-  const staggerChildren = {
+  const staggerChildren: Variants = {
     hidden: {},
     show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
   };
@@ -63,26 +71,22 @@ export default function HomePage() {
   const handleDemoSend = (message: string) => {
     const text = message.trim();
     if (!text) return;
-    setDemoMessages((prev) => [
-      ...prev,
-      { role: "user", text },
-      {
-        role: "assistant",
-        text: "Demo mode: wired UI only (no API key). Your message is captured + rendered.",
-      },
-    ]);
+    sendMessage({ role: "user", content: text });
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-white dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-black dark:selection:text-white transition-colors duration-300">
+    <div className="relative min-h-screen w-full bg-white dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-black dark:selection:text-white transition-colors duration-300 overflow-x-hidden">
 
-      {/* Animated "shader" layer (3D-ish) */}
-      <ShaderBackground intensity={1} fps={30} quality={0.55} />
+      {/* Full-width shader background fading out at the bottom */}
+      <div className="absolute top-0 left-0 right-0 h-[80vh] z-0 pointer-events-none [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]">
+        <ShaderBackground intensity={1} fps={30} quality={1} className="!absolute inset-0 !z-0" />
+        <div className="absolute inset-0 senko-noise opacity-[0.10] dark:opacity-[0.14] z-0" />
+      </div>
 
       {/* Cinematic overlays */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        <div className="absolute inset-0 senko-noise opacity-[0.09] dark:opacity-[0.13]" />
-        <div className="absolute inset-0 senko-vignette opacity-[0.42] dark:opacity-[0.62]" />
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 senko-noise opacity-[0.09] dark:opacity-[0.13] z-0" />
+        <div className="absolute inset-0 senko-vignette hidden dark:block opacity-[0.62]" />
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[520px] w-[820px] rounded-full bg-gradient-to-b from-blue-500/18 via-violet-500/10 to-transparent blur-[120px] dark:from-blue-500/22 dark:via-violet-500/14 opacity-80" />
         <div className="absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-gradient-to-tr from-cyan-400/16 via-emerald-400/8 to-transparent blur-[130px] dark:from-cyan-400/20 dark:via-emerald-400/10 opacity-70" />
       </div>
@@ -231,24 +235,7 @@ export default function HomePage() {
 
         {/* HERO SECTION */}
         <section className="relative w-full max-w-5xl mx-auto flex flex-col items-center text-center py-4 md:py-6">
-          {/* Hero-only animated backdrop (cheap + masked) */}
-          <div className="absolute -inset-x-4 -inset-y-6 md:-inset-x-6 md:-inset-y-8 -z-10 pointer-events-none overflow-hidden rounded-[40px] md:rounded-[48px]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.20),transparent_55%),radial-gradient(circle_at_15%_40%,rgba(34,211,238,0.14),transparent_55%),radial-gradient(circle_at_85%_55%,rgba(244,63,94,0.10),transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.28),transparent_55%),radial-gradient(circle_at_15%_40%,rgba(34,211,238,0.18),transparent_55%),radial-gradient(circle_at_85%_55%,rgba(244,63,94,0.14),transparent_60%)]" />
-            <div className="absolute inset-0 opacity-[0.35] dark:opacity-[0.45] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_20%,black_0%,transparent_70%)]">
-              <AnimatedGridBackground />
-            </div>
-            <div className="absolute inset-0 opacity-[0.55] dark:opacity-[0.65] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_10%,black_0%,transparent_70%)]">
-              <WavyGridBackground mode="contained" maxOpacity={0.12} />
-            </div>
-            <motion.div
-              aria-hidden="true"
-              className="absolute -top-24 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/20 via-white/5 to-transparent blur-[90px] dark:from-white/12 dark:via-white/4"
-              animate={{ x: ["-6%", "6%", "-6%"], opacity: [0.7, 0.9, 0.7] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <div className="absolute inset-0 senko-noise opacity-[0.10] dark:opacity-[0.14]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/70 dark:to-black/70" />
-          </div>
+          {/* Hero background removed to allow full-page shader to shine through */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -354,10 +341,12 @@ export default function HomePage() {
 
                   {/* New Chat Button */}
                   <div>
-                    <AuroraButton>
-                      <MessageCircle className="w-4 h-4" />
-                      New Chat
-                    </AuroraButton>
+                    <div onClick={() => setMessages([])}>
+                      <AuroraButton>
+                        <MessageCircle className="w-4 h-4" />
+                        New Chat
+                      </AuroraButton>
+                    </div>
                   </div>
 
                   {/* Chat History */}
@@ -392,9 +381,6 @@ export default function HomePage() {
                       <span className="text-xs font-medium text-black dark:text-white">Senko-v1.0 (Reasoning)</span>
                       <ChevronDown className="w-3 h-3 text-zinc-500" />
                     </div>
-                    {/* <div className="absolute right-3 top-15 z-50 scale-[0.8] origin-top-right">
-                      <ActivityDropdown />
-                    </div> */}
                   </div>
 
                   {/* Chat Content */}
@@ -405,7 +391,7 @@ export default function HomePage() {
                     </div>
 
                     <div className="relative z-10 flex-1 overflow-y-auto p-6 md:p-10 flex flex-col min-h-[360px]">
-                      {demoMessages.length === 0 ? (
+                      {messages.length === 0 ? (
                         <div className="flex-1 flex flex-col items-center justify-center">
                           <div className="max-w-2xl w-full flex flex-col items-center text-center space-y-6 mb-10">
                             <div className="w-16 h-16 rounded-2xl bg-black dark:bg-white flex items-center justify-center shadow-xl">
@@ -415,11 +401,11 @@ export default function HomePage() {
 
                             {/* Suggestion Chips */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-xl mt-8">
-                              <GlassCard className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
+                              <GlassCard onClick={() => sendMessage({ role: 'user', content: 'Explain quantum computing in simple terms for a beginner' })} className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
                                 <h4 className="text-sm font-medium text-black dark:text-white mb-1">Explain quantum computing</h4>
                                 <p className="text-xs text-zinc-500">in simple terms for a beginner</p>
                               </GlassCard>
-                              <GlassCard className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
+                              <GlassCard onClick={() => sendMessage({ role: 'user', content: 'Refactor this React code to use Server Components' })} className="p-4 text-left cursor-pointer hover:-translate-y-1 transition-transform border-black/5 dark:border-white/5 bg-white/50 dark:bg-black/50 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm">
                                 <h4 className="text-sm font-medium text-black dark:text-white mb-1">Refactor this React code</h4>
                                 <p className="text-xs text-zinc-500">to use Server Components</p>
                               </GlassCard>
@@ -428,7 +414,7 @@ export default function HomePage() {
                         </div>
                       ) : (
                         <div className="flex flex-col gap-3">
-                          {demoMessages.map((m, idx) => (
+                          {messages.map((m, idx) => (
                             <div
                               key={idx}
                               className={m.role === "user" ? "flex justify-end" : "flex justify-start"}
@@ -438,13 +424,28 @@ export default function HomePage() {
                                   "max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm border",
                                   m.role === "user"
                                     ? "bg-black text-white border-black/10 dark:bg-white dark:text-black dark:border-white/10"
-                                    : "bg-white/70 text-black border-black/10 dark:bg-black/40 dark:text-white dark:border-white/10 backdrop-blur-md",
+                                    : "bg-white/70 text-black border-black/10 dark:bg-black/40 dark:text-white dark:border-white/10 backdrop-blur-md prose prose-sm dark:prose-invert max-w-none prose-p:leading-relaxed prose-pre:bg-black/5 dark:prose-pre:bg-white/5 prose-pre:border prose-pre:border-black/10 dark:prose-pre:border-white/10",
                                 ].join(" ")}
                               >
-                                {m.text}
+                                {m.role === 'user' ? (
+                                  m.content
+                                ) : (
+                                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{m.content}</ReactMarkdown>
+                                )}
                               </div>
                             </div>
                           ))}
+                          {isLoading && messages[messages.length - 1]?.role === "user" && (
+                            <div className="flex justify-start">
+                              <div className="bg-white/70 text-black border-black/10 dark:bg-black/40 dark:text-white dark:border-white/10 backdrop-blur-md max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm border flex items-center gap-2">
+                                <div className="flex gap-1.5">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "0ms" }} />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "150ms" }} />
+                                  <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+                                </div>
+                              </div>
+                            </div>
+                          )}
                           <div className="h-2" />
                         </div>
                       )}
@@ -453,7 +454,7 @@ export default function HomePage() {
                     {/* Prompt Box Area */}
                     <div className="relative z-20 w-full px-4 pb-6 pt-4 bg-gradient-to-t from-white via-white to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a] dark:to-transparent flex justify-center">
                       <div className="w-full max-w-3xl flex flex-col items-center">
-                        <PromptInputBox onSend={(msg) => handleDemoSend(msg)} placeholder="Type and press Enter…" />
+                        <PromptInputBox isLoading={isLoading} onSend={(msg) => handleDemoSend(msg)} placeholder="Type and press Enter…" />
                         <p className="text-[10px] text-zinc-400 text-center mt-3 font-medium">Senko AI can make mistakes. Consider verifying important information.</p>
                       </div>
                     </div>
@@ -478,116 +479,116 @@ export default function HomePage() {
             <p className="text-zinc-600 dark:text-zinc-400 text-lg max-w-xl">Every component is meticulously crafted with Framer Motion and Tailwind CSS. Built to be customized, not overwritten.</p>
           </div>
 
-        <motion.div
-          variants={staggerChildren}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          className="relative"
-        >
-          <div className="pointer-events-none absolute inset-0 -z-10 rounded-[32px] bg-gradient-to-b from-black/[0.03] to-transparent dark:from-white/[0.03]" />
-          <BentoGrid className="h-full md:grid-cols-5 md:grid-rows-2 gap-4">
-            <BentoCard
-              className="md:col-span-3 md:row-span-1"
-              name="60FPS Animations"
-              description="Powered by physics-based animations. Interactions feel physical, snappy, and perfectly tuned to human expectations."
-              Icon={Zap}
-              href="/docs"
-              cta="Browse"
-              glowColor="99, 102, 241"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/18 via-violet-500/8 to-transparent dark:from-blue-500/26 dark:via-violet-500/14" />
-                  <div className="absolute inset-0 opacity-70">
-                    <WavyGridBackground mode="contained" maxOpacity={0.12} />
+          <motion.div
+            variants={staggerChildren}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            className="relative"
+          >
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[32px] bg-gradient-to-b from-black/[0.03] to-transparent dark:from-white/[0.03]" />
+            <BentoGrid className="h-full md:grid-cols-5 md:grid-rows-2 gap-4">
+              <BentoCard
+                className="md:col-span-3 md:row-span-1"
+                name="60FPS Animations"
+                description="Powered by physics-based animations. Interactions feel physical, snappy, and perfectly tuned to human expectations."
+                Icon={Zap}
+                href="/docs"
+                cta="Browse"
+                glowColor="99, 102, 241"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/18 via-violet-500/8 to-transparent dark:from-blue-500/26 dark:via-violet-500/14" />
+                    <div className="absolute inset-0 opacity-70">
+                      <WavyGridBackground mode="contained" maxOpacity={0.12} />
+                    </div>
+                    <div className="absolute inset-0 [mask-image:radial-gradient(circle_at_40%_30%,black_0%,transparent_60%)]">
+                      <motion.div
+                        animate={{ x: ["-20%", "20%", "-20%"], y: ["10%", "-10%", "10%"] }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute left-0 top-0 h-[260px] w-[360px] rounded-full bg-cyan-400/12 blur-[80px]"
+                      />
+                    </div>
                   </div>
-                  <div className="absolute inset-0 [mask-image:radial-gradient(circle_at_40%_30%,black_0%,transparent_60%)]">
+                }
+              />
+
+              <BentoCard
+                className="md:col-span-2 md:row-span-1"
+                name="Tailwind Native"
+                description="Theme your entire application in seconds. No complex CSS-in-JS. Just clean, manageable utility classes."
+                Icon={Layers}
+                href="/docs/components/glass-card"
+                cta="See card"
+                glowColor="34, 211, 238"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.18),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.16),transparent_55%)]" />
+                    <div className="absolute inset-0 senko-noise opacity-[0.10]" />
                     <motion.div
-                      animate={{ x: ["-20%", "20%", "-20%"], y: ["10%", "-10%", "10%"] }}
-                      transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute left-0 top-0 h-[260px] w-[360px] rounded-full bg-cyan-400/12 blur-[80px]"
-                    />
+                      initial={{ opacity: 0.4, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <div className="w-[72%] -rotate-3">
+                        <GlassCard className="p-4 bg-white/25 dark:bg-black/25 border-white/10">
+                          <div className="h-2 w-24 rounded bg-white/30 dark:bg-white/10" />
+                          <div className="mt-3 h-2 w-32 rounded bg-white/25 dark:bg-white/10" />
+                          <div className="mt-6 h-8 w-full rounded-xl bg-white/15 dark:bg-white/5" />
+                        </GlassCard>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              }
-            />
+                }
+              />
 
-            <BentoCard
-              className="md:col-span-2 md:row-span-1"
-              name="Tailwind Native"
-              description="Theme your entire application in seconds. No complex CSS-in-JS. Just clean, manageable utility classes."
-              Icon={Layers}
-              href="/docs/components/glass-card"
-              cta="See card"
-              glowColor="34, 211, 238"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,211,238,0.18),transparent_55%),radial-gradient(circle_at_70%_60%,rgba(99,102,241,0.16),transparent_55%)]" />
-                  <div className="absolute inset-0 senko-noise opacity-[0.10]" />
-                  <motion.div
-                    initial={{ opacity: 0.4, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <div className="w-[72%] -rotate-3">
-                      <GlassCard className="p-4 bg-white/25 dark:bg-black/25 border-white/10">
-                        <div className="h-2 w-24 rounded bg-white/30 dark:bg-white/10" />
-                        <div className="mt-3 h-2 w-32 rounded bg-white/25 dark:bg-white/10" />
-                        <div className="mt-6 h-8 w-full rounded-xl bg-white/15 dark:bg-white/5" />
-                      </GlassCard>
+              <BentoCard
+                className="md:col-span-2 md:row-span-1"
+                name="Accessible First"
+                description="Keyboard navigation, screen reader support, and focus management built right into the foundation."
+                Icon={Grid}
+                href="/docs/components/bento-grid"
+                cta="Use bento"
+                glowColor="244, 63, 94"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/14 via-orange-500/8 to-transparent dark:from-rose-500/18 dark:via-orange-500/10" />
+                    <div className="absolute inset-0 opacity-[0.55] dark:opacity-[0.65]">
+                      <AnimatedGridBackground />
                     </div>
-                  </motion.div>
-                </div>
-              }
-            />
-
-            <BentoCard
-              className="md:col-span-2 md:row-span-1"
-              name="Accessible First"
-              description="Keyboard navigation, screen reader support, and focus management built right into the foundation."
-              Icon={Grid}
-              href="/docs/components/bento-grid"
-              cta="Use bento"
-              glowColor="244, 63, 94"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/14 via-orange-500/8 to-transparent dark:from-rose-500/18 dark:via-orange-500/10" />
-                  <div className="absolute inset-0 opacity-[0.55] dark:opacity-[0.65]">
-                    <AnimatedGridBackground />
+                    <div className="absolute inset-0 senko-noise opacity-[0.08]" />
                   </div>
-                  <div className="absolute inset-0 senko-noise opacity-[0.08]" />
-                </div>
-              }
-            />
+                }
+              />
 
-            <BentoCard
-              className="md:col-span-3 md:row-span-1"
-              name="Mobile Optimized"
-              description="Perfect hitboxes, smooth scaling, and native-feeling gesture support for touch devices out of the box."
-              Icon={Smartphone}
-              href="/docs/device-mocks/browser"
-              cta="View mocks"
-              glowColor="234, 179, 8"
-              background={
-                <div className="absolute inset-0">
-                  <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-transparent dark:from-yellow-500/14" />
-                  <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-yellow-400/10 blur-[70px]" />
-                  <div className="absolute inset-0 flex items-end justify-end p-5">
-                    <div className="w-[220px] origin-bottom-right rotate-[6deg] transition-transform duration-500 group-hover:rotate-[3deg] group-hover:scale-[1.02]">
-                      <IPhoneMockup className="shadow-2xl">
-                        <div className="w-full h-full bg-white dark:bg-black relative flex flex-col justify-end p-4 pb-8 border border-black/10 dark:border-white/10">
-                          <PromptInputBox />
-                        </div>
-                      </IPhoneMockup>
+              <BentoCard
+                className="md:col-span-3 md:row-span-1"
+                name="Mobile Optimized"
+                description="Perfect hitboxes, smooth scaling, and native-feeling gesture support for touch devices out of the box."
+                Icon={Smartphone}
+                href="/docs/device-mocks/browser"
+                cta="View mocks"
+                glowColor="234, 179, 8"
+                background={
+                  <div className="absolute inset-0">
+                    <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-transparent dark:from-yellow-500/14" />
+                    <div className="absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-yellow-400/10 blur-[70px]" />
+                    <div className="absolute inset-0 flex items-end justify-end p-5">
+                      <div className="w-[220px] origin-bottom-right rotate-[6deg] transition-transform duration-500 group-hover:rotate-[3deg] group-hover:scale-[1.02]">
+                        <IPhoneMockup className="shadow-2xl">
+                          <div className="w-full h-full bg-white dark:bg-black relative flex flex-col justify-end p-4 pb-8 border border-black/10 dark:border-white/10">
+                            <PromptInputBox />
+                          </div>
+                        </IPhoneMockup>
+                      </div>
                     </div>
                   </div>
-                </div>
-              }
-            />
-          </BentoGrid>
-        </motion.div>
+                }
+              />
+            </BentoGrid>
+          </motion.div>
         </motion.section>
 
         {/* DEVELOPER EXPERIENCE */}
@@ -671,97 +672,91 @@ export default function HomePage() {
 
       </main>
 
-      {/* FOOTER */}
-      <footer className="relative z-10 w-full border-t border-black/5 dark:border-white/5 bg-zinc-50 dark:bg-[#050505] py-16 px-6 transition-colors duration-300">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-6 gap-12">
+      {/* ── FOOTER ─────────────────────────────────────────────────────────────── */}
+      <footer className="relative w-full bg-[#07080a] text-zinc-50 overflow-hidden border-t border-white/[0.06]">
 
-          {/* Interactive Components */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Interactive</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/activity-dropdown" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Activity Dropdown</Link>
-              <Link href="/docs/components/aurora-button" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Aurora Button</Link>
-              <Link href="/docs/components/beveled-border-button" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Beveled Button</Link>
-              <Link href="/docs/components/like-button" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Like Button</Link>
-              <Link href="/docs/components/magnetic-pit-slider" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Magnetic Slider</Link>
+        {/* Subtle glow behind the whole bar */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_120%_at_50%_120%,rgba(99,102,241,0.13),transparent_70%)]" aria-hidden />
+
+        {/* Top strip — brand + nav links all on one line */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+
+          {/* Wordmark */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <div className="w-6 h-6 rounded-md bg-white flex items-center justify-center">
+              <Box className="w-3.5 h-3.5 text-black" />
             </div>
+            <span className="text-sm font-bold tracking-tight text-white">Senko UI</span>
+            <span className="hidden sm:inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[10px] font-mono text-zinc-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 inline-block" />
+              v1.0
+            </span>
           </div>
 
-          {/* Layout Components */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Layout</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/bento-grid" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Bento Grid</Link>
-              <Link href="/docs/components/carousel" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Carousel</Link>
-              <Link href="/docs/components/glass-card" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Card</Link>
-              <Link href="/docs/components/glass-container" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Container</Link>
-              <Link href="/docs/components/social-proof" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Social Proof</Link>
-            </div>
-          </div>
+          {/* Nav links — collapsed into a single scrollable row */}
+          <nav className="flex items-center gap-1 flex-wrap" aria-label="Footer navigation">
+            {[
+              { label: "Docs", href: "/docs" },
+              { label: "Components", href: "/docs/components/light-trail-badge" },
+              { label: "Backgrounds", href: "/docs/backgrounds/wavy-grid-background" },
+              { label: "Mocks", href: "/docs/device-mocks/browser" },
+              { label: "Bento Grid", href: "/docs/components/bento-grid" },
+              { label: "Glass Card", href: "/docs/components/glass-card" },
+              { label: "Aurora Button", href: "/docs/components/aurora-button" },
+              { label: "Wavy Grid", href: "/docs/components/wavy-grid-background" },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="px-3 py-1.5 rounded-lg text-[12px] text-zinc-500 hover:text-white hover:bg-white/[0.06] transition-all duration-150"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-          {/* Navigation */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Navigation</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/glass-dock" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Dock</Link>
-              <Link href="/docs/components/pill-navbar" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Pill Navbar</Link>
-            </div>
+          {/* Right — social + CTA */}
+          <div className="flex items-center gap-2 shrink-0">
+            <a
+              href="https://github.com"
+              aria-label="GitHub"
+              className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.04] flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all duration-150"
+            >
+              <Github className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="https://twitter.com"
+              aria-label="Twitter"
+              className="w-8 h-8 rounded-lg border border-white/10 bg-white/[0.04] flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all duration-150"
+            >
+              <Twitter className="w-3.5 h-3.5" />
+            </a>
+            <Link
+              href="/docs"
+              className="ml-1 inline-flex items-center gap-1.5 h-8 px-4 rounded-full bg-white text-black text-[12px] font-semibold hover:bg-zinc-200 transition-colors"
+            >
+              Get Started
+              <ArrowUpRight className="w-3 h-3" />
+            </Link>
           </div>
+        </div>
 
-          {/* Device Mockups */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Mockups</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/android-mockup" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Android Mockup</Link>
-              <Link href="/docs/components/iphone-mockup" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">iPhone Mockup</Link>
-              <Link href="/docs/components/laptop-mockup" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Laptop Mockup</Link>
-              <Link href="/docs/components/safari-view" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Safari View</Link>
-            </div>
-          </div>
-
-          {/* Backgrounds & Text */}
-          <div className="flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Effects</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs/components/ai-prompt-box-glassmorphism" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">AI Prompt (Glass)</Link>
-              <Link href="/docs/components/ai-prompt-box-neomorphism" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">AI Prompt (Neo)</Link>
-              <Link href="/docs/components/animated-grid-background" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Animated Grid</Link>
-              <Link href="/docs/components/glass-login" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Glass Login</Link>
-              <Link href="/docs/components/iconic-heading" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Iconic Heading</Link>
-              <Link href="/docs/components/light-trail-badge" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Light Trail Badge</Link>
-              <Link href="/docs/components/mesh-gradient" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Mesh Gradient</Link>
-              <Link href="/docs/components/underlined-heading" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Underlined Heading</Link>
-              <Link href="/docs/components/wavy-grid-background" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Wavy Grid</Link>
-            </div>
-          </div>
-
-          {/* Resources Column - Hidden on mobile, shown on larger screens */}
-          <div className="hidden md:flex flex-col gap-4 md:col-span-1">
-            <h3 className="font-semibold text-sm text-black dark:text-zinc-300">Resources</h3>
-            <div className="flex flex-col gap-3 text-sm">
-              <Link href="/docs" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Documentation</Link>
-              <Link href="/docs/getting-started" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Getting Started</Link>
-              <Link href="/docs/installation" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Installation</Link>
-              <Link href="https://twitter.com" className="text-zinc-500 hover:text-black dark:hover:text-white transition-colors">Twitter</Link>
-            </div>
-          </div>
-
-          {/* Brand Column */}
-          <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-6 border-t border-black/5 dark:border-white/5 pt-8 mt-8 md:mt-0 md:border-0 md:pt-0">
-            <div className="flex items-center gap-3">
-              <div className="w-6 h-6 bg-black dark:bg-white rounded-md flex items-center justify-center shadow-sm">
-                <Box className="w-3.5 h-3.5 text-white dark:text-black" />
-              </div>
-              <span className="font-semibold text-sm tracking-tight text-black dark:text-zinc-300">Senko UI</span>
-            </div>
-            <p className="text-sm text-zinc-500 leading-relaxed max-w-sm">
-              Modern UI components built with React and Tailwind CSS. Beautiful, accessible, and highly customizable.
-            </p>
+        {/* Bottom micro-bar */}
+        <div className="relative z-10 border-t border-white/[0.04] max-w-[1200px] mx-auto px-6 py-3 flex items-center justify-between gap-4">
+          <p className="text-[11px] text-zinc-700 tracking-wide">
+            © {new Date().getFullYear()} Senko UI — MIT License
+          </p>
+          <div className="flex items-center gap-4">
+            {["Privacy", "Terms"].map((item) => (
+              <Link key={item} href="/docs" className="text-[11px] text-zinc-700 hover:text-zinc-400 transition-colors">
+                {item}
+              </Link>
+            ))}
           </div>
         </div>
 
       </footer>
-    </div>
 
+    </div>
   );
 }
