@@ -54,7 +54,6 @@ export function ShaderBackground({
     if (typeof window === "undefined") return true;
     return window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
   }, []);
-
   // Parallax target in -1..1
   const parallaxRef = useRef({ tx: 0, ty: 0, x: 0, y: 0 });
 

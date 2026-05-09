@@ -109,7 +109,7 @@ export const EcommerceBadges = () => (
       </LightTrailBadge>
       <LightTrailBadge className="border-foreground text-foreground">
         <Zap className="w-3 h-3" />
-        Pro Plan
+        Premium User
       </LightTrailBadge>
     </div>
     <p className="text-zinc-500 text-xs font-mono uppercase tracking-tighter">Premium E-commerce</p>
