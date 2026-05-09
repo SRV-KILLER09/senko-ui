@@ -253,3 +253,127 @@
 *::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb-hover);
 }
+
+/* ─── Docs Theme Overrides ────────────────────────────────────── */
+.docs-theme-overrides {
+  /* Removed global --fd-background: transparent to prevent dropdowns from bleeding text */
+}
+
+/* Make main outer elements glassy */
+.docs-theme-overrides aside,
+.docs-theme-overrides>header,
+.docs-theme-overrides>div>header {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark .docs-theme-overrides aside,
+.dark .docs-theme-overrides>header,
+.dark .docs-theme-overrides>div>header {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Ensure the main content background remains transparent */
+.docs-theme-overrides main {
+  background: transparent !important;
+}
+
+/* ─── Aesthetic MDX Tables (Tech Stack, etc) ─── */
+.docs-theme-overrides main table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  margin: 2.5rem 0 !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(99, 102, 241, 0.15) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.dark .docs-theme-overrides main table {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.5), rgba(0, 0, 0, 0.6)) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(99, 102, 241, 0.2) !important;
+}
+
+.docs-theme-overrides main table th {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.05), transparent) !important;
+  padding: 16px 24px !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  color: #4f46e5 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-size: 0.8rem !important;
+}
+
+.dark .docs-theme-overrides main table th {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.1), transparent) !important;
+  color: #a5b4fc !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.docs-theme-overrides main table td {
+  padding: 16px 24px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
+  color: #3f3f46 !important;
+  transition: all 0.2s ease !important;
+}
+
+.dark .docs-theme-overrides main table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.docs-theme-overrides main table td:first-child {
+  font-weight: 600 !important;
+  color: #4338ca !important;
+}
+
+.dark .docs-theme-overrides main table td:first-child {
+  color: #818cf8 !important;
+}
+
+.docs-theme-overrides main table tbody tr:hover td {
+  background: rgba(99, 102, 241, 0.03) !important;
+  color: #000 !important;
+}
+
+.dark .docs-theme-overrides main table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: #fff !important;
+}
+
+.docs-theme-overrides main table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* ─── Mac Window Wrapper for Tech Stack ─── */
+.docs-theme-overrides main .mac-window-wrapper {
+  margin: 2.5rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(99, 102, 241, 0.15);
+}
+
+.dark .docs-theme-overrides main .mac-window-wrapper {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+.docs-theme-overrides main .mac-window-wrapper > div,
+.docs-theme-overrides main .mac-window-wrapper > *:last-child {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.docs-theme-overrides main .mac-window-wrapper table {
+  margin: 0 !important;
+  border-radius: 0 0 16px 16px !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
