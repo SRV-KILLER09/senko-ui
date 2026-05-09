@@ -10,6 +10,7 @@
     "registry:build": "shadcn build"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.71",
     "@ai-sdk/react": "^3.0.179",
     "@google/generative-ai": "^0.24.1",
     "@number-flow/react": "^0.6.0",
