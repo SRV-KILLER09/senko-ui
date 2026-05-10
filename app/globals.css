@@ -155,16 +155,7 @@
   }
 }
 
-/* ─── Cinematic overlays (noise/vignette) ─────────────────────── */
-.senko-noise {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  mix-blend-mode: overlay;
-}
-
-.senko-vignette {
-  background: radial-gradient(ellipse 75% 55% at 50% 20%, transparent 0%, rgba(0, 0, 0, 0.25) 70%, rgba(0, 0, 0, 0.55) 100%);
-}
+/* ─── Removed cinematic overlays for a cleaner look ─── */
 
 /* ─── Neomorphism shadow system ──────────────────────────────── */
 :root {
@@ -214,18 +205,18 @@
   --vignette: rgba(0, 0, 0, 0.45);
 }
 
-/* ─── Themed scrollbars ───────────────────────────────────────── */
+/* ─── Themed minimal scrollbars ─────────────────────────────────── */
 :root {
   color-scheme: light dark;
-  --scrollbar-track: rgba(0, 0, 0, 0.05);
-  --scrollbar-thumb: rgba(99, 102, 241, 0.35);
-  --scrollbar-thumb-hover: rgba(99, 102, 241, 0.55);
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.2);
 }
 
 .dark {
-  --scrollbar-track: rgba(255, 255, 255, 0.06);
-  --scrollbar-thumb: rgba(129, 140, 248, 0.38);
-  --scrollbar-thumb-hover: rgba(129, 140, 248, 0.6);
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.1);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.2);
 }
 
 /* Firefox */
@@ -236,8 +227,8 @@
 
 /* Chromium (Chrome/Edge) + Safari */
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 *::-webkit-scrollbar-track {
@@ -247,7 +238,6 @@
 *::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 999px;
-  border: 2px solid var(--scrollbar-track);
 }
 
 *::-webkit-scrollbar-thumb:hover {
@@ -259,21 +249,21 @@
   /* Removed global --fd-background: transparent to prevent dropdowns from bleeding text */
 }
 
-/* Make main outer elements glassy */
+/* Make main outer elements have clean frosted glass */
 .docs-theme-overrides aside,
 .docs-theme-overrides>header,
 .docs-theme-overrides>div>header {
-  background: rgba(255, 255, 255, 0.5) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-color: rgba(0, 0, 0, 0.05) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 .dark .docs-theme-overrides aside,
 .dark .docs-theme-overrides>header,
 .dark .docs-theme-overrides>div>header {
-  background: rgba(0, 0, 0, 0.4) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(9, 9, 11, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Ensure the main content background remains transparent */
@@ -281,125 +271,69 @@
   background: transparent !important;
 }
 
-/* ─── Aesthetic MDX Tables (Tech Stack, etc) ─── */
+/* ─── Clean Professional Tables ─── */
 .docs-theme-overrides main table {
   border-collapse: separate !important;
   border-spacing: 0 !important;
   width: 100% !important;
-  border-radius: 16px !important;
+  border-radius: 8px !important;
   overflow: hidden !important;
-  margin: 2.5rem 0 !important;
-  background: rgba(255, 255, 255, 0.6) !important;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(99, 102, 241, 0.15) !important;
-  backdrop-filter: blur(20px) !important;
+  margin: 2rem 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  background: #ffffff !important;
 }
 
 .dark .docs-theme-overrides main table {
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.5), rgba(0, 0, 0, 0.6)) !important;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(99, 102, 241, 0.2) !important;
+  background: rgba(24, 24, 27, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .docs-theme-overrides main table th {
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.05), transparent) !important;
-  padding: 16px 24px !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+  padding: 12px 16px !important;
   text-align: left !important;
-  font-weight: 600 !important;
-  color: #4f46e5 !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  color: var(--muted-foreground) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  font-size: 0.875rem !important;
 }
 
 .dark .docs-theme-overrides main table th {
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.1), transparent) !important;
-  color: #a5b4fc !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .docs-theme-overrides main table td {
-  padding: 16px 24px !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
-  color: #3f3f46 !important;
-  transition: all 0.2s ease !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+  color: var(--foreground) !important;
+  font-size: 0.875rem !important;
 }
 
 .dark .docs-theme-overrides main table td {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-}
-
-.docs-theme-overrides main table td:first-child {
-  font-weight: 600 !important;
-  color: #4338ca !important;
-}
-
-.dark .docs-theme-overrides main table td:first-child {
-  color: #818cf8 !important;
-}
-
-.docs-theme-overrides main table tbody tr:hover td {
-  background: rgba(99, 102, 241, 0.03) !important;
-  color: #000 !important;
-}
-
-.dark .docs-theme-overrides main table tbody tr:hover td {
-  background: rgba(255, 255, 255, 0.03) !important;
-  color: #fff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
 }
 
 .docs-theme-overrides main table tbody tr:last-child td {
   border-bottom: none !important;
 }
 
-/* ─── Mac Window Wrapper for Tech Stack ─── */
-.docs-theme-overrides main .mac-window-wrapper {
-  margin: 2.5rem 0;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 1);
+.docs-theme-overrides main table tbody tr:hover td {
+  background: rgba(0, 0, 0, 0.01) !important;
 }
 
-.dark .docs-theme-overrides main .mac-window-wrapper {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 1), 0 0 60px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+.dark .docs-theme-overrides main table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.01) !important;
 }
 
-.docs-theme-overrides main .mac-window-wrapper > *:not(:first-child) {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
+/* ─── Premium Text Gradients ─── */
+.text-gradient-premium {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(180deg, #18181b, #71717a);
 }
 
-.docs-theme-overrides main .mac-window-wrapper table {
-  margin: 0 !important;
-  border-radius: 0 0 16px 16px !important;
-  box-shadow: none !important;
-  width: 100% !important;
-}
-
-/* ─── Aesthetic 3D Text ─── */
-.text-3d-aesthetic {
-  text-shadow: 
-    1px 1px 0px #d8b4fe,
-    2px 2px 0px #a855f7,
-    3px 3px 0px #67e8f9,
-    4px 4px 0px #06b6d4,
-    5px 5px 15px rgba(168, 85, 247, 0.3),
-    0px 10px 30px rgba(6, 182, 212, 0.2);
-  transform: translateZ(0); /* Hardware acceleration */
-}
-
-.dark .text-3d-aesthetic {
-  text-shadow: 
-    1px 1px 0px #a855f7,
-    2px 2px 0px #a855f7,
-    3px 3px 0px #6366f1,
-    4px 4px 0px #6366f1,
-    5px 5px 0px #06b6d4,
-    6px 6px 0px #06b6d4,
-    7px 7px 15px rgba(0, 0, 0, 0.8),
-    0px 10px 30px rgba(168, 85, 247, 0.2);
+.dark .text-gradient-premium {
+  background-image: linear-gradient(180deg, #ffffff, #a1a1aa);
 }

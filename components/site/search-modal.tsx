@@ -11,6 +11,7 @@ interface SearchHit {
   title: string;
   description?: string;
   content?: string;
+  breadcrumbs?: string[];
   type: "page" | "heading" | "text";
 }
 
@@ -168,11 +169,21 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
                         >
                           {typeIcon(r.type)}
                           <span className="flex-1 min-w-0">
-                            <span className="font-medium block truncate">{r.title}</span>
-                            {(r.description || r.content) && (
-                              <span className="text-xs text-zinc-400 block truncate mt-0.5">
-                                {r.description ?? r.content}
-                              </span>
+                            {r.type === "page" || r.type === "heading" ? (
+                              <span
+                                className="font-medium block truncate"
+                                dangerouslySetInnerHTML={{ __html: r.content || r.title || "" }}
+                              />
+                            ) : (
+                              <>
+                                <span className="font-medium block truncate">
+                                  {r.breadcrumbs ? r.breadcrumbs[r.breadcrumbs.length - 1] : r.title || "Result"}
+                                </span>
+                                <span
+                                  className="text-xs text-zinc-400 block truncate mt-0.5"
+                                  dangerouslySetInnerHTML={{ __html: r.content || r.description || "" }}
+                                />
+                              </>
                             )}
                           </span>
                         </Link>

@@ -29,7 +29,7 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
-          <RootProvider>{children}</RootProvider>
+          <RootProvider search={{ options: { delayMs: 100 } }}>{children}</RootProvider>
         </ThemeProvider>
       </body>
     </html>

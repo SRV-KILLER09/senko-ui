@@ -100,7 +100,7 @@ export function ComponentPreview({
       {tab === "preview" && (
         <div
           key={key}
-          className="min-h-[380px] flex items-center justify-center p-8 bg-[radial-gradient(ellipse_at_center,hsl(var(--muted))_0%,hsl(var(--background))_70%)]"
+          className="relative overflow-hidden min-h-[380px] flex items-center justify-center p-8 bg-[radial-gradient(ellipse_at_center,hsl(var(--muted))_0%,hsl(var(--background))_70%)]"
         >
           {children}
         </div>

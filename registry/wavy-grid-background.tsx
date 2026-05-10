@@ -31,7 +31,7 @@ export default function WavyGridBackground({
 
   const updateThemeColor = useCallback(() => {
     const probe = document.createElement("div");
-    probe.style.color = "hsl(var(--foreground))";
+    probe.style.color = "var(--foreground)";
     document.body.appendChild(probe);
 
     const computed = getComputedStyle(probe).color;
@@ -173,11 +173,11 @@ export default function WavyGridBackground({
         WebkitMaskImage:
           mode === "fixed"
             ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
-            : "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
+            : "linear-gradient(to bottom, black 0%, black 60%, transparent 100%)",
         maskImage:
           mode === "fixed"
             ? "linear-gradient(to bottom, black 0%, black 18%, transparent 65%)"
-            : "linear-gradient(to right, black 0%, black 60%, transparent 100%)",
+            : "linear-gradient(to bottom, black 0%, black 60%, transparent 100%)",
       }}
     >
       <canvas ref={canvasRef} style={{ display: "block" }} />

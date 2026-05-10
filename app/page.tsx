@@ -4,8 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Box, Code2, Layout, Layers, Zap, Shield, Smartphone, Palette, Grid, Lock, MousePointer2, Terminal, Copy, Check, ChevronRight, ChevronDown, Menu, X, MessageCircle, Search, ArrowUpRight, Github, Twitter } from "lucide-react";
-import { SearchModal } from "@/components/site/search-modal";
-
+import { useSearchContext } from "fumadocs-ui/contexts/search";
 // Components
 import { Safari } from "@/registry/safari-view";
 import IPhoneMockup from "@/registry/iphone-mockup";
@@ -20,14 +19,13 @@ import { ThemeToggle } from "@/components/site/theme-toggle";
 import { ShaderBackground } from "@/registry/shader-background";
 import { BentoCard, BentoGrid } from "@/registry/bento-grid";
 
-// ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("auth");
   const [copied, setCopied] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const { setOpenSearch } = useSearchContext();
   const [isMac, setIsMac] = useState(false);
   const [demoMessages, setDemoMessages] = useState<Array<{ role: "user" | "assistant"; text: string }>>([]);
 
@@ -47,14 +45,9 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsMac(/Mac|iPhone|iPad|iPod/i.test(navigator.platform));
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen(true);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    
+    // Warm up search API to reduce cold starts and cache initial index
+    fetch("/api/search?q=").catch(() => {});
   }, []);
 
   const handleCopy = () => {
@@ -97,8 +90,7 @@ export default function HomePage() {
         <div className="w-full max-w-[1200px] h-full border-x border-black/[0.02] dark:border-white/[0.02] bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
-      {/* Search Modal */}
-      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
+
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-white/50 dark:bg-black/50 backdrop-blur-md border-b border-black/5 dark:border-white/5 transition-colors duration-300">
@@ -166,7 +158,7 @@ export default function HomePage() {
           <div className="flex items-center gap-4 border-l border-black/10 dark:border-white/10 pl-6 ml-2">
             <button
               id="search-trigger-desktop"
-              onClick={() => setSearchOpen(true)}
+              onClick={() => setOpenSearch(true)}
               aria-label="Search documentation"
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-black/10 dark:border-white/10 text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all text-xs font-medium"
             >
@@ -185,7 +177,7 @@ export default function HomePage() {
         <div className="flex md:hidden items-center gap-3">
           <button
             id="search-trigger-mobile"
-            onClick={() => setSearchOpen(true)}
+            onClick={() => setOpenSearch(true)}
             aria-label="Search documentation"
             className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors"
           >
@@ -292,7 +284,8 @@ export default function HomePage() {
           >
             <button
               id="search-trigger-hero"
-              onClick={() => setSearchOpen(true)}
+              onClick={() => setOpenSearch(true)}
+              onMouseEnter={() => fetch("/api/search?q=").catch(() => {})}
               aria-label="Search components and documentation"
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/80 dark:bg-zinc-900/80 border border-black/10 dark:border-white/10 backdrop-blur-sm shadow-sm hover:shadow-md hover:border-black/20 dark:hover:border-white/20 transition-all text-left"
             >
