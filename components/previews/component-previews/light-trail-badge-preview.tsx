@@ -1,15 +1,15 @@
 "use client"
 
 import React from "react"
-import { 
-  Sparkles, 
-  Cpu, 
-  Globe, 
-  Terminal, 
-  Layers, 
-  Coins, 
-  Trophy, 
-  Gamepad2, 
+import {
+  Sparkles,
+  Cpu,
+  Globe,
+  Terminal,
+  Layers,
+  Coins,
+  Trophy,
+  Gamepad2,
   ShoppingBag,
   Zap
 } from "lucide-react"
