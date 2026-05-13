@@ -55,6 +55,7 @@ import {
 import { AiPromptGlassDefault } from "./components/previews/component-previews/ai-prompt-glass-preview";
 import { AiPromptNeoDefault } from "./components/previews/component-previews/ai-prompt-neo-preview";
 import { AnimatedGridPreview } from "./components/previews/background/animated-grid-preview";
+import { VisualKitShowcase } from "./components/previews/visual-kit-showcase";
 
 import UnderlineHeading from "@/registry/underlined-heading";
 import { IconicHeading } from "@/registry/iconic-heading";
@@ -139,6 +140,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     AiPromptGlassDefault,
     AiPromptNeoDefault,
     AnimatedGridPreview,
+    VisualKitShowcase,
     UnderlineHeading,
     IconicHeading,
     ...components,
