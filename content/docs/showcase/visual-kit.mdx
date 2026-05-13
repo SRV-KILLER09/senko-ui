@@ -1,0 +1,50 @@
+---
+title: Visual effects kit
+description: Fifty aesthetic backgrounds, frames, motion accents, typography treatments, and micro-decorations — split by category with live previews and copy-ready code.
+full: true
+status: newly-added
+---
+
+## Overview
+
+This kit is a dense collection of polished visuals you can drop behind hero sections, empty states, pricing cards, and loaders. Everything lives in a single import surface (`@/registry/senko-visual-effects`) so you can cherry-pick only the exports you need.
+
+## Browse by category
+
+- **[Backgrounds](/docs/showcase/visual-kit-backgrounds)** — Ambient washes, grids, beams, particles, and cinematic fields.
+- **[Frames](/docs/showcase/visual-kit-frames)** — Glowing borders, shimmer cards, HUD corners, and conic spinners.
+- **[Surfaces](/docs/showcase/visual-kit-surfaces)** — Frosted glass, iridescent overlays, and ripple glass.
+- **[Decorative](/docs/showcase/visual-kit-decorative)** — Orbits, confetti, sonar ripples, and metaball fusion.
+- **[Motion](/docs/showcase/visual-kit-motion)** — Float, drift, breathe, tilt, and marquee strips.
+- **[UI](/docs/showcase/visual-kit-ui)** — Badges, live dots, equalizer bars, and terminal caret.
+- **[Typography](/docs/showcase/visual-kit-typography)** — Chrome, glitch, blur-in, split hue, underline, sweep, and neon type.
+
+## Installation
+
+```bash
+npx shadcn@latest add https://senko-ui.vercel.app/r/senko-visual-effects.json
+```
+
+The components rely on **CSS utility classes** defined in this project's `app/globals.css` (search for `Senko visual kit`). Copy that block into your own global stylesheet so classes such as `vk-animate-aurora` resolve correctly.
+
+## Dependencies
+
+- `motion` (Framer Motion API)
+- `clsx` + `tailwind-merge` via `cn()` from your `@/lib/utils` helper
+
+## Usage
+
+```tsx
+import { AuroraWashField, ChromeGradientText } from "@/registry/senko-visual-effects";
+
+export default function Hero() {
+  return (
+    <div className="relative min-h-[420px] w-full overflow-hidden rounded-3xl">
+      <AuroraWashField className="rounded-3xl" />
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 p-8">
+        <ChromeGradientText label="Ship faster" />
+      </div>
+    </div>
+  );
+}
+```

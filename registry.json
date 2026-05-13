@@ -250,6 +250,27 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "senko-visual-effects",
+      "type": "registry:component",
+      "title": "Senko Visual Effects Kit",
+      "description": "Fifty aesthetic backgrounds, frames, motion accents, and typography treatments",
+      "dependencies": ["motion", "clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/senko-visual-effects-01.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/senko-visual-effects-02.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/senko-visual-effects.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

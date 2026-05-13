@@ -337,3 +337,256 @@
 .dark .text-gradient-premium {
   background-image: linear-gradient(180deg, #ffffff, #a1a1aa);
 }
+
+/* ─── Senko visual kit (docs showcase) ───────────────────────── */
+@keyframes vk-aurora-shift {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: rotate(25deg) scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes vk-shift-bg {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes vk-pulse-soft {
+
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes vk-grain {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-2%, -3%);
+  }
+
+  30% {
+    transform: translate(3%, -1%);
+  }
+
+  50% {
+    transform: translate(-1%, 2%);
+  }
+
+  70% {
+    transform: translate(2%, 3%);
+  }
+
+  90% {
+    transform: translate(-3%, 1%);
+  }
+}
+
+@keyframes vk-mesh-drift {
+
+  0%,
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  50% {
+    transform: scale(1.05) translate(2%, -2%);
+  }
+}
+
+@keyframes vk-scan {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes vk-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vk-spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes vk-morph {
+
+  0%,
+  100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: rotate(0deg) scale(1);
+  }
+
+  33% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: rotate(8deg) scale(1.05);
+  }
+
+  66% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: rotate(-6deg) scale(0.98);
+  }
+}
+
+@keyframes vk-float-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes vk-float-y-reverse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(14px);
+  }
+}
+
+@keyframes vk-slide-x {
+  0% {
+    transform: translateX(-30%);
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateX(30%);
+    opacity: 0.2;
+  }
+}
+
+@keyframes vk-slide-y {
+  0% {
+    transform: translateY(-40%);
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(40%);
+    opacity: 0.15;
+  }
+}
+
+@keyframes vk-shine-sweep {
+  0% {
+    transform: translateX(-60%) rotate(12deg);
+  }
+
+  100% {
+    transform: translateX(60%) rotate(12deg);
+  }
+}
+
+@keyframes vk-shimmer-x {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.vk-animate-aurora {
+  animation: vk-aurora-shift 14s ease-in-out infinite;
+}
+
+.vk-animate-shift-bg {
+  animation: vk-shift-bg 12s linear infinite;
+}
+
+.vk-animate-pulse-soft {
+  animation: vk-pulse-soft 5s ease-in-out infinite;
+}
+
+.vk-animate-grain {
+  animation: vk-grain 0.8s steps(4) infinite;
+}
+
+.vk-animate-mesh-drift {
+  animation: vk-mesh-drift 18s ease-in-out infinite;
+}
+
+.vk-animate-scan {
+  animation: vk-scan 6s linear infinite;
+}
+
+.vk-animate-spin-slow {
+  animation: vk-spin-slow 22s linear infinite;
+}
+
+.vk-animate-spin-reverse {
+  animation: vk-spin-reverse 28s linear infinite;
+}
+
+.vk-animate-morph {
+  animation: vk-morph 12s ease-in-out infinite;
+}
+
+.vk-animate-float-y {
+  animation: vk-float-y 8s ease-in-out infinite;
+}
+
+.vk-animate-float-y-reverse {
+  animation: vk-float-y-reverse 9s ease-in-out infinite;
+}
+
+.vk-animate-slide-x {
+  animation: vk-slide-x 5s ease-in-out infinite;
+}
+
+.vk-animate-slide-y {
+  animation: vk-slide-y 6s ease-in-out infinite;
+}
+
+.vk-animate-shine-sweep {
+  animation: vk-shine-sweep 4s ease-in-out infinite;
+}
+
+.vk-animate-shimmer-x {
+  animation: vk-shimmer-x 3.5s ease-in-out infinite;
+}
